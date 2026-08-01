@@ -1,0 +1,1570 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,html{
+    scroll-behavior: smooth;
+    padding: 14px;
+    font-family: manrope;
+}
+
+:root {
+    --navcontainer: #0a0a0a;
+    --navlink: #fafafa;
+    --navbtn1: #fafafa;
+    --navbtn2: rgb(56, 144, 232);
+    --navlogo: whitesmoke;
+    --navlogospan: #25D366;
+    --bg-dark: #0f172a;
+    --card-bg: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --flame-color: linear-gradient(180deg, rgba(5, 60, 24, 0.8) 0%, rgb(17, 171, 78) 50%, rgba(239, 68, 68, 0) 100%);
+    --glow-color: rgba(14, 248, 61, 0.633);
+
+    /* root color codes for the footer section */
+    --bg-footer: #090d16;
+    --text-primary: #f8fafc;
+    --text-muted: #64748b;
+    --border-color: rgba(255, 255, 255, 0.08);
+    
+    /* Brand Accent Glow Colors */
+    --gpt-glow: #10a37f;
+    --claude-glow: #cc785c;
+    --gemini-glow: #4285f4;
+
+}
+
+.navcontainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background: var(--navcontainer);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter:lur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 20px 34px;
+    margin-bottom:  20px;
+    border-radius: 70px;
+    box-shadow: 1px 1px 2px 2px solid var(--navlogospan);
+    font-family: manrope;
+
+    
+
+
+}
+
+#logo {
+    color: var(--navlogo);
+}
+
+#logo span {
+    color: var(--navlogospan);
+}
+
+
+
+.navmenu {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+
+.icons{
+    display: inline;
+    text-align: center;
+    align-items: center;
+    margin-right: 5px;
+    letter-spacing: 12px;
+}
+
+img.icons {
+    filter: brightness(0) invert(1);
+}
+
+
+.navlink {
+    color: var(--navlink);
+    text-decoration: none;
+    font-weight:600;
+    font-size: 14px;
+    font-family: manrope;
+    border-radius: 60px;
+    padding: 22px 24px;
+    align-items: center;
+    transition: 0.2s ease, color 0.2s ease;
+}
+
+.underscore {
+    position: relative;
+}
+
+.underscore::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px; /* adjust spacing */
+    width: 0%;
+    height: 0%;
+    background-color: var(--navlogospan);
+    transition: width 0.3s ease, color 0.3s;
+}
+
+.underscore:hover::after {
+    width: 100%;
+    height: 4px;
+    border-radius: 70px;
+}
+
+
+
+.navbuttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+
+}
+
+.navbtn1 {
+    padding: 10px;
+    border-radius: 15px; 
+    background:  var(--navlogospan);
+    transition: 0.2s ease, color 0.2s ease; 
+    font-weight: 500;
+    font-size: 15px;
+    
+
+}
+
+.navbtn1:hover {
+    border: 1px dashed var(--navlink);
+    cursor: pointer;
+    
+
+}
+
+.navbtn2 {
+    background: transparent;
+    padding: 10px;
+    border-radius: 15px ;
+    color: var(--navlink);
+}
+
+.navbtn2:hover {
+    border: 1px dashed var(--navlogospan);
+    color: var(--navlink);
+    cursor: pointer;
+
+}
+
+
+
+
+/*  HAMBURGER BUTTON Hidden on desktop by default, revealed at the nav breakpoint below. */
+.hamburger-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 42px;
+    height: 42px;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1200;
+    transition: background 0.25s ease;
+}
+
+.hamburger-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.hamburger-line {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background-color: var(--navlink, #fafafa);
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.25s ease,
+                background-color 0.3s ease;
+}
+
+/* Turns the three lines into an "X" when the menu is open */
+.navcontainer.menu-open .hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.navcontainer.menu-open .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.navcontainer.menu-open .hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+
+/* --------------------------------------------------------------------------
+   2. BACKDROP OVERLAY
+   Dims the page behind the open mobile menu.
+-------------------------------------------------------------------------- */
+.nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+    z-index: 999;
+}
+ 
+.nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+ 
+ 
+/* --------------------------------------------------------------------------
+   3. TABLET & MOBILE NAVIGATION (<=1080px)
+   The logo + 4 links + 2 buttons genuinely can't fit under ~1080px without
+   crowding, so the hamburger takes over here rather than waiting for a
+   smaller "mobile-only" breakpoint.
+-------------------------------------------------------------------------- */
+
+
+
+
+
+
+
+
+/* HERO SECTION CONTENT  */
+
+
+/* --- MAIN HERO LAYOUT CONTAINER --- */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5rem;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+    min-height: calc(100vh - 100px); 
+    font-family: Manrope;
+}
+
+/* LEFT COLUMN: CONTENT & TYPOGRAPHY  */
+.hero-title {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+.title-content {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--navcontainer);
+    margin: 0;
+    letter-spacing: -0.03em;
+}
+
+.title-content span {
+    color: var(--navlogospan);
+    text-shadow: 0 0 20px rgba(16, 163, 127, 0.15);
+}
+
+.lit {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--bg-dark);
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.title-paragraph {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--bg-dark);
+    font-weight: 500;
+    margin: 0;
+}
+
+.title-paragraph .paragraph1 {
+    display: block;
+    margin-top: 0.8rem;
+    color: var(--bg-dark);
+}
+
+.title-paragraph .paragraph2 {
+    display: block;
+    margin-top: 1rem;
+    color: var(--bg-dark); 
+    font-weight: 500;
+}
+
+.title-paragraph .paragraph3 {
+    display: block;
+    margin-top: 1.2rem;
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--navlogospan);
+    text-shadow: 0 0 20px rgba(16, 163, 127, 0.15);
+}
+
+/* Decorative lively Circles underneath the text block */
+.hero-circle {
+    margin-top: 0.5rem;
+}
+
+.btn-circle {
+    display: flex;
+    gap: 8px;
+}
+
+.circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--navlogospan);
+    opacity: 1;
+    animation: decorativePulse 2s infinite ease-in-out;
+}
+
+
+
+/*  Staggered pulse animation for the three circles */
+.circle:nth-child(2) { animation-delay: 0.4s; }
+.circle:nth-child(3) { animation-delay: 0.8s; }
+
+
+/* Build with Us Call To Action Button */
+.hero-button {
+    margin-top: 0.5rem;
+}
+
+
+.hero-btn {
+    padding: 1rem 2.5rem;
+    background: var(--navcontainer);
+    color: var(--navlink);
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 550;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(16, 163, 127, 0.25);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hero-btn:hover {
+    background: var(--navlogospan);
+    color: var(--bg-dark);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(16, 163, 127, 0.4);
+}
+
+
+/*  RIGHT COLUMN: THE ENDLESS RANDOM SLIDER  */
+.hero-image-section {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    max-width: 580px;  
+    height: 680px;     
+    overflow: hidden;
+    border-radius: 24px;
+    background-color: var(--navcontainer, #111);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18), 
+                0 0 40px rgba(16, 163, 126, 0.034);
+}
+
+.hero-slider-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Elegant entering animation parameters */
+    opacity: 0;
+    transform: scale(1.06);
+    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), 
+                transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hero-slider-img.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+
+/*  keyframe animation */
+
+@keyframes decorativePulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: scale(1.3);
+        opacity: 1;
+        background-color: #ffffff;
+    }
+}
+
+
+/* --- FLUID TABLET & MOBILE RESPONSIVENESS --- */
+@media (max-width: 968px) {
+    .hero-section {
+        flex-direction: column-reverse; /* Stacks image on top on smaller devices */
+        gap: 3rem;
+        padding: 4rem 1.5rem;
+        text-align: center;
+    }
+
+    .hero-title {
+        align-items: center;
+    }
+
+    .title-content {
+        font-size: 3rem;
+    }
+
+    .hero-image-section {
+        max-width: 100%;
+        height: 420px;
+    }
+    
+    .btn-circle {
+        justify-content: center;
+    }
+}
+
+
+/* Hero section circle */
+
+.hero-circle {
+    display: flex;
+    align-items: center;
+    margin: 10px 10px;
+    margin-bottom: 25px;
+    align-items: center;
+    transition: ease 0.3s;
+
+}
+
+.btn-circle {
+    display: flex;
+    align-items: center;
+    
+}
+
+.circle:nth-child(1) {
+    width: 40px;
+    height: 40px;
+    background: var(--navlogospan);
+    border-radius: 50%;
+}
+
+.circle:nth-child(2) {
+    width: 22px;
+    height: 22px;
+    background: var(--navlogospan);
+    border-radius: 50%;
+}
+
+.circle:nth-child(3) {
+    width: 10px;
+    height: 10px;
+    background: var(--navlogospan);
+    border-radius: 50%;
+}
+
+
+
+/*  CONTENT SECTION FOR LANDING PAGE */
+
+
+.landing-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 35px 20px;
+
+
+
+}
+
+
+.section-divide {
+    width: 90px;
+    height: 20px;
+    background: var(--navcontainer);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgb(12, 196, 74);
+    transform-origin: top center;
+    animation: dangleSwing 3s ease-in-out infinite;
+}
+
+
+@keyframes dangleSwing {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(18deg); /* Initial swing right */
+  }
+  40% {
+    transform: rotate(-10deg); /* Counter swing left */
+  }
+  60% {
+    transform: rotate(18deg);  /* Smaller swing right */
+  }
+  80% {
+    transform: rotate(-6deg);  /* Smaller swing left */
+  }
+  100% {
+    transform: rotate(0deg);   /* Settle back to center */
+  }
+}
+
+
+.dangling-button:hover {
+  animation-play-state: paused; /* Freezes the dangle when the user hovers over it */
+background-color: #1a4d3a;
+}
+
+
+/* THE MAIN HERO SECTION */
+
+/*.main-hero {
+    display: flex;
+    justify-content: space-evenly;
+    background: var(--text-main);
+    margin-top: 80px;
+    padding: 40px;
+    border-radius: 5%;
+    box-shadow: 1px 1px 1px rgba(14, 248, 61, 0.633);
+
+
+
+
+}
+
+
+
+.image-container-photo img {
+    height: 600px;
+    width: 600px;
+    margin-bottom: -45px;
+    overflow-x: hidden;
+    
+
+}*/
+
+
+/* --- Modern Main Hero Container --- */
+.main-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5rem;
+    max-width: 1500px;
+    margin: 6rem auto;
+    padding: 2rem;
+    font-family: 'Manrope', sans-serif;
+    background-color: var(--text-main);
+    border-radius: 9px;
+    box-shadow: 1px 1px 1px rgb(17, 171, 78);
+}
+
+/*  alternate layouts: Left-to-Right / Right-to-Left */
+.main-hero:nth-of-type(even) {
+    flex-direction: row-reverse;
+}
+
+/* --- Content Column --- */
+.main-hero-content {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.category-tag {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #10a37f; /* Accent color */
+}
+
+/* Adjust tag color for the second block (Claude/Anthropic color palette match) */
+.main-hero:nth-of-type(even) .category-tag {
+    color: #cc785c;
+}
+
+.main-hero-content h2 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--navcontainer);
+    line-height: 1.1;
+    margin: 0;
+}
+
+.main-hero-content h2 span {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--text-muted);
+    margin-top: 0.4rem;
+}
+
+.main-hero-content p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin: 0;
+    max-width: 500px;
+}
+
+/* Interactive Image Column  */
+.image-container-photo {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+}
+
+.image-container-photo img {
+    margin-bottom: -33px;
+    max-width: 100%;
+    height: auto;
+    max-height: 480px;
+    object-fit: contain;
+    z-index: 2;
+    will-change: transform;
+    animation: floatingHero 6s ease-in-out infinite;
+    transition: transform 0.5s cubic-bezier(0.2, 1, 0.5, 1);
+}
+
+/* --- Interactive Ambient Glow Auras --- */
+.glow-aura {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 1;
+    opacity: 0.15;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.gpt-glow {
+    background: #10a37f;
+}
+
+.claude-glow {
+    background: #cc785c;
+}
+
+/* --- Interactive Hover Effects --- */
+.image-container-photo:hover img {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.image-container-photo:hover .glow-aura {
+    opacity: 0.3;
+    transform: scale(1.2);
+}
+
+/* --- Keyframe Animations --- */
+@keyframes floatingHero {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* --- Fluid Tablet & Mobile Responsiveness --- */
+@media (max-width: 968px) {
+    .main-hero,
+    .main-hero:nth-of-type(even) {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 3rem;
+        margin: 4rem auto;
+        padding: 1.5rem;
+    }
+
+    .main-hero-content {
+        align-items: center;
+    }
+
+    .main-hero-content h2 {
+        font-size: 2.4rem;
+    }
+
+    .image-container-photo {
+        min-height: auto;
+    }
+
+    .image-container-photo img {
+        max-height: 300px;
+    }
+
+    .glow-aura {
+        width: 200px;
+        height: 200px;
+        filter: blur(50px);
+    }
+}
+
+
+
+
+/* TESTIMONIAL SECTION */
+
+.testimonial-section {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5rem;
+    padding: 4rem 2rem;
+    font-family: manrope;
+
+}
+
+.testimony-card {
+    display: flex;
+    justify-content: space-evenly;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    background-color: var(--navcontainer);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 5px 10px var(--glow-color);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    width: 420px;
+    min-height: 300px;
+    overflow: hidden;
+    
+}
+
+/* The Flame Line Design */
+.card-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #0b6320, #0dd047);
+    transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+    z-index: 1;
+    opacity: 0.7;
+}
+
+
+
+.testimony-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px var(--glow-color);
+}
+
+
+
+/* Hover Interaction states */
+
+.testimony-card:hover .card-line {
+    height: 70px; /* Shoots up to a distinct, controlled layout height */
+    opacity: 1;
+    background: var(--flame-color);
+    /*  stylized jagged geometric wave shape resembling an audio wave/graph */
+    clip-path: polygon(
+        0% 100%, 0% 80%, 8% 45%, 15% 75%, 23% 20%, 30% 60%, 
+        38% 10%, 45% 65%, 52% 30%, 60% 85%, 68% 5%, 
+        75% 55%, 83% 25%, 90% 70%, 95% 40%, 100% 90%, 100% 100%
+    );
+}
+
+
+
+.card-content {
+    z-index: 2; 
+}
+
+.testimony-text {
+    color: var(--text-main);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.user-title {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+
+
+
+
+
+
+
+/* FOOTER SECTION */
+
+
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    font-family: manrope;
+    background-color: var(--navcontainer);
+    border-top: 1px solid var(--border-color);
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    padding: 3rem 4rem;
+    margin: 30px;
+
+}
+
+
+.footer-container:hover {
+    box-shadow: 0 5px 10px var(--glow-color);
+
+}
+
+
+.footer-button {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+
+.footer-button button {
+    padding: 0.6rem;
+    border-radius: 12px;
+    background: var(--navlogospan);
+    cursor: pointer;
+}
+
+
+.footer-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 30px;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: var(--navlink);
+    text-decoration: none;
+    padding: 1rem;
+    border: 1px dashed var(--navlogospan);
+    border-radius: 12px;
+    background: blur(12px);
+    transition: 0.2s ease-in-out, color 0.2s;
+    cursor: pointer;
+}
+
+.footer-links a:hover {
+    color: var(--navlogospan);
+}
+
+
+/* Brand Section */
+.footer-brand-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-logo {
+    color: var(--navlink);
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    margin: 20px;
+}
+
+.footer-logo span {
+    color: var(--navlogospan);
+    font-weight: 300;
+    margin-left: 2px;
+}
+
+
+.testimonial-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;;
+    margin: 50px;
+
+}
+
+.testimonial-title h3 {
+    font-size: 50px;
+    font-family: manrope;
+    font-weight: 850;
+
+}
+
+.testimonial-title span {
+    color: var(--navlogospan);
+
+}
+
+
+.brand-subtext {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 5px;
+}
+
+/* Communities Container Layout */
+.communities-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* Individual Card Styling */
+.community-item {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex: 1;
+    min-width: 250px;
+    padding: 1.25rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.community-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+img.community-icon {
+    filter: brightness(0) invert(1);
+}
+
+.community-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.community-info h4 {
+    color: var(--text-primary);
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.community-info p {
+    color: var(--text-muted);
+    margin: 0.25rem 0 0 0;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+/* Vertical Divider Settings */
+.vertical-divider {
+    width: 1px;
+    height: 50px;
+    background-color: var(--border-color);
+}
+
+/* Interactive States  */
+
+/* ChatGPT Interaction Icon */
+.gpt-community:hover {
+    border-color: rgba(16, 163, 127, 0.3);
+    background: rgba(16, 163, 127, 0.03);
+}
+
+.community-icon img {
+    filter: brightness(0) invert(1);
+}
+
+.gpt-community:hover .community-icon {
+    background: var(--navlogospan);
+    color: var(--bg-dark);
+    box-shadow: 0 0 15px rgba(16, 163, 127, 0.4);
+}
+
+/* Claude Interaction icon */
+.claude-community:hover {
+    border-color: rgba(204, 120, 92, 0.3);
+    background: rgba(204, 120, 92, 0.03);
+}
+.claude-community:hover .community-icon {
+    background: var(--claude-glow);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(204, 120, 92, 0.4);
+}
+
+/* Gemini Interaction icon */
+.gemini-community:hover {
+    border-color: rgba(66, 133, 244, 0.3);
+    background: rgba(66, 133, 244, 0.03);
+}
+.gemini-community:hover .community-icon {
+    background: rgb(142, 190, 212);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(66, 133, 244, 0.4);
+}
+
+/* Responsive collapse on small mobile devices */
+@media (max-width: 768px) {
+    .communities-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .vertical-divider {
+        display: none; /* Hide dividers when cards stack vertically */
+    }
+    .footer-container {
+        padding: 2rem 1.5rem;
+    }
+}
+
+
+
+
+
+
+
+/* RESPONSIVENESS AND MEDIA QUERIES */
+
+
+
+
+/* --------------------------------------------------------------------------
+   3. TABLET & MOBILE NAVIGATION (<=1080px)
+   The logo + 4 links + 2 buttons genuinely can't fit under ~1080px without
+   crowding, so the hamburger takes over here rather than waiting for a
+   smaller "mobile-only" breakpoint.
+-------------------------------------------------------------------------- */
+@media (max-width: 1080px) {
+ 
+    .navcontainer {
+        padding: 16px 22px;
+        border-radius: 24px;
+        position: relative;
+        /* .navcontainer already has display:flex + flex-wrap:wrap from
+           style.css — we use that wrap behavior to drop the menu onto its
+           own line rather than relying on guessed pixel offsets. */
+    }
+ 
+    .hamburger-btn {
+        display: flex;
+        order: 3;
+    }
+ 
+    .navbranding { order: 1; }
+ 
+    /* Both groups collapse to zero height, become one continuous line,
+       and wrap onto a new row below the logo/hamburger row. Height-based
+       (not viewport-based) so it always fits its own content, whatever
+       that content ends up being. */
+    .navmenu,
+    .navbuttons {
+        flex-basis: 100%;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        gap: 8px;
+        margin-top: 0;
+        transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+                    opacity 0.3s ease,
+                    margin-top 0.4s ease;
+    }
+ 
+    .navmenu {
+        order: 4;
+    }
+ 
+    .navbuttons {
+        order: 5;
+        padding-top: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+ 
+    .navcontainer.menu-open .navmenu,
+    .navcontainer.menu-open .navbuttons {
+        max-height: 600px;
+        opacity: 1;
+        margin-top: 16px;
+    }
+ 
+    .navlink {
+        width: 100%;
+        padding: 16px 18px;
+        border-radius: 14px;
+    }
+ 
+    .navlink:hover,
+    .navlink:focus-visible {
+        background: rgba(255, 255, 255, 0.06);
+    }
+ 
+    .underscore::after {
+        display: none; /* underline hover effect doesn't translate to tap targets */
+    }
+ 
+    .navbuttons .navbtn1,
+    .navbuttons .navbtn2 {
+        width: 100%;
+        padding: 14px;
+        font-size: 15px;
+    }
+ 
+    .navbtn2 {
+        border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+}
+ 
+ 
+/* --------------------------------------------------------------------------
+   4. LARGE TABLET (<=968px)
+   Complements the existing hero/main-hero rules already in style.css —
+   only adds what's still needed to stay clean at this width.
+-------------------------------------------------------------------------- */
+@media (max-width: 968px) {
+ 
+    body, html {
+        padding: 10px;
+    }
+ 
+    .navbranding #logo {
+        font-size: 1.3rem;
+    }
+ 
+    .title-paragraph {
+        font-size: 1rem;
+    }
+ 
+    .landing-content {
+        margin: 24px 16px;
+    }
+}
+ 
+ 
+/* --------------------------------------------------------------------------
+   5. TABLET / LARGE PHONE (<=768px)
+-------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+ 
+    .navcontainer {
+        padding: 14px 18px;
+    }
+ 
+    .hero-section {
+        padding: 3rem 1.25rem;
+    }
+ 
+    .title-content {
+        font-size: 2.4rem;
+    }
+ 
+    .hero-btn {
+        width: 100%;
+        text-align: center;
+    }
+ 
+    .hero-button {
+        width: 100%;
+    }
+ 
+    .main-hero,
+    .main-hero:nth-of-type(even) {
+        margin: 3rem auto;
+    }
+ 
+    .main-hero-content h2 {
+        font-size: 2rem;
+    }
+ 
+    .main-hero-content h2 span {
+        font-size: 1.15rem;
+    }
+ 
+    .testimonial-title {
+        margin: 32px 20px;
+    }
+ 
+    .testimonial-title h3 {
+        font-size: 34px;
+    }
+ 
+    .testimonial-section {
+        gap: 1.5rem;
+        padding: 2rem 1.25rem;
+    }
+ 
+    .testimony-card {
+        width: 100%;
+        max-width: 460px;
+        min-height: auto;
+        padding: 2rem 1.5rem;
+    }
+ 
+    .footer-container {
+        margin: 16px;
+        padding: 2.5rem 1.75rem;
+    }
+ 
+    .footer-links {
+        justify-content: flex-start;
+        margin: 20px 0;
+        gap: 12px;
+    }
+ 
+    .footer-links a {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+ 
+ 
+/* --------------------------------------------------------------------------
+   6. MOBILE (<=640px)
+-------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+ 
+    body, html {
+        padding: 8px;
+    }
+ 
+    .navcontainer {
+        padding: 12px 16px;
+        border-radius: 20px;
+    }
+ 
+    #logo {
+        font-size: 1.15rem;
+    }
+ 
+    .navbranding #logo span {
+        display: block;
+        font-size: 0.65rem;
+        letter-spacing: 0.08em;
+    }
+ 
+    .hero-section {
+        padding: 2.5rem 1rem;
+        gap: 2rem;
+    }
+ 
+    .title-content {
+        font-size: 2rem;
+    }
+ 
+    .lit {
+        font-size: 0.8rem;
+        letter-spacing: 0.1em;
+    }
+ 
+    .title-paragraph {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+ 
+    .hero-image-section {
+        height: 320px;
+        border-radius: 18px;
+    }
+ 
+    .hero-btn {
+        padding: 0.9rem 2rem;
+        font-size: 1rem;
+    }
+ 
+    .landing-header {
+        padding: 0 0.5rem;
+    }
+ 
+    .main-hero {
+        padding: 1.25rem;
+        border-radius: 16px;
+        gap: 2rem;
+    }
+ 
+    .main-hero-content h2 {
+        font-size: 1.7rem;
+    }
+ 
+    .main-hero-content p {
+        font-size: 1rem;
+    }
+ 
+    .image-container-photo img {
+        max-height: 220px;
+    }
+ 
+    .testimonial-title {
+        margin: 24px 16px;
+    }
+ 
+    .testimonial-title h3 {
+        font-size: 28px;
+    }
+ 
+    .testimony-card {
+        padding: 1.75rem 1.25rem;
+    }
+ 
+    .testimony-text {
+        font-size: 0.95rem;
+    }
+ 
+    .footer-container {
+        margin: 12px;
+        padding: 2rem 1.25rem;
+        gap: 1.75rem;
+    }
+ 
+    .footer-logo {
+        margin: 10px 0;
+        font-size: 1.35rem;
+    }
+ 
+    .footer-button {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+ 
+    .footer-button button {
+        width: 100%;
+        padding: 0.85rem;
+    }
+ 
+    .footer-links {
+        flex-direction: column;
+        align-items: stretch;
+        margin: 16px 0;
+    }
+ 
+    .footer-links a {
+        text-align: center;
+    }
+ 
+    .community-item {
+        min-width: 100%;
+    }
+}
+ 
+ 
+/* --------------------------------------------------------------------------
+   7. SMALL PHONE (<=480px)
+-------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+ 
+    .navcontainer {
+        padding: 10px 14px;
+        border-radius: 16px;
+    }
+ 
+    .hamburger-btn {
+        width: 38px;
+        height: 38px;
+    }
+ 
+    .title-content {
+        font-size: 1.7rem;
+    }
+ 
+    .title-paragraph {
+        font-size: 0.9rem;
+    }
+ 
+    .hero-image-section {
+        height: 260px;
+        border-radius: 14px;
+    }
+ 
+    .hero-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.95rem;
+    }
+ 
+    .main-hero-content h2 {
+        font-size: 1.45rem;
+    }
+ 
+    .main-hero-content h2 span {
+        font-size: 1rem;
+    }
+ 
+    .main-hero-content img {
+        width: 60px !important;
+        height: 60px !important;
+    }
+ 
+    .testimonial-title h3 {
+        font-size: 24px;
+    }
+ 
+    .testimony-card {
+        padding: 1.5rem 1rem;
+    }
+ 
+    .footer-container {
+        margin: 8px;
+        padding: 1.75rem 1rem;
+    }
+ 
+    .footer-logo {
+        font-size: 1.2rem;
+    }
+ 
+    .community-item {
+        padding: 1rem;
+        gap: 1rem;
+    }
+}
+ 
+ 
+/* --------------------------------------------------------------------------
+   8. VERY SMALL PHONE (<=380px)
+-------------------------------------------------------------------------- */
+@media (max-width: 380px) {
+ 
+    body, html {
+        padding: 6px;
+    }
+ 
+    .navcontainer {
+        padding: 9px 12px;
+    }
+ 
+    #logo {
+        font-size: 1rem;
+    }
+ 
+    .hero-section {
+        padding: 2rem 0.75rem;
+    }
+ 
+    .title-content {
+        font-size: 1.45rem;
+    }
+ 
+    .lit {
+        font-size: 0.7rem;
+    }
+ 
+    .hero-image-section {
+        height: 220px;
+    }
+ 
+    .btn-circle .circle:nth-child(1) { width: 30px; height: 30px; }
+    .btn-circle .circle:nth-child(2) { width: 18px; height: 18px; }
+    .btn-circle .circle:nth-child(3) { width: 8px; height: 8px; }
+ 
+    .main-hero-content h2 {
+        font-size: 1.25rem;
+    }
+ 
+    .testimonial-title h3 {
+        font-size: 20px;
+    }
+ 
+    .footer-logo {
+        font-size: 1.05rem;
+    }
+ 
+    .brand-subtext {
+        font-size: 0.8rem;
+    }
+}
+ 
+ 
+/* --------------------------------------------------------------------------
+   9. ACCESSIBILITY: keep focus visible when tabbing through the mobile menu
+-------------------------------------------------------------------------- */
+.hamburger-btn:focus-visible,
+.navlink:focus-visible,
+.navbtn1:focus-visible,
+.navbtn2:focus-visible {
+    outline: 2px solid var(--navlogospan);
+    outline-offset: 2px;
+}
+ 
+ 
+/* --------------------------------------------------------------------------
+   10. Respect reduced-motion preference for the menu + brand animations
+-------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    .navmenu,
+    .navbuttons,
+    .hamburger-line,
+    .nav-overlay {
+        transition: none !important;
+    }
+}
