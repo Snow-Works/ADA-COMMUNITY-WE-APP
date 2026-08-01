@@ -1073,6 +1073,81 @@ img.community-icon {
 
 
 
+ 
+/* --------------------------------------------------------------------------
+   1. HAMBURGER BUTTON
+   Hidden on desktop by default, revealed at the nav breakpoint below.
+-------------------------------------------------------------------------- */
+.hamburger-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 42px;
+    height: 42px;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1200;
+    transition: background 0.25s ease;
+}
+ 
+.hamburger-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+ 
+.hamburger-line {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background-color: var(--navlink, #fafafa);
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.25s ease,
+                background-color 0.3s ease;
+}
+ 
+/* Turns the three lines into an "X" when the menu is open */
+.navcontainer.menu-open .hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+ 
+.navcontainer.menu-open .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+ 
+.navcontainer.menu-open .hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+ 
+ 
+/* --------------------------------------------------------------------------
+   2. BACKDROP OVERLAY
+   Dims the page behind the open mobile menu.
+-------------------------------------------------------------------------- */
+.nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+    z-index: 900;
+}
+ 
+.nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+
+
+
+
 /* --------------------------------------------------------------------------
    3. TABLET & MOBILE NAVIGATION (<=1080px)
    The logo + 4 links + 2 buttons genuinely can't fit under ~1080px without
