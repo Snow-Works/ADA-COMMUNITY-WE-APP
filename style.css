@@ -740,6 +740,7 @@ background-color: #1a4d3a;
 .testimony-card {
     display: flex;
     justify-content: space-evenly;
+    position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     background-color: var(--navcontainer);
