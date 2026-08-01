@@ -1,0 +1,160 @@
+/* ==========================================================================
+   MOBILE-ENHANCEMENTS.CSS
+   Styling for the new mobile-focused features:
+   1. Landing section header title
+   2. Footer community monogram icons (Claude / Gemini)
+   3. Sticky mobile "Build With US" CTA
+   4. Tap-active state for testimonial cards (touch equivalent of :hover)
+   5. Hero "Read more" collapse/expand on small phones
+   Loaded AFTER style.css and responsive.css.
+   ========================================================================== */
+ 
+ 
+/* --------------------------------------------------------------------------
+   1. LANDING HEADER TITLE
+-------------------------------------------------------------------------- */
+.landing-header h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--bg-dark, #0f172a);
+    text-align: center;
+    margin: 0.75rem 0 0 0;
+}
+ 
+.landing-header h2 span {
+    color: var(--navlogospan);
+}
+ 
+@media (max-width: 640px) {
+    .landing-header h2 {
+        font-size: 1.25rem;
+        padding: 0 1rem;
+    }
+}
+ 
+ 
+/* --------------------------------------------------------------------------
+   2. FOOTER COMMUNITY MONOGRAM ICONS
+   The Claude/Gemini icons are deliberately abstract shapes (not the real
+   brand logos) — swap the inline SVGs in index.html for licensed brand
+   assets any time you have them.
+-------------------------------------------------------------------------- */
+.claude-community .community-icon,
+.gemini-community .community-icon {
+    color: var(--text-primary, #fafafa);
+}
+ 
+.claude-community:hover .community-icon svg,
+.gemini-community:hover .community-icon svg {
+    color: #fff;
+}
+ 
+ 
+/* --------------------------------------------------------------------------
+   3. STICKY MOBILE CTA
+   Hidden entirely on desktop/tablet. On phones, fades in once the user has
+   scrolled past the hero's own "Build With US" button (handled by
+   mobile-enhancements.js via IntersectionObserver).
+-------------------------------------------------------------------------- */
+.sticky-mobile-cta {
+    display: none;
+}
+ 
+@media (max-width: 640px) {
+    .sticky-mobile-cta {
+        display: block;
+        position: fixed;
+        left: 50%;
+        bottom: 18px;
+        transform: translate(-50%, 24px);
+        z-index: 950; /* above page content, below the nav header/menu */
+        width: min(90vw, 340px);
+        padding: 14px;
+        border: none;
+        border-radius: 50px;
+        background: var(--navlogospan);
+        color: #04140a;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+ 
+    .sticky-mobile-cta.visible {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translate(-50%, 0);
+    }
+ 
+    /* Don't show it while the mobile nav menu itself is open */
+    .navcontainer.menu-open ~ .sticky-mobile-cta {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+ 
+ 
+/* --------------------------------------------------------------------------
+   4. TAP-ACTIVE TESTIMONIAL CARDS
+   Mirrors the existing :hover "flame line" effect (defined in style.css)
+   so touch users get the same feedback on tap that desktop users get on
+   hover, since touch devices don't have a real :hover state.
+-------------------------------------------------------------------------- */
+.testimony-card.tap-active {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px var(--glow-color);
+}
+ 
+.testimony-card.tap-active .card-line {
+    height: 70px;
+    opacity: 1;
+    background: var(--flame-color);
+    clip-path: polygon(
+        0% 100%, 0% 80%, 8% 45%, 15% 75%, 23% 20%, 30% 60%,
+        38% 10%, 45% 65%, 52% 30%, 60% 85%, 68% 5%,
+        75% 55%, 83% 25%, 90% 70%, 95% 40%, 100% 90%, 100% 100%
+    );
+}
+ 
+ 
+/* --------------------------------------------------------------------------
+   5. HERO "READ MORE" TOGGLE
+   On small phones the two extra hero paragraphs collapse behind a
+   "Read more" button so the CTA is reachable sooner. Desktop/tablet is
+   untouched — both paragraphs stay fully visible there.
+-------------------------------------------------------------------------- */
+.hero-readmore-btn {
+    display: none;
+}
+ 
+@media (max-width: 480px) {
+    .hero-extra-copy {
+        display: block;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.4s ease, opacity 0.3s ease;
+    }
+ 
+    .hero-extra-copy.expanded {
+        max-height: 300px;
+        opacity: 1;
+    }
+ 
+    .hero-readmore-btn {
+        display: inline-block;
+        margin-top: 0.75rem;
+        padding: 0;
+        border: none;
+        background: none;
+        color: var(--navlogospan);
+        font-size: 0.9rem;
+        font-weight: 700;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+ 

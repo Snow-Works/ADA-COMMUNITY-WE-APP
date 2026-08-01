@@ -687,6 +687,10 @@ background-color: #1a4d3a;
     }
 }
 
+
+
+
+
 /* --- Fluid Tablet & Mobile Responsiveness --- */
 @media (max-width: 968px) {
     .main-hero,
@@ -745,7 +749,6 @@ background-color: #1a4d3a;
     cursor: pointer;
     background-color: var(--navcontainer);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 5px 10px var(--glow-color);
     border-radius: 16px;
     padding: 2.5rem 2rem;
     width: 420px;
@@ -771,7 +774,7 @@ background-color: #1a4d3a;
 
 .testimony-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px var(--glow-color);
+    box-shadow: 0 1px 1px var(--glow-color);
 }
 
 

@@ -1,0 +1,104 @@
+* ==========================================================================
+   HERO-MOBILE-STACK.CSS
+   Fixes the hero image slider for screens 700px and below:
+   1. Reorders it to sit BELOW the text/CTA block (style.css's own 968px
+      breakpoint uses "column-reverse", which puts the image on top —
+      this file overrides that specifically for <=700px).
+   2. Replaces the fixed pixel heights from responsive.css (320px / 260px /
+      220px) with a proportional aspect-ratio, so the image renders large,
+      balanced, and uncropped-feeling on every phone size, rather than a
+      thin squeezed strip.
+   Must be loaded AFTER style.css, responsive.css, and mobile-enhancements.css
+   so its rules win the cascade at matching widths.
+   ========================================================================== */
+ 
+@media (max-width: 700px) {
+ 
+    .hero-section {
+        /* Force normal top-to-bottom order instead of style.css's
+           "column-reverse" (which is what was putting the image on top) */
+        flex-direction: column;
+    }
+ 
+    /* Belt-and-suspenders: explicit order, so the stacking is correct
+       regardless of which flex-direction ends up winning the cascade */
+    .hero-title {
+        order: 1;
+    }
+ 
+    .hero-image-section {
+        order: 2;
+        width: 100%;
+        max-width: 100%;
+        height: auto;               /* let aspect-ratio control the size, not a fixed px height */
+        aspect-ratio: 4 / 5;        /* tall, balanced, portrait-friendly frame */
+        margin-top: 1rem;
+        border-radius: 20px;
+    }
+}
+ 
+/* On very small phones a slightly more square frame reads as less
+   cramped than a tall 4:5 ratio squeezed into a narrow viewport */
+@media (max-width: 420px) {
+    .hero-image-section {
+        aspect-ratio: 1 / 1;
+    }
+}
+
+
+
+
+
+
+
+/* THE HERO VIDEO SECTION FIX FOR SCREEN SIES HIGER THAN 400 */
+
+
+
+/* ==========================================================================
+   HERO-MOBILE-FIX.CSS
+   Fixes two things in the hero section for screens <=968px (tablet down to
+   the smallest phone):
+ 
+   1. ORDER — style.css uses flex-direction: column-reverse here, which
+      puts the image ABOVE the text. We want text first, image below it,
+      so we switch to plain flex-direction: column (the image's <div>
+      already comes second in the HTML, so normal column order puts it
+      right where we want it — no HTML changes needed).
+ 
+   2. SIZE — style.css (420px) and responsive.css (320px / 260px / 220px)
+      each shrink the image to a smaller fixed pixel height as the screen
+      gets narrower. We replace all of that with one fluid rule using
+      aspect-ratio, so the image scales proportionally with the screen
+      and stays big and well-balanced at every phone size instead of
+      shrinking down to a sliver.
+ 
+   Loaded LAST (after style.css, responsive.css, mobile-enhancements.css)
+   so these rules win the cascade without needing !important.
+   ========================================================================== */
+ 
+@media (max-width: 968px) {
+ 
+    .hero-section {
+        /*flex-direction: column; /* text first, image second — overrides column-reverse */
+    }
+    
+
+    .hero-image-section {
+        width: 100%;
+        max-width: 560px;       /* caps how large it gets on bigger tablets */
+        height: auto;           /* let aspect-ratio drive the height, not a fixed px value */
+        aspect-ratio: 4 / 5;    /* balanced portrait proportion, scales with width */
+        margin: 0 auto;         /* centered under the text */
+    }
+}
+ 
+/* Slightly taller/narrower proportion once we're down to phone widths —
+   still fluid, just a small aesthetic adjustment, not a hard shrink. */
+@media (max-width: 480px) {
+    .hero-image-section {
+        aspect-ratio: 3 / 4;
+    }
+}
+ 
+ 
