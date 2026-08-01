@@ -217,35 +217,6 @@ img.icons {
 }
 
 
-/* --------------------------------------------------------------------------
-   2. BACKDROP OVERLAY
-   Dims the page behind the open mobile menu.
--------------------------------------------------------------------------- */
-.nav-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.35s ease, visibility 0.35s ease;
-    z-index: 999;
-}
- 
-.nav-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
- 
- 
-/* --------------------------------------------------------------------------
-   3. TABLET & MOBILE NAVIGATION (<=1080px)
-   The logo + 4 links + 2 buttons genuinely can't fit under ~1080px without
-   crowding, so the hamburger takes over here rather than waiting for a
-   smaller "mobile-only" breakpoint.
--------------------------------------------------------------------------- */
-
 
 
 
@@ -1101,6 +1072,7 @@ img.community-icon {
 
 
 
+
 /* --------------------------------------------------------------------------
    3. TABLET & MOBILE NAVIGATION (<=1080px)
    The logo + 4 links + 2 buttons genuinely can't fit under ~1080px without
@@ -1112,7 +1084,9 @@ img.community-icon {
     .navcontainer {
         padding: 16px 22px;
         border-radius: 24px;
-        position: relative;
+        /* position stays "sticky" as defined in style.css — not touched
+           here. isolation guards against blur/backdrop bleed bugs. */
+        isolation: isolate;
         /* .navcontainer already has display:flex + flex-wrap:wrap from
            style.css — we use that wrap behavior to drop the menu onto its
            own line rather than relying on guessed pixel offsets. */
@@ -1140,6 +1114,7 @@ img.community-icon {
         opacity: 0;
         gap: 8px;
         margin-top: 0;
+        background: var(--navcontainer);
         transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1),
                     opacity 0.3s ease,
                     margin-top 0.4s ease;
