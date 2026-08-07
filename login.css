@@ -12,6 +12,7 @@ body,html{
     padding: 14px;
     font-family: manrope;
     background: var(--navcontainer);
+    overflow-x: hidden;
 }
 
 :root {
@@ -45,7 +46,7 @@ body,html{
 
 .container {
     max-width: 800px;
-    width: 600px;
+    width: min(92%, 600px);
     filter: blur;
     background: var(--navlogospan);
     color: var(--navcontainer);
@@ -163,6 +164,187 @@ body,html{
     width: 40px;
     height: 40px;
     background: var(--navcontainer);
+}
+
+
+
+
+
+/* RESPONSIVENESS  MEDIA QUERIES FOR ALL SCREEN SIZES  */
+
+/* Tablets and small laptop screen size  (<=1024px) */
+
+@media (max-width: 1024px) {
+    .container {
+        padding: 4rem;
+        margin: 48px auto;
+    }
+}
+
+
+/* Tablet screen size  (<=768px) */
+@media (max-width: 768px) {
+    .container {
+        width: min(90%, 520px);
+        padding: 3rem 2.25rem;
+        margin: 36px auto;
+    }
+
+    .form-content h3 {
+        font-size: 22px;
+        padding: 16px;
+        margin-bottom: 32px;
+    }
+
+    .form-content span a {
+        font-size: 18px;
+        padding: 16px;
+        margin-bottom: 32px;
+    }
+
+    .form-content form {
+        max-width: 100%;
+        gap: 24px;
+    }
+
+    .form-content input {
+        padding: 13px;
+    }
+
+    #logo {
+        font-size: 1.4rem;
+    }
+}
+
+
+/* Large phone screen size (<=640px) */
+@media (max-width: 640px) {
+    body, html {
+        padding: 10px;
+    }
+
+    .container {
+        width: 94%;
+        padding: 2.25rem 1.5rem;
+        margin: 24px auto;
+        border-radius: 12px;
+    }
+
+    .form-content h3 {
+        font-size: 19px;
+        padding: 14px;
+        margin-bottom: 26px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .form-content span a {
+        font-size: 16px;
+        padding: 14px;
+        margin-bottom: 0;
+    }
+
+    .form-content form {
+        gap: 18px;
+    }
+
+    .check-box {
+        padding: 14px 4px;
+        font-size: 14px;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .form-button {
+        margin: 20px 0;
+    }
+
+    .account-link {
+        margin-top: 26px;
+        flex-direction: column;
+        gap: 6px;
+    }
+}
+
+
+/* Small phone screen size (<=480px)*/
+@media (max-width: 480px) {
+    .container {
+        padding: 1.75rem 1.1rem;
+        border-radius: 10px;
+    }
+
+    .form-content h3 {
+        font-size: 17px;
+        padding: 12px;
+    }
+
+    .form-content span a {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .form-content input {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .form-button button {
+        width: 100%;
+        padding: 0.9rem;
+    }
+
+    #logo {
+        font-size: 1.15rem;
+    }
+}
+
+
+/* Very small phone screen size (<=360px) */
+@media (max-width: 360px) {
+    .container {
+        padding: 1.25rem 0.85rem;
+    }
+
+    .form-content h3 {
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    .form-content span a {
+        font-size: 13px;
+        padding: 10px;
+    }
+}
+
+
+/*  FORM-CIRCLE DECORATION — additive fix (see note at top of file)
+   .form-circle had no layout rule and its dots used an untargetable
+   selector, so nothing was ever visible. This restores it responsively.
+-------------------------------------------------------------------------- */
+
+
+@media (max-width: 480px) {
+    .form-circle .circle {
+        width: 9px;
+        height: 9px;
+    }
+}
+
+
+/*  NAV BRANDING (ADA COMMUNITY logo below the form) */
+
+.navbranding {
+    text-align: center;
+    margin-top: 12px;
+}
+
+@media (max-width: 640px) {
+    #logo span {
+        display: block;
+        font-size: 0.7em;
+        letter-spacing: 0.08em;
+    }
 }
 
 
