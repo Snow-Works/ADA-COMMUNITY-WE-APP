@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="icon" href="ADA" type="text" size="16x16 32x32">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="chatbox.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="dashboard-container">
+
+        <!-- SIDEBAR -->
+        <aside class="left-side-section" id="leftSidesection">
+
+            <div class="profile-header" id="profile">
+
+                <div class="profile-photo" id="profilePhoto">
+                    <img src="images/Eddie8.png" alt="Profile Photo">
+                </div>
+
+                <div class="profile-info" id="profileInfo">
+                    <h2 class="profile-name" id="profileName">
+                        Eddie Otudor
+                    </h2>
+
+                    <p class="profile-email" id="profileEmail">
+                        john.doe@example.com
+                    </p>
+                </div>
+
+                <button class="profile-edit-button" id="profileEditButton">
+                    Edit Profile
+                </button>
+
+            </div>
+
+            <!-- Side-bar Actions Section -->
+            <div class="sidebar-actions">
+
+                <button class="sidebar-new-chat" id="sidebarNewChat" type="button">
+                    <span>＋</span>
+                    New Chat
+                </button>
+
+            </div>
+
+
+            <!-- Conversation History section -->
+            <div class="conversation-history">
+
+                <div class="history-header">
+                    <p>Recent Conversations</p>
+                </div>
+
+                <div class="conversation-list" id="conversationList">
+
+                    <!-- Conversations will be created by JavaScript -->
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- Main Application Section -->
+        <section class="main-section">
+
+            <!-- Chat-box area section -->
+
+            <div class="chat-area" id="chatArea">
+
+                <!-- EMPTY CHAT STATE -->
+
+                <div class="empty-chat" id="emptyChat">
+
+                    <img src="images/ADA.png" alt="ADA Logo" class="ada-logo">
+
+                    <h1>
+                        How can ADA help you?
+                    </h1>
+
+                    <p>
+                        Start a conversation by sending
+                        a message below.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Typing section indicator-->
+
+            <div class="typing-indicator" id="typingIndicator">
+
+                <div class="typing-dots">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+                <p>ADA is thinking...</p>
+
+            </div>
+
+
+            <!-- Prompt Composer Section -->
+
+            <div class="composer-section">
+
+                <div class="composer-box">
+
+                    <textarea class="text-area" id="textArea" rows="1" placeholder="Message ADA..."></textarea>
+
+
+                    <button class="send-button" id="sendButton" type="button" aria-label="Send message">
+                        ↑
+                    </button>
+
+                </div>
+
+
+                <p class="composer-disclaimer">
+                    ADA may make mistakes. Verify important information.
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+
+</html>
