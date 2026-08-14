@@ -11,7 +11,7 @@ body,html{
     scroll-behavior: smooth;
     padding: 14px;
     font-family: manrope;
-    background: var(--navlink);
+    background: var(--navcontainered);
 }
 
 :root {
@@ -122,6 +122,6 @@ button {
 }
 
 #logo {
-    color: var(--navcontainer);
+    color: var(--navlink);
 }
 
