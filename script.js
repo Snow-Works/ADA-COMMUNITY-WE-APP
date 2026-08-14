@@ -34,6 +34,7 @@ btnI.addEventListener('click', () =>{
 
 });
 
+
 //SIGNIN BUTTON  ON THE NAV BAR
 const btnI2 = document.querySelector('#navBtnB');
 btnI2.addEventListener('click', () =>{

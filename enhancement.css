@@ -10,9 +10,8 @@
    ========================================================================== */
  
  
-/* --------------------------------------------------------------------------
-   1. LANDING HEADER TITLE
--------------------------------------------------------------------------- */
+/* LANDING HEADER TITLE */
+
 .landing-header h2 {
     font-size: 1.6rem;
     font-weight: 700;
@@ -20,19 +19,19 @@
     text-align: center;
     margin: 0.75rem 0 0 0;
 }
- 
+
 .landing-header h2 span {
     color: var(--navlogospan);
 }
- 
+
 @media (max-width: 640px) {
     .landing-header h2 {
         font-size: 1.25rem;
         padding: 0 1rem;
     }
 }
- 
- 
+
+
 /* --------------------------------------------------------------------------
    2. FOOTER COMMUNITY MONOGRAM ICONS
    The Claude/Gemini icons are deliberately abstract shapes (not the real

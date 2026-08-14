@@ -2,7 +2,7 @@
   "name": "ada-community-we-app",
   "version": "1.0.0",
   "description": "adacommunity webapp",
-  "main": "dashboard.js",
+  "main": "chatbox.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

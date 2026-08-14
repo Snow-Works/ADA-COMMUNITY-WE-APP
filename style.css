@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body,html{
+body,
+html {
     scroll-behavior: smooth;
     padding: 14px;
     font-family: manrope;
@@ -32,7 +33,7 @@ body,html{
     --text-primary: #f8fafc;
     --text-muted: #64748b;
     --border-color: rgba(255, 255, 255, 0.08);
-    
+
     /* Brand Accent Glow Colors */
     --gpt-glow: #10a37f;
     --claude-glow: #cc785c;
@@ -49,15 +50,15 @@ body,html{
     position: sticky;
     top: 0;
     z-index: 1000;
-    backdrop-filter:lur(12px);
+    backdrop-filter: lur(12px);
     -webkit-backdrop-filter: blur(12px);
     padding: 20px 34px;
-    margin-bottom:  20px;
+    margin-bottom: 20px;
     border-radius: 70px;
     box-shadow: 1px 1px 2px 2px solid var(--navlogospan);
     font-family: manrope;
 
-    
+
 
 
 }
@@ -79,7 +80,7 @@ body,html{
 }
 
 
-.icons{
+.icons {
     display: inline;
     text-align: center;
     align-items: center;
@@ -95,7 +96,7 @@ img.icons {
 .navlink {
     color: var(--navlink);
     text-decoration: none;
-    font-weight:600;
+    font-weight: 600;
     font-size: 14px;
     font-family: manrope;
     border-radius: 60px;
@@ -112,7 +113,8 @@ img.icons {
     content: "";
     position: absolute;
     left: 0;
-    bottom: -5px; /* adjust spacing */
+    bottom: -5px;
+    /* adjust spacing */
     width: 0%;
     height: 0%;
     background-color: var(--navlogospan);
@@ -137,26 +139,26 @@ img.icons {
 
 .navbtn1 {
     padding: 10px;
-    border-radius: 15px; 
-    background:  var(--navlogospan);
-    transition: 0.2s ease, color 0.2s ease; 
+    border-radius: 15px;
+    background: var(--navlogospan);
+    transition: 0.2s ease, color 0.2s ease;
     font-weight: 500;
     font-size: 15px;
-    
+
 
 }
 
 .navbtn1:hover {
     border: 1px dashed var(--navlink);
     cursor: pointer;
-    
+
 
 }
 
 .navbtn2 {
     background: transparent;
     padding: 10px;
-    border-radius: 15px ;
+    border-radius: 15px;
     color: var(--navlink);
 }
 
@@ -199,8 +201,8 @@ img.icons {
     border-radius: 2px;
     background-color: var(--navlink, #fafafa);
     transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-                opacity 0.25s ease,
-                background-color 0.3s ease;
+        opacity 0.25s ease,
+        background-color 0.3s ease;
 }
 
 /* Turns the three lines into an "X" when the menu is open */
@@ -236,7 +238,7 @@ img.icons {
     max-width: 1500px;
     margin: 0 auto;
     padding: 6rem 2rem;
-    min-height: calc(100vh - 100px); 
+    min-height: calc(100vh - 100px);
     font-family: Manrope;
 }
 
@@ -288,7 +290,7 @@ img.icons {
 .title-paragraph .paragraph2 {
     display: block;
     margin-top: 1rem;
-    color: var(--bg-dark); 
+    color: var(--bg-dark);
     font-weight: 500;
 }
 
@@ -324,8 +326,13 @@ img.icons {
 
 
 /*  Staggered pulse animation for the three circles */
-.circle:nth-child(2) { animation-delay: 0.4s; }
-.circle:nth-child(3) { animation-delay: 0.8s; }
+.circle:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.circle:nth-child(3) {
+    animation-delay: 0.8s;
+}
 
 
 /* Build with Us Call To Action Button */
@@ -360,14 +367,14 @@ img.icons {
     flex: 1;
     position: relative;
     width: 100%;
-    max-width: 580px;  
-    height: 680px;     
+    max-width: 580px;
+    height: 680px;
     overflow: hidden;
     border-radius: 24px;
     background-color: var(--navcontainer, #111);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18), 
-                0 0 40px rgba(16, 163, 126, 0.034);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18),
+        0 0 40px rgba(16, 163, 126, 0.034);
 }
 
 .hero-slider-img {
@@ -380,8 +387,8 @@ img.icons {
     /* Elegant entering animation parameters */
     opacity: 0;
     transform: scale(1.06);
-    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), 
-                transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1),
+        transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .hero-slider-img.active {
@@ -393,10 +400,13 @@ img.icons {
 /*  keyframe animation */
 
 @keyframes decorativePulse {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1);
         opacity: 0.3;
     }
+
     50% {
         transform: scale(1.3);
         opacity: 1;
@@ -408,7 +418,8 @@ img.icons {
 /* --- FLUID TABLET & MOBILE RESPONSIVENESS --- */
 @media (max-width: 968px) {
     .hero-section {
-        flex-direction: column-reverse; /* Stacks image on top on smaller devices */
+        flex-direction: column-reverse;
+        /* Stacks image on top on smaller devices */
         gap: 3rem;
         padding: 4rem 1.5rem;
         text-align: center;
@@ -426,7 +437,7 @@ img.icons {
         max-width: 100%;
         height: 420px;
     }
-    
+
     .btn-circle {
         justify-content: center;
     }
@@ -448,7 +459,7 @@ img.icons {
 .btn-circle {
     display: flex;
     align-items: center;
-    
+
 }
 
 .circle:nth-child(1) {
@@ -503,30 +514,41 @@ img.icons {
 
 
 @keyframes dangleSwing {
-  0% {
-    transform: rotate(0deg);
-  }
-  20% {
-    transform: rotate(18deg); /* Initial swing right */
-  }
-  40% {
-    transform: rotate(-10deg); /* Counter swing left */
-  }
-  60% {
-    transform: rotate(18deg);  /* Smaller swing right */
-  }
-  80% {
-    transform: rotate(-6deg);  /* Smaller swing left */
-  }
-  100% {
-    transform: rotate(0deg);   /* Settle back to center */
-  }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    20% {
+        transform: rotate(18deg);
+        /* Initial swing right */
+    }
+
+    40% {
+        transform: rotate(-10deg);
+        /* Counter swing left */
+    }
+
+    60% {
+        transform: rotate(18deg);
+        /* Smaller swing right */
+    }
+
+    80% {
+        transform: rotate(-6deg);
+        /* Smaller swing left */
+    }
+
+    100% {
+        transform: rotate(0deg);
+        /* Settle back to center */
+    }
 }
 
 
 .dangling-button:hover {
-  animation-play-state: paused; /* Freezes the dangle when the user hovers over it */
-background-color: #1a4d3a;
+    animation-play-state: paused;
+    /* Freezes the dangle when the user hovers over it */
+    background-color: #1a4d3a;
 }
 
 
@@ -591,7 +613,8 @@ background-color: #1a4d3a;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: #10a37f; /* Accent color */
+    color: #10a37f;
+    /* Accent color */
 }
 
 /* Adjust tag color for the second block (Claude/Anthropic color palette match) */
@@ -680,9 +703,11 @@ background-color: #1a4d3a;
     0% {
         transform: translateY(0px);
     }
+
     50% {
         transform: translateY(-5px);
     }
+
     100% {
         transform: translateY(0px);
     }
@@ -694,6 +719,7 @@ background-color: #1a4d3a;
 
 /* --- Fluid Tablet & Mobile Responsiveness --- */
 @media (max-width: 968px) {
+
     .main-hero,
     .main-hero:nth-of-type(even) {
         flex-direction: column-reverse;
@@ -755,7 +781,7 @@ background-color: #1a4d3a;
     width: 420px;
     min-height: 300px;
     overflow: hidden;
-    
+
 }
 
 /* The Flame Line Design */
@@ -783,21 +809,20 @@ background-color: #1a4d3a;
 /* Hover Interaction states */
 
 .testimony-card:hover .card-line {
-    height: 70px; /* Shoots up to a distinct, controlled layout height */
+    height: 70px;
+    /* Shoots up to a distinct, controlled layout height */
     opacity: 1;
     background: var(--flame-color);
     /*  stylized jagged geometric wave shape resembling an audio wave/graph */
-    clip-path: polygon(
-        0% 100%, 0% 80%, 8% 45%, 15% 75%, 23% 20%, 30% 60%, 
-        38% 10%, 45% 65%, 52% 30%, 60% 85%, 68% 5%, 
-        75% 55%, 83% 25%, 90% 70%, 95% 40%, 100% 90%, 100% 100%
-    );
+    clip-path: polygon(0% 100%, 0% 80%, 8% 45%, 15% 75%, 23% 20%, 30% 60%,
+            38% 10%, 45% 65%, 52% 30%, 60% 85%, 68% 5%,
+            75% 55%, 83% 25%, 90% 70%, 95% 40%, 100% 90%, 100% 100%);
 }
 
 
 
 .card-content {
-    z-index: 2; 
+    z-index: 2;
 }
 
 .testimony-text {
@@ -922,7 +947,8 @@ background-color: #1a4d3a;
 .testimonial-title {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;;
+    align-items: center;
+    ;
     margin: 50px;
 
 }
@@ -1035,9 +1061,10 @@ img.community-icon {
     border-color: rgba(204, 120, 92, 0.3);
     background: rgba(204, 120, 92, 0.03);
 }
+
 .claude-community:hover .community-icon {
     background: var(--claude-glow);
-    color: #fff;
+    color: var(--navlink);
     box-shadow: 0 0 15px rgba(204, 120, 92, 0.4);
 }
 
@@ -1046,9 +1073,10 @@ img.community-icon {
     border-color: rgba(66, 133, 244, 0.3);
     background: rgba(66, 133, 244, 0.03);
 }
+
 .gemini-community:hover .community-icon {
     background: rgb(142, 190, 212);
-    color: #fff;
+    color: var(--navlink);
     box-shadow: 0 0 15px rgba(66, 133, 244, 0.4);
 }
 
@@ -1058,9 +1086,12 @@ img.community-icon {
         flex-direction: column;
         align-items: stretch;
     }
+
     .vertical-divider {
-        display: none; /* Hide dividers when cards stack vertically */
+        display: none;
+        /* Hide dividers when cards stack vertically */
     }
+
     .footer-container {
         padding: 2rem 1.5rem;
     }
@@ -1078,7 +1109,7 @@ img.community-icon {
 
 
 
- 
+
 /* --------------------------------------------------------------------------
    1. HAMBURGER BUTTON
    Hidden on desktop by default, revealed at the nav breakpoint below.
@@ -1099,11 +1130,11 @@ img.community-icon {
     z-index: 1200;
     transition: background 0.25s ease;
 }
- 
+
 .hamburger-btn:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0);
 }
- 
+
 .hamburger-line {
     display: block;
     width: 22px;
@@ -1111,38 +1142,35 @@ img.community-icon {
     border-radius: 2px;
     background-color: var(--navlink, #fafafa);
     transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-                opacity 0.25s ease,
-                background-color 0.3s ease;
+        opacity 0.25s ease,
+        background-color 0.3s ease;
 }
- 
+
 /* Turns the three lines into an "X" when the menu is open */
 .navcontainer.menu-open .hamburger-line:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
 }
- 
+
 .navcontainer.menu-open .hamburger-line:nth-child(2) {
     opacity: 0;
 }
- 
+
 .navcontainer.menu-open .hamburger-line:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
 }
- 
- 
-/* --------------------------------------------------------------------------
-   2. BACKDROP OVERLAY
-   Dims the page behind the open mobile menu.
--------------------------------------------------------------------------- */
+
+
+/* BACKDROP OVERLAY (Dims the page behind the open mobile menu). */
 .nav-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.031);
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.35s ease, visibility 0.35s ease;
     z-index: 900;
 }
- 
+
 .nav-overlay.active {
     opacity: 1;
     visibility: visible;
@@ -1153,36 +1181,28 @@ img.community-icon {
 
 
 
-/* --------------------------------------------------------------------------
-   3. TABLET & MOBILE NAVIGATION (<=1080px)
-   The logo + 4 links + 2 buttons genuinely can't fit under ~1080px without
-   crowding, so the hamburger takes over here rather than waiting for a
-   smaller "mobile-only" breakpoint.
--------------------------------------------------------------------------- */
+/*  TABLET & MOBILE NAVIGATION (for screen sizes (<=1080px)) The logo + 4 links + 2 buttons genuinely can't fit under ~1080px without crowding, so the hamburger takes over here rather than waiting for a smaller "mobile-only" breakpoint.  */
 @media (max-width: 1080px) {
- 
+
     .navcontainer {
         padding: 16px 22px;
         border-radius: 24px;
         /* position stays "sticky" as defined in style.css — not touched
            here. isolation guards against blur/backdrop bleed bugs. */
         isolation: isolate;
-        /* .navcontainer already has display:flex + flex-wrap:wrap from
-           style.css — we use that wrap behavior to drop the menu onto its
-           own line rather than relying on guessed pixel offsets. */
+        /* .navcontainer already has display:flex + flex-wrap:wrap from style.css, i used that wrap behavior to drop the menu onto its own line rather than relying on guessed pixel offsets. */
     }
- 
+
     .hamburger-btn {
         display: flex;
         order: 3;
     }
- 
-    .navbranding { order: 1; }
- 
-    /* Both groups collapse to zero height, become one continuous line,
-       and wrap onto a new row below the logo/hamburger row. Height-based
-       (not viewport-based) so it always fits its own content, whatever
-       that content ends up being. */
+
+    .navbranding {
+        order: 1;
+    }
+
+    /* Both groups collapse to zero height, become one continuous line, and wrap onto a new row below the logo/hamburger row. Height-based (not viewport-based) so it always fits its own content, whatever that content ends up being. */
     .navmenu,
     .navbuttons {
         flex-basis: 100%;
@@ -1196,413 +1216,418 @@ img.community-icon {
         margin-top: 0;
         background: var(--navcontainer);
         transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1),
-                    opacity 0.3s ease,
-                    margin-top 0.4s ease;
+            opacity 0.3s ease,
+            margin-top 0.4s ease;
     }
- 
+
     .navmenu {
         order: 4;
     }
- 
+
     .navbuttons {
         order: 5;
         padding-top: 10px;
         border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
- 
+
     .navcontainer.menu-open .navmenu,
     .navcontainer.menu-open .navbuttons {
         max-height: 600px;
         opacity: 1;
         margin-top: 16px;
     }
- 
+
     .navlink {
         width: 100%;
         padding: 16px 18px;
         border-radius: 14px;
     }
- 
+
     .navlink:hover,
     .navlink:focus-visible {
         background: rgba(255, 255, 255, 0.06);
     }
- 
+
     .underscore::after {
-        display: none; /* underline hover effect doesn't translate to tap targets */
+        display: none;
+        /* underline hover effect doesn't translate to tap targets */
     }
- 
+
     .navbuttons .navbtn1,
     .navbuttons .navbtn2 {
         width: 100%;
         padding: 14px;
         font-size: 15px;
     }
- 
+
     .navbtn2 {
         border: 1px solid rgba(255, 255, 255, 0.15);
     }
 }
- 
- 
-/* --------------------------------------------------------------------------
-   4. LARGE TABLET (<=968px)
-   Complements the existing hero/main-hero rules already in style.css —
-   only adds what's still needed to stay clean at this width.
--------------------------------------------------------------------------- */
+
+
+/*  LARGE TABLET SCREEN SIZE (<=968px) Complements the existing hero/main-hero rules already in style.css, only adds what's still needed to stay clean at this width. */
 @media (max-width: 968px) {
- 
-    body, html {
+
+    body,
+    html {
         padding: 10px;
     }
- 
+
     .navbranding #logo {
         font-size: 1.3rem;
     }
- 
+
     .title-paragraph {
         font-size: 1rem;
     }
- 
+
     .landing-content {
         margin: 24px 16px;
     }
 }
- 
- 
-/* --------------------------------------------------------------------------
-   5. TABLET / LARGE PHONE (<=768px)
--------------------------------------------------------------------------- */
+
+
+/* - TABLET / LARGE PHONE  SCREEN SIZES (<=768px) */
 @media (max-width: 768px) {
- 
+
     .navcontainer {
         padding: 14px 18px;
     }
- 
+
     .hero-section {
         padding: 3rem 1.25rem;
     }
- 
+
     .title-content {
         font-size: 2.4rem;
     }
- 
+
     .hero-btn {
         width: 100%;
         text-align: center;
     }
- 
+
     .hero-button {
         width: 100%;
     }
- 
+
     .main-hero,
     .main-hero:nth-of-type(even) {
         margin: 3rem auto;
     }
- 
+
     .main-hero-content h2 {
         font-size: 2rem;
     }
- 
+
     .main-hero-content h2 span {
         font-size: 1.15rem;
     }
- 
+
     .testimonial-title {
         margin: 32px 20px;
     }
- 
+
     .testimonial-title h3 {
         font-size: 34px;
     }
- 
+
     .testimonial-section {
         gap: 1.5rem;
         padding: 2rem 1.25rem;
     }
- 
+
     .testimony-card {
         width: 100%;
         max-width: 460px;
         min-height: auto;
         padding: 2rem 1.5rem;
     }
- 
+
     .footer-container {
         margin: 16px;
         padding: 2.5rem 1.75rem;
     }
- 
+
     .footer-links {
         justify-content: flex-start;
         margin: 20px 0;
         gap: 12px;
     }
- 
+
     .footer-links a {
         padding: 0.75rem 1rem;
         font-size: 0.9rem;
     }
 }
- 
- 
-/* --------------------------------------------------------------------------
-   6. MOBILE (<=640px)
--------------------------------------------------------------------------- */
+
+
+/* MOBILE SCREEN SIZES (<=640px) */
 @media (max-width: 640px) {
- 
-    body, html {
+
+    body,
+    html {
         padding: 8px;
     }
- 
+
     .navcontainer {
         padding: 12px 16px;
         border-radius: 20px;
     }
- 
+
     #logo {
         font-size: 1.15rem;
     }
- 
+
     .navbranding #logo span {
         display: block;
         font-size: 0.65rem;
         letter-spacing: 0.08em;
     }
- 
+
     .hero-section {
         padding: 2.5rem 1rem;
         gap: 2rem;
     }
- 
+
     .title-content {
         font-size: 2rem;
     }
- 
+
     .lit {
         font-size: 0.8rem;
         letter-spacing: 0.1em;
     }
- 
+
     .title-paragraph {
         font-size: 0.95rem;
         line-height: 1.6;
     }
- 
+
     .hero-image-section {
         height: 320px;
         border-radius: 18px;
     }
- 
+
     .hero-btn {
         padding: 0.9rem 2rem;
         font-size: 1rem;
     }
- 
+
     .landing-header {
         padding: 0 0.5rem;
     }
- 
+
     .main-hero {
         padding: 1.25rem;
         border-radius: 16px;
         gap: 2rem;
     }
- 
+
     .main-hero-content h2 {
         font-size: 1.7rem;
     }
- 
+
     .main-hero-content p {
         font-size: 1rem;
     }
- 
+
     .image-container-photo img {
         max-height: 220px;
     }
- 
+
     .testimonial-title {
         margin: 24px 16px;
     }
- 
+
     .testimonial-title h3 {
         font-size: 28px;
     }
- 
+
     .testimony-card {
         padding: 1.75rem 1.25rem;
     }
- 
+
     .testimony-text {
         font-size: 0.95rem;
     }
- 
+
     .footer-container {
         margin: 12px;
         padding: 2rem 1.25rem;
         gap: 1.75rem;
     }
- 
+
     .footer-logo {
         margin: 10px 0;
         font-size: 1.35rem;
     }
- 
+
     .footer-button {
         flex-direction: column;
         gap: 0.75rem;
     }
- 
+
     .footer-button button {
         width: 100%;
         padding: 0.85rem;
     }
- 
+
     .footer-links {
         flex-direction: column;
         align-items: stretch;
         margin: 16px 0;
     }
- 
+
     .footer-links a {
         text-align: center;
     }
- 
+
     .community-item {
         min-width: 100%;
     }
 }
- 
- 
+
+
 /* --------------------------------------------------------------------------
    7. SMALL PHONE (<=480px)
 -------------------------------------------------------------------------- */
 @media (max-width: 480px) {
- 
+
     .navcontainer {
         padding: 10px 14px;
         border-radius: 16px;
     }
- 
+
     .hamburger-btn {
         width: 38px;
         height: 38px;
     }
- 
+
     .title-content {
         font-size: 1.7rem;
     }
- 
+
     .title-paragraph {
         font-size: 0.9rem;
     }
- 
+
     .hero-image-section {
         height: 260px;
         border-radius: 14px;
     }
- 
+
     .hero-btn {
         padding: 0.8rem 1.5rem;
         font-size: 0.95rem;
     }
- 
+
     .main-hero-content h2 {
         font-size: 1.45rem;
     }
- 
+
     .main-hero-content h2 span {
         font-size: 1rem;
     }
- 
+
     .main-hero-content img {
         width: 60px !important;
         height: 60px !important;
     }
- 
+
     .testimonial-title h3 {
         font-size: 24px;
     }
- 
+
     .testimony-card {
         padding: 1.5rem 1rem;
     }
- 
+
     .footer-container {
         margin: 8px;
         padding: 1.75rem 1rem;
     }
- 
+
     .footer-logo {
         font-size: 1.2rem;
     }
- 
+
     .community-item {
         padding: 1rem;
         gap: 1rem;
     }
 }
- 
- 
+
+
 /* --------------------------------------------------------------------------
    8. VERY SMALL PHONE (<=380px)
 -------------------------------------------------------------------------- */
 @media (max-width: 380px) {
- 
-    body, html {
+
+    body,
+    html {
         padding: 6px;
     }
- 
+
     .navcontainer {
         padding: 9px 12px;
     }
- 
+
     #logo {
         font-size: 1rem;
     }
- 
+
     .hero-section {
         padding: 2rem 0.75rem;
     }
- 
+
     .title-content {
         font-size: 1.45rem;
     }
- 
+
     .lit {
         font-size: 0.7rem;
     }
- 
+
     .hero-image-section {
         height: 220px;
     }
- 
-    .btn-circle .circle:nth-child(1) { width: 30px; height: 30px; }
-    .btn-circle .circle:nth-child(2) { width: 18px; height: 18px; }
-    .btn-circle .circle:nth-child(3) { width: 8px; height: 8px; }
- 
+
+    .btn-circle .circle:nth-child(1) {
+        width: 30px;
+        height: 30px;
+    }
+
+    .btn-circle .circle:nth-child(2) {
+        width: 18px;
+        height: 18px;
+    }
+
+    .btn-circle .circle:nth-child(3) {
+        width: 8px;
+        height: 8px;
+    }
+
     .main-hero-content h2 {
         font-size: 1.25rem;
     }
- 
+
     .testimonial-title h3 {
         font-size: 20px;
     }
- 
+
     .footer-logo {
         font-size: 1.05rem;
     }
- 
+
     .brand-subtext {
         font-size: 0.8rem;
     }
 }
- 
- 
-/* --------------------------------------------------------------------------
-   9. ACCESSIBILITY: keep focus visible when tabbing through the mobile menu
--------------------------------------------------------------------------- */
+
+
+/*  ACCESSIBILITY: keep focus visible when tabbing through the mobile menu */
 .hamburger-btn:focus-visible,
 .navlink:focus-visible,
 .navbtn1:focus-visible,
@@ -1610,12 +1635,11 @@ img.community-icon {
     outline: 2px solid var(--navlogospan);
     outline-offset: 2px;
 }
- 
- 
-/* --------------------------------------------------------------------------
-   10. Respect reduced-motion preference for the menu + brand animations
--------------------------------------------------------------------------- */
+
+
+/*  Respect reduced-motion preference for the menu + brand animations  */
 @media (prefers-reduced-motion: reduce) {
+
     .navmenu,
     .navbuttons,
     .hamburger-line,
