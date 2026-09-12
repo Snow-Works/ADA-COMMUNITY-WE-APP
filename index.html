@@ -6,7 +6,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" href="ADA" type="text" size="16x16 32x32">
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="enhancement.css">
     <link rel="stylesheet" href="heromobilestack.css">
@@ -64,6 +72,8 @@
                 
             </p>
 
+            
+
 
             <!----CIRCLE DECORATION ON THE HERO SECTION-->
 
@@ -81,7 +91,7 @@
 
 
                 <div class="hero-button" id="heroButton">
-                    <button class="hero-btn" id="heroBtn">Build With US</button>
+                    <button class="hero-btn" id="heroBtn">Join Community</button>
                 </div>
         </div>
 
@@ -117,46 +127,85 @@
 
     <div class="mani-hero-container" id="mainHeroContainer">
 
-        <section class="main-hero" id="mainHero">
-            <div class="main-hero-content" id="mainHeroContent">
-                <h2>CHAT GPT 4.0: <span>Open AI Model</span></h2>
-                <p>The Power Of Chat gpt and how you can become irreplaceable </p>
-                <img src="icons/gptlogo.png" alt="" width="80px" height="80px">
-            </div>
-        
-            <div class="image-container-photo" id="imageContainerphoto">
-                <img src="images/eddietrans.png" alt="">
-            </div>
-        </section>
-
-
-
-        <section class="main-hero" id="mainHero">
-            <div class="main-hero-content" id="mainHeroContent">
-                <h2>CLAUDE AI: <span>Anthropic AI Model</span></h2>
-                <p>The Power Of Claude Code and how you can become irreplaceable </p>
-            </div>
-        
-            <div class="image-container-photo" id="imageContainerphoto">
-                <img src="images/snow1.png" alt="">
-            </div>
-        </section>
-
-
-        <section class="main-hero" id="mainHero">
-            <div class="main-hero-content" id="mainHeroContent">
-                <h2>KIMI AI 2.6: <span>Chinese AI Model</span></h2>
-                <p>The Power Of Kimi 2.6 and how you can become irreplaceable </p>
-                <img src="icons/gptlogo.png" alt="" width="80px" height="80px">
-            </div>
-        
-            <div class="image-container-photo" id="imageContainerphoto">
-                <img src="images/eddietrans.png" alt="">
-            </div>
-        </section>
-
-
+  <!-- ══ CHATGPT ══ -->
+  <section class="main-hero" data-brand="gpt">
+    <div class="main-hero-content">
+      <span class="category-tag">OpenAI Model</span>
+      <h2>
+        ChatGPT 4.0
+        <span>The reasoning workhorse</span>
+      </h2>
+      <p>
+        The power of GPT — and how you become irreplaceable by knowing
+        which prompt structure to reach for, and when.
+      </p>
+      <div class="hero-badge-row">
+        <span class="model-badge">
+          <img src="icons/gptlogo.png" alt="" width="22" height="22">
+          GPT-4o
+        </span>
+        <a href="#" class="model-link">Explore the track <span aria-hidden="true">→</span></a>
+      </div>
     </div>
+
+    <div class="image-container-photo">
+      <span class="glow-aura gpt-glow" aria-hidden="true"></span>
+      <img src="images/eddietrans.png" alt="GPT community session">
+    </div>
+  </section>
+
+  <!-- ══ CLAUDE ══ -->
+  <section class="main-hero" data-brand="claude" data-reverse="true">
+    <div class="main-hero-content">
+      <span class="category-tag">Anthropic Model</span>
+      <h2>
+        Claude AI
+        <span>Long-context clarity</span>
+      </h2>
+      <p>
+        The power of Claude Code — clean writing, deep context windows, and
+        a workflow that keeps your reasoning sharp.
+      </p>
+      <div class="hero-badge-row">
+        <span class="model-badge">Claude Sonnet</span>
+        <a href="#" class="model-link">Explore the track <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+
+    <div class="image-container-photo">
+      <span class="glow-aura claude-glow" aria-hidden="true"></span>
+      <img src="images/snow1.png" alt="Claude community session">
+    </div>
+  </section>
+
+  <!-- ══ KIMI ══ -->
+  <section class="main-hero" data-brand="kimi">
+    <div class="main-hero-content">
+      <span class="category-tag">Chinese Model</span>
+      <h2>
+        Kimi AI 2.6
+        <span>Speed at scale</span>
+      </h2>
+      <p>
+        The power of Kimi 2.6 — fast iteration, strong bilingual output, and
+        a toolset that rewards builders who ship.
+      </p>
+      <div class="hero-badge-row">
+        <span class="model-badge">
+          <img src="icons/gptlogo.png" alt="" width="22" height="22">
+          Kimi 2.6
+        </span>
+        <a href="#" class="model-link">Explore the track <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+
+    <div class="image-container-photo">
+      <span class="glow-aura kimi-glow" aria-hidden="true"></span>
+      <img src="images/eddietrans.png" alt="Kimi community session">
+    </div>
+  </section>
+
+</div>
     
 
 
@@ -210,39 +259,7 @@
     </div>
 
 
-    <div class="testimony-card">
-        <div class="card-content">
-            <p class="testimony-text">"The interface is intuitive and clean. Our team adopted it within a day. Highly recommended for modern tech stacks."</p>
-            <div class="user-info">
-                <span class="user-name">Marcus Vance</span>
-                <span class="user-title">CTO, Splendor Tech</span>
-            </div>
-        </div>
-        <div class="card-line"></div>
-    </div>
-
-
-    <div class="testimony-card">
-        <div class="card-content">
-            <p class="testimony-text">"The interface is intuitive and clean. Our team adopted it within a day. Highly recommended for modern tech stacks."</p>
-            <div class="user-info">
-                <span class="user-name">Marcus Vance</span>
-                <span class="user-title">CTO, Splendor Tech</span>
-            </div>
-        </div>
-        <div class="card-line"></div>
-    </div>
-
-    <div class="testimony-card">
-        <div class="card-content">
-            <p class="testimony-text">"The interface is intuitive and clean. Our team adopted it within a day. Highly recommended for modern tech stacks."</p>
-            <div class="user-info">
-                <span class="user-name">Marcus Vance</span>
-                <span class="user-title">CTO, Splendor Tech</span>
-            </div>
-        </div>
-        <div class="card-line"></div>
-    </div>
+    
 </section>
 
 
