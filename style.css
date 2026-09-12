@@ -798,18 +798,7 @@ img.icons {
 
 }
 
-/* The Flame Line Design */
-.card-line {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg, #0b6320, #0dd047);
-    transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
-    z-index: 1;
-    opacity: 0.7;
-}
+
 
 
 
@@ -819,19 +808,6 @@ img.icons {
 }
 
 
-
-/* Hover Interaction states */
-
-.testimony-card:hover .card-line {
-    height: 70px;
-    /* Shoots up to a distinct, controlled layout height */
-    opacity: 1;
-    background: var(--flame-color);
-    /*  stylized jagged geometric wave shape resembling an audio wave/graph */
-    clip-path: polygon(0% 100%, 0% 80%, 8% 45%, 15% 75%, 23% 20%, 30% 60%,
-            38% 10%, 45% 65%, 52% 30%, 60% 85%, 68% 5%,
-            75% 55%, 83% 25%, 90% 70%, 95% 40%, 100% 90%, 100% 100%);
-}
 
 
 
