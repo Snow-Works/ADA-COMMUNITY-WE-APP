@@ -416,10 +416,10 @@ img.icons {
 
 
 /* --- FLUID TABLET & MOBILE RESPONSIVENESS --- */
+
 @media (max-width: 968px) {
     .hero-section {
-        flex-direction: column-reverse;
-        /* Stacks image on top on smaller devices */
+        flex-direction: column-reverse; /* Stacks image on top on smaller devices */
         gap: 3rem;
         padding: 4rem 1.5rem;
         text-align: center;
@@ -433,14 +433,26 @@ img.icons {
         font-size: 3rem;
     }
 
+
     .hero-image-section {
+        order: 2;
+        width: 100%;
         max-width: 100%;
-        height: 420px;
+        height: auto;
+        aspect-ratio: 4 / 5;        
+        margin-top: 1rem;
+        border-radius: 20px;
     }
 
+    
     .btn-circle {
         justify-content: center;
     }
+
+
+
+
+    
 }
 
 
@@ -511,6 +523,8 @@ img.icons {
     transform-origin: top center;
     animation: dangleSwing 3s ease-in-out infinite;
 }
+
+
 
 
 @keyframes dangleSwing {
@@ -1110,10 +1124,10 @@ img.community-icon {
 
 
 
-/* --------------------------------------------------------------------------
-   1. HAMBURGER BUTTON
-   Hidden on desktop by default, revealed at the nav breakpoint below.
--------------------------------------------------------------------------- */
+/* HAMBURGER BUTTON */
+
+/* Hidden on desktop by default, revealed at the nav breakpoint below. */
+
 .hamburger-btn {
     display: none;
     flex-direction: column;
@@ -1147,6 +1161,7 @@ img.community-icon {
 }
 
 /* Turns the three lines into an "X" when the menu is open */
+
 .navcontainer.menu-open .hamburger-line:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
 }
@@ -1182,6 +1197,7 @@ img.community-icon {
 
 
 /*  TABLET & MOBILE NAVIGATION (for screen sizes (<=1080px)) The logo + 4 links + 2 buttons genuinely can't fit under ~1080px without crowding, so the hamburger takes over here rather than waiting for a smaller "mobile-only" breakpoint.  */
+
 @media (max-width: 1080px) {
 
     .navcontainer {
@@ -1267,6 +1283,7 @@ img.community-icon {
 
 
 /*  LARGE TABLET SCREEN SIZE (<=968px) Complements the existing hero/main-hero rules already in style.css, only adds what's still needed to stay clean at this width. */
+
 @media (max-width: 968px) {
 
     body,
@@ -1285,10 +1302,22 @@ img.community-icon {
     .landing-content {
         margin: 24px 16px;
     }
+
+
+    .hero-image-section {
+        width: 100%;
+        max-width: 560px; 3
+        height: auto;           
+        aspect-ratio: 4 / 5;    
+        margin: 0 auto;         
+    }
+
 }
 
 
-/* - TABLET / LARGE PHONE  SCREEN SIZES (<=768px) */
+/* - TABLET AND  LARGE PHONE  SCREEN SIZES (<=768px) */
+
+
 @media (max-width: 768px) {
 
     .navcontainer {
@@ -1490,9 +1519,11 @@ img.community-icon {
 }
 
 
-/* --------------------------------------------------------------------------
-   7. SMALL PHONE (<=480px)
--------------------------------------------------------------------------- */
+
+
+
+/*  SMALL PHONE screen size (<=480px)  */
+
 @media (max-width: 480px) {
 
     .navcontainer {
@@ -1516,6 +1547,7 @@ img.community-icon {
     .hero-image-section {
         height: 260px;
         border-radius: 14px;
+        aspect-ratio: 3 / 4;
     }
 
     .hero-btn {
@@ -1560,9 +1592,23 @@ img.community-icon {
 }
 
 
-/* --------------------------------------------------------------------------
-   8. VERY SMALL PHONE (<=380px)
--------------------------------------------------------------------------- */
+
+
+/* 420px screen size */
+
+
+@media (max-width: 420px) {
+    .hero-image-section {
+        aspect-ratio: 1 / 1;
+    }
+}
+
+
+
+
+
+/* VERY SMALL PHONE (<=380px) */
+
 @media (max-width: 380px) {
 
     body,
@@ -1627,23 +1673,5 @@ img.community-icon {
 }
 
 
-/*  ACCESSIBILITY: keep focus visible when tabbing through the mobile menu */
-.hamburger-btn:focus-visible,
-.navlink:focus-visible,
-.navbtn1:focus-visible,
-.navbtn2:focus-visible {
-    outline: 2px solid var(--navlogospan);
-    outline-offset: 2px;
-}
 
 
-/*  Respect reduced-motion preference for the menu + brand animations  */
-@media (prefers-reduced-motion: reduce) {
-
-    .navmenu,
-    .navbuttons,
-    .hamburger-line,
-    .nav-overlay {
-        transition: none !important;
-    }
-}

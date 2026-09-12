@@ -11,7 +11,7 @@ body,html{
     scroll-behavior: smooth;
     padding: 14px;
     font-family: manrope;
-    background: var(--navcontainered);
+    background: var(--navcontainer);
 }
 
 :root {

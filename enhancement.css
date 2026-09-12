@@ -96,38 +96,7 @@
 }
  
  
-/* --------------------------------------------------------------------------
-   4. TAP-ACTIVE TESTIMONIAL CARDS
-   Mirrors the existing :hover "flame line" effect (defined in style.css)
-   so touch users get the same feedback on tap that desktop users get on
-   hover, since touch devices don't have a real :hover state.
--------------------------------------------------------------------------- */
-.testimony-card.tap-active {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px var(--glow-color);
-}
- 
-.testimony-card.tap-active .card-line {
-    height: 70px;
-    opacity: 1;
-    background: var(--flame-color);
-    clip-path: polygon(
-        0% 100%, 0% 80%, 8% 45%, 15% 75%, 23% 20%, 30% 60%,
-        38% 10%, 45% 65%, 52% 30%, 60% 85%, 68% 5%,
-        75% 55%, 83% 25%, 90% 70%, 95% 40%, 100% 90%, 100% 100%
-    );
-}
- 
- 
-/* --------------------------------------------------------------------------
-   5. HERO "READ MORE" TOGGLE
-   On small phones the two extra hero paragraphs collapse behind a
-   "Read more" button so the CTA is reachable sooner. Desktop/tablet is
-   untouched — both paragraphs stay fully visible there.
--------------------------------------------------------------------------- */
-.hero-readmore-btn {
-    display: none;
-}
+
  
 @media (max-width: 480px) {
     .hero-extra-copy {

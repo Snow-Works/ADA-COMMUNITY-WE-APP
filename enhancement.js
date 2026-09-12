@@ -21,18 +21,7 @@ Shows the fixed "Build With US" button once the user has scrolled past the hero 
         });
     }
 
-/* TAP-ACTIVE TESTIMONIAL CARDS: Touch devices have no real :hover, so tapping a card toggles the same "flame line" visual state the desktop hover effect uses. Tapping a second card closes the first one.  */
-    const testimonyCards = document.querySelectorAll(".testimony-card");
 
-    testimonyCards.forEach((card) => {
-        card.addEventListener("click", () => {
-            const alreadyActive = card.classList.contains("tap-active");
-            testimonyCards.forEach((c) => c.classList.remove("tap-active"));
-            if (!alreadyActive) {
-                card.classList.add("tap-active");
-            }
-        });
-    });
 
 /* HERO "READ MORE" TOGGLE (small phones only: the  button is hidden, above 480px through CSS media queries, so this is harmless no-op weight on larger screens) */
     const readMoreBtn = document.getElementById("heroReadMoreBtn");
