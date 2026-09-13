@@ -211,18 +211,7 @@ img.icons {
         background-color 0.3s ease;
 }
 
-/* Turns the three lines into an "X" when the menu is open */
-.navcontainer.menu-open .hamburger-line:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-}
 
-.navcontainer.menu-open .hamburger-line:nth-child(2) {
-    opacity: 0;
-}
-
-.navcontainer.menu-open .hamburger-line:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-}
 
 
 
@@ -354,7 +343,6 @@ img.icons {
     padding-left: 1rem;
     font-weight: 700;
     letter-spacing: .04em;
-    ...
 }
 
 
@@ -1792,36 +1780,39 @@ img.icons {
         background-color 0.3s ease;
 }
 
-/* Turns the three lines into an "X" when the menu is open */
 
-.navcontainer.menu-open .hamburger-line:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-}
-
-.navcontainer.menu-open .hamburger-line:nth-child(2) {
-    opacity: 0;
-}
-
-.navcontainer.menu-open .hamburger-line:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-}
 
 
 /* BACKDROP OVERLAY (Dims the page behind the open mobile menu). */
+
+/* Heavy frosted-glass overlay behind the mobile drawer */
 .nav-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.031);
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(20px) saturate(130%);
+    -webkit-backdrop-filter: blur(20px) saturate(130%);
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.35s ease, visibility 0.35s ease;
-    z-index: 900;
+    z-index: 1100;
 }
 
 .nav-overlay.active {
     opacity: 1;
     visibility: visible;
 }
+
+/* Body scroll lock while the drawer is open */
+body.menu-lock {
+    overflow: hidden;
+}
+
+/* The mobile drawer is hidden by default (desktop shows the horizontal nav) */
+.mobile-drawer {
+    display: none;
+}
+
 
 
 
@@ -1850,68 +1841,198 @@ img.icons {
         order: 1;
     }
 
-    /* Both groups collapse to zero height, become one continuous line, and wrap onto a new row below the logo/hamburger row. Height-based (not viewport-based) so it always fits its own content, whatever that content ends up being. */
+       /* Hide the original horizontal nav links and auth buttons on mobile/tablet */
     .navmenu,
     .navbuttons {
-        flex-basis: 100%;
-        width: 100%;
-        flex-direction: column;
-        align-items: stretch;
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        gap: 8px;
-        margin-top: 0;
-        background: var(--navcontainer);
-        transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1),
-            opacity 0.3s ease,
-            margin-top 0.4s ease;
-    }
-
-    .navmenu {
-        order: 4;
-    }
-
-    .navbuttons {
-        order: 5;
-        padding-top: 10px;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .navcontainer.menu-open .navmenu,
-    .navcontainer.menu-open .navbuttons {
-        max-height: 600px;
-        opacity: 1;
-        margin-top: 16px;
-    }
-
-    .navlink {
-        width: 100%;
-        padding: 16px 18px;
-        border-radius: 14px;
-    }
-
-    .navlink:hover,
-    .navlink:focus-visible {
-        background: rgba(255, 255, 255, 0.06);
-    }
-
-    .underscore::after {
         display: none;
-        /* underline hover effect doesn't translate to tap targets */
     }
 
-    .navbuttons .navbtn1,
-    .navbuttons .navbtn2 {
-        width: 100%;
-        padding: 14px;
+
+
+
+
+
+
+    /* =========================
+       MOBILE DRAWER
+       ========================= */
+
+    .mobile-drawer {
+        display: flex;
+        flex-direction: column;
+
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 70%;
+        max-width: 340px;
+        height: 100vh;
+        padding: 24px 20px 28px;
+
+        background: #0a0a0a;
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 12px 0 40px rgba(0, 0, 0, 0.5);
+
+        z-index: 1200;
+        transform: translateX(-100%);
+        transition: transform 0.42s cubic-bezier(0.25, 1, 0.5, 1);
+        overflow-y: auto;
+    }
+
+    .mobile-drawer.open {
+        transform: translateX(0);
+    }
+
+    /* Drawer header row */
+    .drawer-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding-bottom: 22px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .drawer-brand h2 {
+        margin: 0;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--navlogo, whitesmoke);
+        letter-spacing: 0.02em;
+        line-height: 1;
+    }
+
+    .drawer-brand h2 span {
+        color: var(--navlogospan, #25D366);
+    }
+
+    /* Close (X) button inside the drawer */
+    .drawer-close {
+        position: relative;
+        width: 38px;
+        height: 38px;
+        flex-shrink: 0;
+        border: none;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 50%;
+        cursor: pointer;
+        padding: 0;
+        transition: background 0.25s ease;
+    }
+
+    .drawer-close:hover {
+        background: rgba(255, 255, 255, 0.10);
+    }
+
+    .drawer-close span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 18px;
+        height: 2px;
+        background: #fafafa;
+        border-radius: 2px;
+        pointer-events: none;
+    }
+
+    .drawer-close span:nth-child(1) {
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .drawer-close span:nth-child(2) {
+        transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    /* Drawer navigation links */
+    .drawer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 20px 0;
+        margin-top: 6px;
+    }
+
+    .drawer-link {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 16px;
+        border-radius: 12px;
+        color: var(--navlink, #fafafa);
+        font-family: var(--primary-font, sans-serif);
         font-size: 15px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background 0.22s ease, color 0.22s ease, transform 0.22s ease;
     }
 
-    .navbtn2 {
+    .drawer-link .icons {
+        width: 20px;
+        height: 20px;
+        margin: 0;
+        flex-shrink: 0;
+        filter: brightness(0) invert(1);
+    }
+
+    .drawer-link:hover,
+    .drawer-link:focus-visible {
+        background: rgba(255, 255, 255, 0.06);
+        color: #ffffff;
+        transform: translateX(2px);
+        outline: none;
+    }
+
+    /* Auth buttons pinned to the bottom of the drawer */
+    .drawer-auth {
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-top: 22px;
+        border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .drawer-btn {
+        width: 100%;
+        padding: 14px 18px;
+        border-radius: 14px;
+        border: none;
+        font-family: var(--primary-font, sans-serif);
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+            transform 0.22s ease,
+            background 0.22s ease,
+            border-color 0.22s ease,
+            box-shadow 0.22s ease,
+            color 0.22s ease;
+    }
+
+    .drawer-btn-primary {
+        background: var(--navlogospan, #25D366);
+        color: #04140a;
+    }
+
+    .drawer-btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 24px -10px rgba(37, 211, 102, 0.7);
+    }
+
+    .drawer-btn-ghost {
+        background: transparent;
+        color: #fafafa;
         border: 1px solid rgba(255, 255, 255, 0.15);
     }
+
+    .drawer-btn-ghost:hover {
+        border-color: var(--navlogospan, #25D366);
+        color: var(--navlogospan, #25D366);
+    }
 }
+
+
+
 
 
 /*  LARGE TABLET SCREEN SIZE (<=968px) Complements the existing hero/main-hero rules already in style.css, only adds what's still needed to stay clean at this width. */

@@ -57,9 +57,60 @@
             <span class="hamburger-line"></span>
         </button>
 
-        <!--BACKDROP OVERLAY FOR MOBILE MENU-->
-        <div class="nav-overlay" id="navOverlay"></div>
+        
     </header>
+
+
+
+    <!--BACKDROP OVERLAY FOR MOBILE MENU-->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!--MOBILE DRAWER NAVIGATION-->
+    <aside class="mobile-drawer" id="mobileDrawer" aria-label="Mobile navigation menu">
+
+        <!-- Drawer header: brand + close -->
+        <div class="drawer-header">
+            <div class="drawer-brand">
+                <h2>ADA<span>COMMUNITY</span></h2>
+            </div>
+            <button class="drawer-close" id="drawerClose" type="button" aria-label="Close navigation menu">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <!-- Drawer navigation links -->
+        <nav class="drawer-links" aria-label="Mobile primary">
+            <a href="" class="drawer-link">
+                <img src="icons/home_FILL0_wght300_GRAD0_opsz24.svg" class="icons" alt="">
+                <span>Home</span>
+            </a>
+            <a href="" class="drawer-link">
+                <img src="icons/credit_card_FILL0_wght300_GRAD0_opsz24.svg" class="icons" alt="">
+                <span>Account</span>
+            </a>
+            <a href="" class="drawer-link">
+                <img src="icons/chat_bubble_FILL0_wght300_GRAD0_opsz24.svg" class="icons" alt="">
+                <span>About</span>
+            </a>
+            <a href="" class="drawer-link">
+                <img src="icons/group_FILL0_wght300_GRAD0_opsz24.svg" class="icons" alt="">
+                <span>Community</span>
+            </a>
+        </nav>
+
+        <!-- Drawer auth buttons (pinned to bottom) -->
+        <div class="drawer-auth">
+            <button class="drawer-btn drawer-btn-primary" id="drawerLogin" type="button">Log In</button>
+            <button class="drawer-btn drawer-btn-ghost" id="drawerSignIn" type="button">Sign In</button>
+        </div>
+
+    </aside>
+
+
+
+
+
 
 
 
@@ -412,6 +463,7 @@
     <script src="enhancement.js"></script>
     <script src="testimonialcards.js"></script>
     <script src="script.js"></script>
+    <script src="hamburger.js"></script>
 </body>
 
 </html>
