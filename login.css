@@ -14,6 +14,7 @@ body,html{
     font-family: 'Plus Jakarta Sans', sans-serif;
     background: var(--navcontainer);
     overflow-x: hidden;
+    
 }
 
 :root {
@@ -48,7 +49,6 @@ body,html{
 .container {
     max-width: 800px;
     width: min(92%, 600px);
-    filter: blur;
     background: var(--navlogospan);
     color: var(--navcontainer);
     font-family: manrope;

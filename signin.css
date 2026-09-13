@@ -100,7 +100,6 @@ body,html{
     align-items: center;
     background: var(--navcontainer);
     color: var(--navbtn1);
-    filter: blur();
     padding: 20px;
     gap: 10px;
     border-radius: 15px;
