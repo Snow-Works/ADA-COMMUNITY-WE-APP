@@ -1,150 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="icon" href="ADA.png" type="text" size="16x16 32x32">
+    <title>ADA AI — ADA Community</title>
+
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
     <link rel="stylesheet" href="chatbox.css">
-    <title>Document</title>
 </head>
+<body class="chatbox-page">
 
-<body>
-    <div class="dashboard-container">
 
-        <!-- SIDEBAR -->
-        <aside class="left-side-section" id="leftSidesection">
+    <!-- =========================================
+         MAIN COLUMN
+         ========================================= -->
+    <div class="chatbox-main">
 
-            <div class="profile-header" id="profile">
+        <!-- TOP BAR -->
+        <header class="chatbox-topbar">
 
-                <div class="profile-photo" id="profilePhoto">
-                    <img src="images/Eddie8.png" alt="Profile Photo">
-                </div>
+            <button class="chatbox-menu-btn" id="chatboxMenuBtn"
+                    type="button"
+                    aria-label="Open conversations"
+                    aria-expanded="false"
+                    aria-controls="chatboxDrawer">
+                <span class="chatbox-hamburger-line"></span>
+                <span class="chatbox-hamburger-line"></span>
+                <span class="chatbox-hamburger-line"></span>
+            </button>
 
-                <div class="profile-info" id="profileInfo">
-                    <h2 class="profile-name" id="profileName">
-                        Eddie Otudor
-                    </h2>
+            <h2 class="chatbox-brand">ADA<span>COMMUNITY</span></h2>
 
-                    <p class="profile-email" id="profileEmail">
-                        john.doe@example.com
-                    </p>
-                </div>
+            <a href="dashboard.html" class="chatbox-avatar" id="chatboxAvatar"
+               aria-label="Back to dashboard">
+                ··
+            </a>
 
-                <button class="profile-edit-button" id="profileEditButton">
-                    Edit Profile
+        </header>
+
+
+        <!-- CHAT AREA -->
+        <main class="chat-area" id="chatArea">
+            <!-- Rendered by chatbox.js -->
+        </main>
+
+
+        <!-- COMPOSER -->
+        <div class="composer-section">
+
+            <div class="composer-box">
+
+                <textarea class="composer-input" id="composerInput"
+                          rows="1"
+                          placeholder="Message ADA..."
+                          aria-label="Message ADA"></textarea>
+
+                <button class="composer-send" id="composerSend"
+                        type="button"
+                        aria-label="Send message"
+                        disabled>
+                    <svg viewBox="0 0 24 24" width="20" height="20"
+                         fill="none" stroke="currentColor"
+                         stroke-width="2.4" stroke-linecap="round"
+                         stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 19V5M5 12l7-7 7 7"/>
+                    </svg>
                 </button>
 
             </div>
 
-            <!-- Side-bar Actions Section -->
-            <div class="sidebar-actions">
+            <p class="composer-disclaimer">
+                ADA may make mistakes. Verify important information.
+            </p>
 
-                <button class="sidebar-new-chat" id="sidebarNewChat" type="button">
-                    <span>＋</span>
-                    New Chat
-                </button>
-
-            </div>
-
-
-            <!-- Conversation History section -->
-            <div class="conversation-history">
-
-                <div class="history-header">
-                    <p>Recent Conversations</p>
-                </div>
-
-                <div class="conversation-list" id="conversationList">
-
-                    <!-- Conversations will be created by JavaScript -->
-
-                </div>
-
-            </div>
-
-        </aside>
-
-
-        <!-- Main Application Section -->
-        <section class="main-section">
-
-            <!-- Chat-box area section -->
-
-            <div class="chat-area" id="chatArea">
-
-                <!-- EMPTY CHAT STATE -->
-
-                <div class="empty-chat" id="emptyChat">
-
-                    <img src="images/ADA.png" alt="ADA Logo" class="ada-logo">
-
-                    <h1>
-                        How can ADA help you?
-                    </h1>
-
-                    <p>
-                        Start a conversation by sending
-                        a message below.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <!-- Typing section indicator-->
-
-            <div class="typing-indicator" id="typingIndicator">
-
-                <div class="typing-dots">
-
-                    <span></span>
-                    <span></span>
-                    <span></span>
-
-                </div>
-
-                <p>ADA is thinking...</p>
-
-            </div>
-
-
-            <!-- Prompt Composer Section -->
-
-            <div class="composer-section">
-
-                <div class="composer-box">
-
-                    <textarea class="text-area" id="textArea" rows="1" placeholder="Message ADA..."></textarea>
-
-
-                    <button class="send-button" id="sendButton" type="button" aria-label="Send message">
-                        ↑
-                    </button>
-
-                </div>
-
-
-                <p class="composer-disclaimer">
-                    ADA may make mistakes. Verify important information.
-                </p>
-
-            </div>
-
-        </section>
+        </div>
 
     </div>
 
 
+    <!-- =========================================
+         OVERLAY
+         ========================================= -->
+    <div class="chatbox-overlay" id="chatboxOverlay"></div>
 
 
+    <!-- =========================================
+         DRAWER — CONVERSATION HISTORY
+         ========================================= -->
+    <aside class="chatbox-drawer" id="chatboxDrawer"
+           aria-label="Conversations menu">
 
-    
-<script src="chatbox.js"></script>
+        <header class="drawer-header">
+            <h2 class="drawer-brand">ADA<span>COMMUNITY</span></h2>
+            <button class="drawer-close" id="chatboxDrawerClose"
+                    type="button" aria-label="Close menu">
+                <span></span>
+                <span></span>
+            </button>
+        </header>
+
+        <div class="drawer-body">
+
+            <button class="new-chat-btn" id="newChatBtn" type="button">
+                <span aria-hidden="true">＋</span>
+                <span>New Chat</span>
+            </button>
+
+            <p class="drawer-section-label">Recent Conversations</p>
+
+            <div class="conversation-list" id="conversationList">
+                <!-- Rendered by chatbox.js -->
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- SCRIPTS -->
+    <script src="auth.js"></script>
+    <script src="chatbox.js"></script>
+
 </body>
-
 </html>
