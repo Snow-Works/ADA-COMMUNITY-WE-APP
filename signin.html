@@ -3,50 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
     <link rel="icon" href="ADA.png" type="text" size="16x16 32x32">
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="signin.css">
-    <link rel="stylesheet" href="login.css">
+    <title>Sign Up — ADA Community</title>
+    <link rel="stylesheet" href="auth.css">
 </head>
-<body>
-    <div class="container" id="container">
-        <div class="form-content" id="formContent">
-            <h3><span><a href="login.html">Sign In</a></span>Sign Up </h3>
-            <form action="">
-                <input type="text" placeholder="Surname">
-                <input type="text" placeholder="Firstname">
-                <input type="tel" placeholder="Mobile Number">
-                <input type="Email" placeholder="Email">
-                <input type="Password"  placeholder="Password">
-            </form>
+<body class="auth-page">
 
-            <div class="check-box" id="checkBox">
-                <input type="checkbox"><span>I agree with the</span><a href="">Terms & Conditions</a>
+    <main class="auth-card">
+
+        <!-- CARD HEADER -->
+        <header class="auth-card-header">
+            <div class="auth-brand">
+                <h2>ADA<span>COMMUNITY</span></h2>
             </div>
-            <div class="form-button" id="form-button">
-                <button><a href="signin.html">Sign Up</a></button>
+            <h1 class="auth-title">Create your account</h1>
+            <p class="auth-subtitle">Start your AI journey in minutes</p>
+        </header>
+
+        <!-- SIGNUP FORM -->
+        <form class="auth-form" id="signupForm" novalidate>
+
+            <div class="field">
+                <input type="text" name="surname" id="signupSurname" placeholder=" " autocomplete="family-name">
+                <label for="signupSurname">Surname</label>
             </div>
 
-            <div class="account-link" id="accountLink">
-                <h4>Already have an Account?</h4><a href="login.html">Sign in</a>
+            <div class="field">
+                <input type="text" name="firstname" id="signupFirstname" placeholder=" " autocomplete="given-name">
+                <label for="signupFirstname">Firstname</label>
             </div>
+
+            <div class="field">
+                <input type="tel" name="phone" id="signupPhone" placeholder=" " autocomplete="tel">
+                <label for="signupPhone">Mobile Number</label>
+            </div>
+
+            <div class="field">
+                <input type="email" name="email" id="signupEmail" placeholder=" " autocomplete="email">
+                <label for="signupEmail">Email</label>
+            </div>
+
+                        <div class="field field-password">
+                <input type="password" name="password" id="signupPassword" placeholder=" " autocomplete="new-password">
+                <label for="signupPassword">Password</label>
+                <button type="button" class="toggle-password" data-target="signupPassword" aria-label="Show password">
+                    <svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                    <svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                        <line x1="1" y1="1" x2="23" y2="23"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="field">
+                <input type="password" name="confirmPassword" id="signupConfirmPassword" placeholder=" " autocomplete="new-password">
+                <label for="signupConfirmPassword">Confirm Password</label>
+            </div>
+
+        </form>
+
+        <!-- ERROR SLOT -->
+        <p class="form-error" id="signupError" role="alert" aria-live="polite"></p>
+
+        <!-- CHECKBOX -->
+        <div class="check-box">
+            <input type="checkbox" id="signupAgree">
+            <span>I agree with the <a href="#">Terms &amp; Conditions</a></span>
         </div>
 
-        <div class="form-circle" id="formCircle">
-            <div class="circle" id="circle"></div>
-            <div class="circle" id="circle"></div>
-            <div class="circle" id="circle"></div>
+        <!-- SUBMIT -->
+        <button id="signupButton" type="button" class="auth-submit">Sign Up</button>
+
+        <!-- CROSS LINK -->
+        <div class="auth-cross-link">
+            <span>Already have an account?</span>
+            <a href="login.html">Sign In</a>
         </div>
-    </div>
 
+        <!-- DECORATIVE CIRCLES -->
+        <div class="form-circle" aria-hidden="true">
+            <span class="circle-dot"></span>
+            <span class="circle-dot"></span>
+            <span class="circle-dot"></span>
+        </div>
 
-    <div class="navbranding" id="navBranding">
-            <h2 id="logo">ADA<span>COMMUNITY</span></h2>
-    </div>
-    
+    </main>
+
+    <script src="auth.js"></script>
 </body>
 </html>

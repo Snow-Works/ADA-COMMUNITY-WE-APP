@@ -1,127 +1,558 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap');
-
-
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body,html{
-    scroll-behavior: smooth;
-    padding: 14px;
-    font-family: manrope;
-    background: var(--navcontainer);
-}
 
 :root {
-    --navcontainer: #0a0a0a;
-    --navlink: #fafafa;
-    --navbtn1: #fafafa;
-    --navbtn2: rgb(56, 144, 232);
-    --navlogo: whitesmoke;
-    --navlogospan: #25D366;
-    --bg-dark: #0f172a;
-    --card-bg: #1e293b;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --flame-color: linear-gradient(180deg, rgba(5, 60, 24, 0.8) 0%, rgb(17, 171, 78) 50%, rgba(239, 68, 68, 0) 100%);
-    --glow-color: rgba(14, 248, 61, 0.633);
-
-    /* root color codes for the footer section */
-    --bg-footer: #090d16;
-    --text-primary: #f8fafc;
-    --text-muted: #64748b;
-    --border-color: rgba(255, 255, 255, 0.08);
-    
-    /* Brand Accent Glow Colors */
-    --gpt-glow: #10a37f;
-    --claude-glow: #cc785c;
-    --gemini-glow: #4285f4;
-
+    /* Fallbacks in case auth.css isn't loaded */
+    --rm-bg:           var(--auth-bg,        #0a0a0a);
+    --rm-card:         var(--auth-card,      #111111);
+    --rm-field:        var(--auth-field,     #171717);
+    --rm-line:         var(--auth-line,      rgba(255, 255, 255, 0.08));
+    --rm-line-soft:    var(--auth-line-soft, rgba(255, 255, 255, 0.05));
+    --rm-ink:          var(--auth-ink,       #fafafa);
+    --rm-ink-mid:      var(--auth-ink-mid,   #a1a1a1);
+    --rm-ink-low:      var(--auth-ink-low,   #777777);
+    --rm-accent:       var(--auth-accent,    #25D366);
+    --rm-accent-rgb:   var(--auth-accent-rgb, 37, 211, 102);
+    --rm-error:        #ef4444;
+    --rm-error-rgb:    239, 68, 68;
 }
 
 
-.roadmap-container {
+/* =========================================
+   PAGE
+   ========================================= */
+
+body.roadmap-page {
+    min-height: 100vh;
+    padding: 3rem 1.5rem 4rem;
+
+    background: var(--rm-link);
+    color: var(--rm-ink);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+}
+
+
+/* =========================================
+   WRAPPER
+   ========================================= */
+
+.roadmap-wrapper {
+    width: min(100%, 820px);
+    margin: 0 auto;
     display: flex;
-    justify-content: center;
-    margin: 80px auto;
-    
-
+    flex-direction: column;
+    gap: 2.5rem;
 }
 
-.content-container {
-    max-width: 900px;
-    height: fit-content;
-    padding: 20px;
-    background: var(--navlogospan);
-    border-radius: 12px;
-    box-shadow: 4px 4px 4px var(--gpt-glow);
-    
 
-}
+/* =========================================
+   HEADER
+   ========================================= */
 
-.first-section {
-    flex-wrap: wrap;
-    margin: 40px;
+.roadmap-header {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    align-content: center;
-    
+    gap: 0.65rem;
+    text-align: center;
+}
 
+.roadmap-brand h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--rm-bg);
+    line-height: 1;
+}
+
+.roadmap-brand h2 span {
+    color: var(--rm-accent);
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin-left: 0.25em;
+    letter-spacing: 0.01em;
+}
+
+.roadmap-title {
+    margin-top: 0.75rem;
+    font-size: clamp(1.45rem, 3vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--rm-ink);
+    text-wrap: balance;
+}
+
+.roadmap-subtitle {
+    max-width: 48ch;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--rm-ink-low);
+    text-wrap: pretty;
 }
 
 
-.first-section .tool-option {
-    padding: 0.5rem;
-    border: none;
+/* =========================================
+   SECTIONS
+   ========================================= */
+
+.roadmap-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--rm-line-soft);
+}
+
+.section-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--rm-ink);
+}
+
+.section-counter {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 4px 11px;
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--rm-line-soft);
+
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--rm-ink-low);
+
+    transition:
+        color         0.25s ease,
+        background    0.25s ease,
+        border-color  0.25s ease;
+}
+
+/* Full state — counter turns green when 2/2 reached */
+.section-counter.full {
+    color: var(--rm-accent);
+    background: rgba(var(--rm-accent-rgb), 0.10);
+    border-color: rgba(var(--rm-accent-rgb), 0.35);
+}
+
+
+/* =========================================
+   OPTION GRID
+   ========================================= */
+
+.option-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+
+/* =========================================
+   OPTION BUTTON
+   ========================================= */
+
+.option-btn {
+    position: relative;
+    display: block;
+    width: 100%;
+
+    padding: 14px 40px 14px 16px;
+
+    background: var(--rm-field);
+    border: 1px solid var(--rm-line);
     border-radius: 12px;
-    box-shadow: 1px 1px 1px var(--navcontainer)
-}
+    outline: none;
 
-button {
-    margin-bottom: 20px;
-    transition: ease-in 0.2s;
+    color: var(--rm-ink);
+    font-family: inherit;
+    font-size: 0.86rem;
+    font-weight: 500;
+    line-height: 1.35;
+    text-align: left;
 
-}
-
-.content-container  h3{
-    margin-bottom: 10px;
-
-}
-
-.more-option {
-    padding: 5px;
-    border: none;
-    border-radius: 2px;
-}
-
-
-.dashboard-option {
-    padding: 35px;
-}
-
-
-.dashboard-option button {
-    padding: 0.5rem;
-    border: none;
-    border-radius: 12px;
-    box-shadow: 1px 1px 1px var(--navcontainer);
-    background: var(--navcontainer);
-    color: var(--navlink);
-
-}
-
-.tool-option:hover {
-    transform: translateY(-2px);
     cursor: pointer;
+    overflow: hidden;
+
+    transition:
+        transform      0.22s cubic-bezier(0.25, 1, 0.5, 1),
+        border-color   0.22s ease,
+        background     0.22s ease,
+        box-shadow     0.22s ease,
+        color          0.22s ease;
 }
 
-.tool-option.active {
-    color: var(--navlink);
-    background: var(--navcontainer);
+.option-btn:hover {
+    transform: translateY(-1px);
+    background: #1c1c1c;
+    border-color: rgba(var(--rm-accent-rgb), 0.30);
 }
 
-#logo {
-    color: var(--navlink);
+.option-btn:focus-visible {
+    outline: 2px solid var(--rm-accent);
+    outline-offset: 2px;
 }
 
+/* Active state — picked */
+.option-btn.active {
+    background: rgba(var(--rm-accent-rgb), 0.09);
+    border-color: var(--rm-accent);
+    color: var(--rm-accent);
+    font-weight: 600;
+    box-shadow: 0 0 0 1px rgba(var(--rm-accent-rgb), 0.22);
+}
+
+/* Checkmark on the right when active */
+
+.option-btn.active::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    transform: translateY(-50%);
+
+    font-size: 0.95em;
+    font-weight: 800;
+    color: var(--rm-accent);
+    pointer-events: none;
+}
+
+
+/* =========================================
+   TOAST — "Max 2 selected"
+   ========================================= */
+
+.roadmap-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 34px;
+    z-index: 2000;
+
+    padding: 12px 22px;
+    border-radius: 999px;
+
+    background: rgba(var(--rm-error-rgb), 0.10);
+    border: 1px solid rgba(var(--rm-error-rgb), 0.42);
+    color: var(--rm-error);
+
+    font-size: 0.84rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 16px);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    transition:
+        opacity    0.28s ease,
+        transform  0.28s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.roadmap-toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+
+/* =========================================
+   FOOTER — hint + submit
+   ========================================= */
+
+.roadmap-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--rm-line-soft);
+}
+
+.roadmap-hint {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--rm-ink-low);
+    text-align: center;
+}
+
+.roadmap-submit {
+    width: 100%;
+    padding: 16px 20px;
+
+    border: none;
+    border-radius: 12px;
+    background: var(--rm-accent);
+    color: #04140a;
+
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+
+    cursor: pointer;
+
+    transition:
+        transform    0.22s cubic-bezier(0.25, 1, 0.5, 1),
+        box-shadow   0.22s ease,
+        background   0.22s ease,
+        color        0.22s ease;
+}
+
+.roadmap-submit:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 30px -12px rgba(var(--rm-accent-rgb), 0.75);
+}
+
+.roadmap-submit:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.roadmap-submit:focus-visible {
+    outline: 2px solid var(--rm-accent);
+    outline-offset: 3px;
+}
+
+.roadmap-submit:disabled {
+    background: #141414;
+    color: #4a4a4a;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+
+/* =========================================
+   RESPONSIVE — 768px
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    body.roadmap-page {
+        padding: 2.25rem 1.1rem 3rem;
+    }
+
+    .roadmap-wrapper {
+        gap: 2rem;
+    }
+
+    .option-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.65rem;
+    }
+
+    .option-btn {
+        padding: 13px 36px 13px 14px;
+        font-size: 0.84rem;
+    }
+}
+
+
+/* =========================================
+   RESPONSIVE — 480px
+   ========================================= */
+
+@media (max-width: 480px) {
+
+    body.roadmap-page {
+        padding: 1.75rem 0.9rem 2.5rem;
+    }
+
+    .roadmap-wrapper {
+        gap: 1.75rem;
+    }
+
+    .roadmap-title {
+        font-size: 1.3rem;
+    }
+
+    .roadmap-subtitle {
+        font-size: 0.82rem;
+    }
+
+    .section-title {
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+    }
+
+    .section-counter {
+        font-size: 0.68rem;
+        padding: 3px 9px;
+    }
+
+    .option-grid {
+        gap: 0.55rem;
+    }
+
+    .option-btn {
+        padding: 12px 32px 12px 12px;
+        font-size: 0.78rem;
+        border-radius: 10px;
+    }
+
+    .option-btn.active::after {
+        right: 10px;
+        font-size: 0.85em;
+    }
+
+    .roadmap-hint {
+        font-size: 0.78rem;
+    }
+
+    .roadmap-submit {
+        padding: 14px 18px;
+        font-size: 14.5px;
+    }
+
+    .roadmap-toast {
+        padding: 10px 18px;
+        font-size: 0.78rem;
+        bottom: 24px;
+    }
+
+
+        .see-more-btn {
+        font-size: 0.75rem;
+        padding: 8px 16px;
+    }
+}
+
+
+/* =========================================
+   RESPONSIVE — 340px (very small phones)
+   ========================================= */
+
+@media (max-width: 340px) {
+
+    body.roadmap-page {
+        padding: 1.35rem 0.7rem 2.25rem;
+    }
+
+    .roadmap-brand h2 {
+        font-size: 1.5rem;
+    }
+
+    .roadmap-title {
+        font-size: 1.15rem;
+    }
+
+    .roadmap-subtitle {
+        font-size: 0.76rem;
+    }
+
+    .option-btn {
+        padding: 11px 28px 11px 10px;
+        font-size: 0.73rem;
+    }
+
+    .option-btn.active::after {
+        right: 8px;
+        font-size: 0.8em;
+    }
+
+
+
+
+    /* =========================================
+   SEE MORE / SEE LESS
+   ========================================= */
+
+/* Extra options are hidden until the grid is expanded */
+.option-grid .option-btn.extra {
+    display: none;
+}
+
+.option-grid.expanded .option-btn.extra {
+    display: block;
+}
+
+/* The See More button itself */
+.see-more-btn {
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    margin-top: 0.25rem;
+    padding: 9px 20px;
+    background: transparent;
+    border-radius: 999px;
+    outline: none;
+    color: var(--rm-ink-mid);
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+
+    transition:
+        color          0.22s ease,
+        background     0.22s ease,
+        border-color   0.22s ease,
+        transform      0.22s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.see-more-btn:hover {
+    color: var(--rm-accent);
+    background: rgba(var(--rm-accent-rgb), 0.06);
+    border-color: rgba(var(--rm-accent-rgb), 0.42);
+    transform: translateY(-1px);
+}
+
+.see-more-btn:focus-visible {
+    outline: 2px solid var(--rm-accent);
+    outline-offset: 3px;
+}
+
+.see-more-btn:active {
+    transform: translateY(0);
+}
+
+    .roadmap-submit {
+        padding: 13px 16px;
+        font-size: 13.5px;
+    }
+
+    .roadmap-toast {
+        max-width: 92vw;
+        padding: 9px 16px;
+        font-size: 0.72rem;
+        white-space: normal;
+        text-align: center;
+    }
+
+
+
+        .see-more-btn {
+        font-size: 0.7rem;
+        padding: 7px 14px;
+    }
+
+
+}
+
+
+/* =========================================
+   REDUCED MOTION
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .option-btn,
+    .roadmap-submit,
+    .roadmap-toast,
+    .section-counter {
+        transition: none;
+    }
+}
