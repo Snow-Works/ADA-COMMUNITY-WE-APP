@@ -1,1014 +1,502 @@
+/* =========================================
+   ADA COMMUNITY — CHATBOX (ADA AI)
+   Handles:
+     · Auth guard
+     · Conversation persistence (localStorage)
+     · Drawer open/close
+     · Message rendering
+     · Typing indicator
+     · Keyword-aware mock AI responses
+     · Suggested prompts derived from user's roadmap
+   ========================================= */
 
-// THE CHATBOX SYSTEM
+document.addEventListener("DOMContentLoaded", () => {
 
-// 
-// WAIT FOR HTML TO LOAD
-// 
+    /* ========== GUARDS ========== */
 
-document.addEventListener("DOMContentLoaded", function () {
+    if (!window.adaAuth) {
+        console.error("ADA: auth.js must load before chatbox.js.");
+        return;
+    }
 
+    const currentUser = window.adaAuth.getCurrentUser();
 
-    // 
-    // GETTING THE  HTML ELEMENTS
-    //
-
-    const chatArea =
-        document.getElementById("chatArea");
-
-    const textArea =
-        document.getElementById("textArea");
-
-    const sendButton =
-        document.getElementById("sendButton");
-
-    const typingIndicator =
-        document.getElementById("typingIndicator");
-
-    const sidebarNewChat =
-        document.getElementById("sidebarNewChat");
-
-    const conversationList =
-        document.getElementById("conversationList");
+    if (!currentUser) {
+        window.location.href = "signin.html";
+        return;
+    }
 
 
-    // 
-    // STORAGE
-    // 
+    /* ========== DOM REFERENCES ========== */
 
-    const STORAGE_KEY =
-        "adaCommunityConversations";
+    const chatArea        = document.getElementById("chatArea");
+    const composerInput   = document.getElementById("composerInput");
+    const composerSend    = document.getElementById("composerSend");
+
+    const menuBtn         = document.getElementById("chatboxMenuBtn");
+    const drawer          = document.getElementById("chatboxDrawer");
+    const drawerClose     = document.getElementById("chatboxDrawerClose");
+    const overlay         = document.getElementById("chatboxOverlay");
+
+    const avatarEl        = document.getElementById("chatboxAvatar");
+    const conversationList = document.getElementById("conversationList");
+    const newChatBtn      = document.getElementById("newChatBtn");
 
 
-    // 
-    // CONVERSATION STATE (backend engine)
-    // 
+    /* ========== STORAGE ========== */
+
+    const STORAGE_KEY = "adaCommunityConversations";
 
     let conversations = [];
-
     let activeConversationId = null;
 
 
-    // 
-    // CHECK REQUIRED THE HTML ELEMENTS
-    // 
-    if (!chatArea) {
+    /* =========================================
+       HELPERS
+       ========================================= */
 
-        console.error(
-            "ADA ERROR: #chatArea was not found."
-        );
-
-        return;
+    function getInitials(user) {
+        const first = (user.firstName || "").trim();
+        const last  = (user.surname   || "").trim();
+        const f = first ? first.charAt(0) : "";
+        const l = last  ? last.charAt(0)  : "";
+        return (f + l).toUpperCase() || "··";
     }
-
-
-    if (!textArea) {
-
-        console.error(
-            "ADA ERROR: #textArea was not found."
-        );
-
-        return;
-    }
-
-
-    if (!sendButton) {
-
-        console.error(
-            "ADA ERROR: #sendButton was not found."
-        );
-
-        return;
-    }
-
-
-    if (!typingIndicator) {
-
-        console.error(
-            "ADA ERROR: #typingIndicator was not found."
-        );
-
-        return;
-    }
-
-
-    // 
-    // SAVE THE  CONVERSATIONS
-    // 
-    function saveConversations() {
-
-        try {
-
-            localStorage.setItem(
-                STORAGE_KEY,
-                JSON.stringify(conversations)
-            );
-
-            console.log(
-                "ADA: conversations saved."
-            );
-
-        } catch (error) {
-
-            console.error(
-                "ADA ERROR: Could not save conversations.",
-                error
-            );
-
-        }
-    }
-
-
-    // 
-    // LOAD CONVERSATIONS
-    // 
 
     function loadConversations() {
-
         try {
-
-            const storedData =
-                localStorage.getItem(
-                    STORAGE_KEY
-                );
-
-
-            // No saved conversations
-
-            if (!storedData) {
-
-                conversations = [];
-
-                return;
-
-            }
-
-
-            // Convert saved JSON back
-            // into JavaScript data
-
-            conversations =
-                JSON.parse(storedData);
-
-
-            // Make sure the result
-            // is actually an array
-
-            if (!Array.isArray(conversations)) {
-
-                conversations = [];
-
-            }
-
-
-            console.log(
-                "ADA: conversations loaded.",
-                conversations
-            );
-
-
-        } catch (error) {
-
-            console.error(
-                "ADA ERROR: Unable to load conversations.",
-                error
-            );
-
-
-            conversations = [];
-
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return [];
+            const parsed = JSON.parse(raw);
+            return Array.isArray(parsed) ? parsed : [];
+        } catch {
+            return [];
         }
     }
 
+    function saveConversations() {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(conversations));
+        } catch (error) {
+            console.error("ADA: could not save conversations.", error);
+        }
+    }
 
-    // =====================================
-    // CREATE NEW CONVERSATION
-    // =====================================
+    function generateTitle(text) {
+        const clean = String(text || "").trim();
+        const words = clean.split(/\s+/);
+        if (words.length <= 6) return clean || "New Conversation";
+        return words.slice(0, 6).join(" ") + "…";
+    }
 
-    function createConversation() {
 
+    /* =========================================
+       MOCK AI RESPONSES
+       Keyword matching → then generic pool → random delay
+       ========================================= */
+
+    const KEYWORD_REPLIES = [
+        { match: /\b(prompt|prompting|prompt engineering)\b/i,
+          reply: "Prompting is the skill of giving clear, structured instructions to an AI. The pattern that works best: role → task → context → format. Tell it who it should be, what you want, why, and how the answer should look. Want me to show an example?" },
+
+        { match: /\b(learn|learning|study|start|begin|beginner)\b/i,
+          reply: "Learning AI is a path, not a sprint. My suggestion: pick one tool, one niche, and one small project to build this week. Depth beats breadth early on. What's the first thing you'd like to make?" },
+
+        { match: /\b(engineer|coding|code|developer|programming)\b/i,
+          reply: "Engineering with AI means using the model as a thinking partner — not a code machine. Ask it to critique your design, explore tradeoffs, or spot edge cases. That's where the leverage lives." },
+
+        { match: /\b(roadmap|path|career|niche)\b/i,
+          reply: "Your roadmap is a compass, not a checklist. Revisit it every few weeks and adjust as your skills grow. The goal is momentum, not perfect planning." },
+
+        { match: /\b(chatgpt|gpt|openai)\b/i,
+          reply: "GPT-4o is a strong all-rounder — great for reasoning, drafting, and iterating. Try giving it a role in the system prompt for noticeably sharper output." },
+
+        { match: /\b(claude|anthropic)\b/i,
+          reply: "Claude excels at long-context reasoning and clean writing. If you're working with big documents or careful editing, it's a great first pick." },
+
+        { match: /\b(gemini|google)\b/i,
+          reply: "Gemini's strength is multimodal — combining text, images, and native tools. Useful for research and cross-format work." },
+
+        { match: /\b(hello|hi|hey|yo|start)\b/i,
+          reply: "Hey! What are you working on today? I can help with prompts, roadmaps, tool selection, or just thinking through an idea." },
+
+        { match: /\b(thank|thanks|cheers)\b/i,
+          reply: "Anytime. If you want to go deeper on anything, just ask." }
+    ];
+
+    const GENERIC_REPLIES = [
+        "That's a good question. Here's how I'd think about it: split the problem into what you already know, what you need to learn, and what you can test today. Momentum beats planning.",
+        "Interesting. Could you tell me a bit more? I'll give you a sharper answer once I understand the context.",
+        "Noted. One approach worth trying: start with the smallest useful version of this, ship it, and iterate. Progress compounds.",
+        "Good direction. My take: reach for the tools you already have before adding new ones. Depth is underrated right now.",
+        "I hear you. Let me offer one angle — what would success look like in a week? Work backwards from there.",
+        "Here's a thought: the best AI users aren't the ones who know every tool. They're the ones who know which tool to reach for and when."
+    ];
+
+    function pickMockReply(message) {
+        const clean = String(message || "").trim();
+        for (const rule of KEYWORD_REPLIES) {
+            if (rule.match.test(clean)) return rule.reply;
+        }
+        return GENERIC_REPLIES[Math.floor(Math.random() * GENERIC_REPLIES.length)];
+    }
+
+
+    /* =========================================
+       USER-FACING GREETING + SUGGESTIONS
+       ========================================= */
+
+    function getFirstName() {
+        return (currentUser.firstName || "").trim() || "there";
+    }
+
+    function getUserNiches() {
+        return (currentUser.roadmap && currentUser.roadmap.niches) || [];
+    }
+
+    function buildSuggestions() {
+        const niches = getUserNiches();
+        const prompts = [];
+
+        if (niches[0]) prompts.push(`How do I get started with ${niches[0]}?`);
+        if (niches[1]) prompts.push(`What should I focus on first in ${niches[1]}?`);
+        prompts.push("What is prompt engineering?");
+
+        return prompts.slice(0, 3);
+    }
+
+
+    /* =========================================
+       EMPTY STATE
+       ========================================= */
+
+    function renderEmptyState() {
+        const initials = getInitials(currentUser);
+        const niches = getUserNiches();
+        const suggestions = buildSuggestions();
+
+        const pathsHtml = niches.length
+            ? `<div class="chat-empty-paths">
+                 ${niches.map(n => `<span class="chat-empty-path-chip">${escapeHtml(n)}</span>`).join("")}
+               </div>`
+            : "";
+
+        chatArea.innerHTML = `
+            <div class="chat-empty">
+                <div class="chat-empty-icon" aria-hidden="true">✦</div>
+
+                <h1 class="chat-empty-greeting">
+                    Hi <span>${escapeHtml(getFirstName())}</span>, I'm ADA
+                </h1>
+
+                <p class="chat-empty-sub">
+                    Ask me anything about AI tools, prompts, or your learning path.
+                </p>
+
+                ${pathsHtml}
+
+                <div class="chat-suggestions" role="list">
+                    ${suggestions.map(text => `
+                        <button class="suggestion-btn" type="button" role="listitem"
+                                data-prompt="${escapeAttr(text)}">
+                            <span class="suggestion-icon" aria-hidden="true">✦</span>
+                            <span>${escapeHtml(text)}</span>
+                        </button>
+                    `).join("")}
+                </div>
+            </div>
+        `;
+
+        chatArea.querySelectorAll(".suggestion-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const prompt = btn.getAttribute("data-prompt");
+                if (!prompt) return;
+                composerInput.value = prompt;
+                resizeComposer();
+                sendMessage();
+            });
+        });
+    }
+
+    function escapeHtml(s) {
+        return String(s ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+    function escapeAttr(s) { return escapeHtml(s); }
+
+
+    /* =========================================
+       MESSAGE RENDERING
+       ========================================= */
+
+    function appendMessage(role, content) {
+        const wrap = document.createElement("div");
+        wrap.className = `message ${role}`;
+
+        const bubble = document.createElement("div");
+        bubble.className = "message-content";
+        bubble.textContent = content;
+
+        wrap.appendChild(bubble);
+        chatArea.appendChild(wrap);
+    }
+
+    function showTyping() {
+        const row = document.createElement("div");
+        row.className = "typing-row";
+        row.id = "typingRow";
+
+        row.innerHTML = `
+            <div class="typing-bubble">
+                <div class="typing-dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <span class="typing-label">ADA is thinking…</span>
+            </div>
+        `;
+        chatArea.appendChild(row);
+        scrollToBottom();
+    }
+
+    function hideTyping() {
+        const row = document.getElementById("typingRow");
+        if (row) row.remove();
+    }
+
+    function scrollToBottom() {
+        chatArea.scrollTop = chatArea.scrollHeight;
+    }
+
+
+    /* =========================================
+       CONVERSATION — CREATE / OPEN / RENDER
+       ========================================= */
+
+    function createConversation(firstMessage) {
         const conversation = {
-
-            id:
-                Date.now().toString(),
-
-            title:
-                "New Conversation",
-
-            messages:
-                [],
-
-            createdAt:
-                new Date().toISOString()
-
+            id: Date.now().toString(),
+            title: generateTitle(firstMessage),
+            messages: [],
+            createdAt: new Date().toISOString()
         };
-
-
-        // Add newest conversation
-        // to the beginning
-
-        conversations.unshift(
-            conversation
-        );
-
-
-        // Make it active
-
-        activeConversationId =
-            conversation.id;
-
-
-        // Save
-
+        conversations.unshift(conversation);
+        activeConversationId = conversation.id;
         saveConversations();
-
-
-        // Update interface
-
-        renderConversationHistory();
-
-        renderConversation();
-
-
+        renderConversationList();
         return conversation;
     }
 
-
-    // =====================================
-    // GENERATE CONVERSATION TITLE
-    // =====================================
-
-    function generateConversationTitle(
-        message
-    ) {
-
-        const cleanMessage =
-            message.trim();
-
-
-        const words =
-            cleanMessage.split(/\s+/);
-
-
-        // Short messages become
-        // the conversation title
-
-        if (words.length <= 6) {
-
-            return cleanMessage;
-
-        }
-
-
-        // Long messages are shortened
-
-        return (
-            words
-                .slice(0, 6)
-                .join(" ") +
-            "..."
-        );
+    function getActiveConversation() {
+        return conversations.find(c => c.id === activeConversationId) || null;
     }
 
+    function openConversation(id) {
+        activeConversationId = id;
+        renderConversationList();
+        renderActiveConversation();
+        closeMenu();
+    }
 
-    // =====================================
-    // RENDER CONVERSATION HISTORY
-    // =====================================
+    function renderActiveConversation() {
+        const conv = getActiveConversation();
 
-    function renderConversationHistory() {
-
-        // If the history container
-        // doesn't exist, stop here
-
-        if (!conversationList) {
-
+        if (!conv || !conv.messages || conv.messages.length === 0) {
+            renderEmptyState();
             return;
-
         }
 
+        chatArea.innerHTML = "";
+        conv.messages.forEach((m) => appendMessage(m.role, m.content));
+        scrollToBottom();
+    }
 
-        // Clear existing history
+    function renderConversationList() {
+        if (!conversationList) return;
 
         conversationList.innerHTML = "";
 
-
-        // Create a button for
-        // every conversation
-
-        conversations.forEach(
-            function (conversation) {
-
-
-                const button =
-                    document.createElement("button");
-
-
-                button.className =
-                    "conversation-item";
-
-
-                button.type =
-                    "button";
-
-
-                // Highlight active conversation
-
-                if (
-                    conversation.id ===
-                    activeConversationId
-                ) {
-
-                    button.classList.add(
-                        "active"
-                    );
-
-                }
-
-
-                // Conversation title
-
-                button.textContent =
-                    conversation.title;
-
-
-                // Open conversation
-                // when clicked
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        openConversation(
-                            conversation.id
-                        );
-
-                    }
-                );
-
-
-                conversationList.appendChild(
-                    button
-                );
-
-            }
-        );
-    }
-
-
-    // =====================================
-    // OPEN EXISTING CONVERSATION
-    // =====================================
-
-    function openConversation(
-        conversationId
-    ) {
-
-        const conversation =
-            conversations.find(
-                function (item) {
-
-                    return (
-                        item.id ===
-                        conversationId
-                    );
-
-                }
-            );
-
-
-        // Conversation doesn't exist
-
-        if (!conversation) {
-
-            console.error(
-                "ADA ERROR: Conversation not found."
-            );
-
+        if (conversations.length === 0) {
+            const empty = document.createElement("div");
+            empty.className = "conversation-empty";
+            empty.textContent = "No conversations yet.";
+            conversationList.appendChild(empty);
             return;
-
         }
 
-
-        // Set active conversation
-
-        activeConversationId =
-            conversation.id;
-
-
-        // Update interface
-
-        renderConversationHistory();
-
-        renderConversation();
-
-
-        // Focus input
-
-        textArea.focus();
+        conversations.forEach((c) => {
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "conversation-item";
+            if (c.id === activeConversationId) btn.classList.add("active");
+            btn.textContent = c.title || "Untitled";
+            btn.addEventListener("click", () => openConversation(c.id));
+            conversationList.appendChild(btn);
+        });
     }
 
 
-    // =====================================
-    // RENDER CURRENT CONVERSATION
-    // =====================================
-
-    function renderConversation() {
-
-        // Clear chat area
-
-        chatArea.innerHTML = "";
-
-
-        // Find active conversation
-
-        const conversation =
-            conversations.find(
-                function (item) {
-
-                    return (
-                        item.id ===
-                        activeConversationId
-                    );
-
-                }
-            );
-
-
-        // No conversation
-
-        if (!conversation) {
-
-            showEmptyChat();
-
-            return;
-
-        }
-
-
-        // Conversation has no messages
-
-        if (
-            !conversation.messages ||
-            conversation.messages.length === 0
-        ) {
-
-            showEmptyChat();
-
-            return;
-
-        }
-
-
-        // Render every message
-
-        conversation.messages.forEach(
-            function (message) {
-
-                renderMessage(
-                    message.role,
-                    message.content
-                );
-
-            }
-        );
-
-
-        // Scroll to bottom
-
-        scrollChatToBottom();
-    }
-
-
-    // =====================================
-    // RENDER INDIVIDUAL MESSAGE
-    // =====================================
-
-    function renderMessage(
-        role,
-        content
-    ) {
-
-        const messageWrapper =
-            document.createElement("div");
-
-
-        messageWrapper.className =
-            `message ${role}`;
-
-
-        const messageContent =
-            document.createElement("div");
-
-
-        messageContent.className =
-            "message-content";
-
-
-        messageContent.textContent =
-            content;
-
-
-        messageWrapper.appendChild(
-            messageContent
-        );
-
-
-        chatArea.appendChild(
-            messageWrapper
-        );
-    }
-
-
-    // =====================================
-    // EMPTY CHAT SCREEN
-    // =====================================
-
-    function showEmptyChat() {
-
-        chatArea.innerHTML = `
-
-            <div
-                class="empty-chat"
-                id="emptyChat"
-            >
-
-                <div class="empty-chat-icon">
-                    ✦
-                </div>
-
-                <h1>
-                    How can ADA help you?
-                </h1>
-
-                <p>
-                    Start a conversation by
-                    sending a message below.
-                </p>
-
-            </div>
-
-        `;
-    }
-
-
-    // =====================================
-    // SCROLL CHAT TO BOTTOM
-    // =====================================
-
-    function scrollChatToBottom() {
-
-        chatArea.scrollTop =
-            chatArea.scrollHeight;
-    }
-
-
-    // =====================================
-    // SHOW TYPING INDICATOR
-    // =====================================
-
-    function showTypingIndicator() {
-
-        if (!typingIndicator) {
-
-            return;
-
-        }
-
-
-        typingIndicator.classList.add(
-            "active"
-        );
-    }
-
-
-    // =====================================
-    // HIDE TYPING INDICATOR
-    // =====================================
-
-    function hideTypingIndicator() {
-
-        if (!typingIndicator) {
-
-            return;
-
-        }
-
-
-        typingIndicator.classList.remove(
-            "active"
-        );
-    }
-
-
-    // =====================================
-    // ADA TEMPORARY RESPONSE
-    // =====================================
-    //
-    // IMPORTANT:
-    // This is currently a simulated response.
-    //
-    // Later we will replace this with:
-    //
-    // chatbox.js
-    //      ↓
-    // fetch()
-    //      ↓
-    // Node.js / Express
-    //      ↓
-    // AI API
-    //
-    // =====================================
-
-    function simulateADAResponse(
-        conversation
-    ) {
-
-        console.log(
-            "ADA: preparing response..."
-        );
-
-
-        // Show typing indicator
-
-        showTypingIndicator();
-
-
-        // Wait 1.5 seconds
-
-        setTimeout(
-            function () {
-
-
-                const response =
-                    "Hello! I'm ADA. I received your message. How can I help you today?";
-
-
-                console.log(
-                    "ADA: response generated."
-                );
-
-
-                // ---------------------------------
-                // SAVE ADA MESSAGE
-                // ---------------------------------
-
-                conversation.messages.push({
-
-                    role:
-                        "ai",
-
-                    content:
-                        response,
-
-                    createdAt:
-                        new Date().toISOString()
-
-                });
-
-
-                // ---------------------------------
-                // SAVE CONVERSATION
-                // ---------------------------------
-
-                saveConversations();
-
-
-                // ---------------------------------
-                // HIDE TYPING INDICATOR
-                // ---------------------------------
-
-                hideTypingIndicator();
-
-
-                // ---------------------------------
-                // RENDER ADA RESPONSE
-                // ---------------------------------
-
-                renderConversation();
-
-
-                console.log(
-                    "ADA: response displayed."
-                );
-
-
-            },
-            1500
-        );
-    }
-
-
-    // =====================================
-    // SEND MESSAGE
-    // =====================================
+    /* =========================================
+       SEND MESSAGE
+       ========================================= */
 
     function sendMessage() {
+        const text = composerInput.value.trim();
+        if (!text) return;
 
-        // Get text from textarea
-
-        const message =
-            textArea.value.trim();
-
-
-        // Don't send empty messages
-
-        if (message === "") {
-
-            textArea.focus();
-
-            return;
-
-        }
-
-
-        console.log(
-            "USER MESSAGE:",
-            message
-        );
-
-
-        // =================================
-        // CREATE CONVERSATION IF NEEDED
-        // =================================
-
-        if (!activeConversationId) {
-
-            createConversation();
-
-        }
-
-
-        // =================================
-        // FIND ACTIVE CONVERSATION
-        // =================================
-
-        const conversation =
-            conversations.find(
-                function (item) {
-
-                    return (
-                        item.id ===
-                        activeConversationId
-                    );
-
-                }
-            );
-
-
-        // Conversation wasn't found
+        /* Ensure there's an active conversation */
+        let conversation = getActiveConversation();
+        const isNew = !conversation;
 
         if (!conversation) {
-
-            console.error(
-                "ADA ERROR: Active conversation not found."
-            );
-
-            return;
-
+            conversation = createConversation(text);
         }
 
-
-        // =================================
-        // SAVE USER MESSAGE
-        // =================================
-
+        /* Save user message */
         conversation.messages.push({
-
-            role:
-                "user",
-
-            content:
-                message,
-
-            createdAt:
-                new Date().toISOString()
-
+            role: "user",
+            content: text,
+            createdAt: new Date().toISOString()
         });
-
-
-        // =================================
-        // CREATE CONVERSATION TITLE
-        // =================================
-
-        if (
-            conversation.title ===
-            "New Conversation"
-        ) {
-
-            conversation.title =
-                generateConversationTitle(
-                    message
-                );
-
-        }
-
-
-        // =================================
-        // SAVE UPDATED CONVERSATION
-        // =================================
-
         saveConversations();
 
+        /* Render immediately */
+        if (isNew) {
+            chatArea.innerHTML = "";
+        }
+        appendMessage("user", text);
+        scrollToBottom();
 
-        // =================================
-        // CLEAR INPUT
-        // =================================
+        /* Clear composer */
+        composerInput.value = "";
+        resizeComposer();
+        updateSendButton();
 
-        textArea.value = "";
+        /* Ask "ADA" */
+        respondTo(conversation, text);
+    }
 
+    function respondTo(conversation, userMessage) {
+        showTyping();
 
-        // =================================
-        // DISPLAY USER MESSAGE
-        // =================================
+        const reply = pickMockReply(userMessage);
+        const delay = 800 + Math.random() * 1400; /* 0.8s – 2.2s */
 
-        renderConversation();
+        setTimeout(() => {
+            hideTyping();
 
+            conversation.messages.push({
+                role: "ai",
+                content: reply,
+                createdAt: new Date().toISOString()
+            });
+            saveConversations();
 
-        // =================================
-        // UPDATE CONVERSATION HISTORY
-        // =================================
-
-        renderConversationHistory();
-
-
-        // =================================
-        // ASK ADA FOR RESPONSE
-        // =================================
-
-        simulateADAResponse(
-            conversation
-        );
-
-
-        // =================================
-        // RETURN FOCUS TO TEXTAREA
-        // =================================
-
-        textArea.focus();
+            appendMessage("ai", reply);
+            scrollToBottom();
+        }, delay);
     }
 
 
-    // =====================================
-    // SEND BUTTON
-    // =====================================
+    /* =========================================
+       COMPOSER AUTO-RESIZE + SEND STATE
+       ========================================= */
 
-    sendButton.addEventListener(
-        "click",
-        function () {
+    function resizeComposer() {
+        composerInput.style.height = "auto";
+        composerInput.style.height = Math.min(composerInput.scrollHeight, 180) + "px";
+    }
 
+    function updateSendButton() {
+        composerSend.disabled = composerInput.value.trim().length === 0;
+    }
+
+
+    /* =========================================
+       DRAWER
+       ========================================= */
+
+    function openMenu() {
+        drawer.classList.add("open");
+        overlay.classList.add("active");
+        document.body.classList.add("menu-lock");
+        menuBtn.setAttribute("aria-expanded", "true");
+    }
+
+    function closeMenu() {
+        drawer.classList.remove("open");
+        overlay.classList.remove("active");
+        document.body.classList.remove("menu-lock");
+        menuBtn.setAttribute("aria-expanded", "false");
+    }
+
+    function toggleMenu() {
+        if (drawer.classList.contains("open")) closeMenu();
+        else openMenu();
+    }
+
+
+    /* =========================================
+       WIRING
+       ========================================= */
+
+    menuBtn.addEventListener("click", toggleMenu);
+    drawerClose.addEventListener("click", closeMenu);
+    overlay.addEventListener("click", closeMenu);
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && drawer.classList.contains("open")) closeMenu();
+    });
+
+    newChatBtn.addEventListener("click", () => {
+        activeConversationId = null;
+        renderConversationList();
+        renderActiveConversation();
+        closeMenu();
+        composerInput.focus();
+    });
+
+    composerInput.addEventListener("input", () => {
+        resizeComposer();
+        updateSendButton();
+    });
+
+    composerInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
             sendMessage();
-
         }
-    );
+    });
+
+    composerSend.addEventListener("click", sendMessage);
 
 
-    // =====================================
-    // ENTER TO SEND
-    // =====================================
+    /* =========================================
+       INITIAL RENDER
+       ========================================= */
 
-    textArea.addEventListener(
-        "keydown",
-        function (event) {
+    avatarEl.textContent = getInitials(currentUser);
 
-            // Enter without Shift
+    conversations = loadConversations();
 
-            if (
-                event.key === "Enter" &&
-                !event.shiftKey
-            ) {
-
-                event.preventDefault();
-
-                sendMessage();
-
-            }
-
-        }
-    );
-
-
-    // =====================================
-    // NEW CHAT
-    // =====================================
-
-    function startNewChat() {
-
-        console.log(
-            "ADA: starting new chat..."
-        );
-
-
-        // Create conversation
-
-        const conversation =
-            createConversation();
-
-
-        // Make sure it is active
-
-        activeConversationId =
-            conversation.id;
-
-
-        // Clear input
-
-        textArea.value = "";
-
-
-        // Render empty conversation
-
-        renderConversation();
-
-        renderConversationHistory();
-
-
-        // Focus textarea
-
-        textArea.focus();
-
-
-        console.log(
-            "ADA: new chat created."
-        );
-    }
-
-
-    // =====================================
-    // SIDEBAR NEW CHAT BUTTON
-    // =====================================
-
-    if (sidebarNewChat) {
-
-        sidebarNewChat.addEventListener(
-            "click",
-            function () {
-
-                startNewChat();
-
-            }
-        );
-
-    }
-
-
-    // =====================================
-    // INITIALIZE DASHBOARD
-    // =====================================
-
-    console.log(
-        "ADA: loading conversations..."
-    );
-
-
-    loadConversations();
-
-
-    // =====================================
-    // RESTORE EXISTING CONVERSATIONS
-    // =====================================
-
-    if (
-        conversations.length > 0
-    ) {
-
-        // Open most recent conversation
-
-        activeConversationId =
-            conversations[0].id;
-
-
-        renderConversationHistory();
-
-        renderConversation();
-
-
-        console.log(
-            "ADA: previous conversations restored."
-        );
-
-
+    /* Open the most recent conversation if one exists */
+    if (conversations.length > 0) {
+        activeConversationId = conversations[0].id;
+        renderActiveConversation();
     } else {
+        renderEmptyState();
+    } 
 
-
-        // =================================
-        // CREATE FIRST CONVERSATION
-        // =================================
-
-        createConversation();
-
-
-        console.log(
-            "ADA: first conversation created."
-        );
-
-    }
-
-
-    // =====================================
-    // FINAL DEBUG MESSAGE
-    // =====================================
-
-    console.log(
-        "ADA Community dashboard loaded successfully."
-    );
+    renderConversationList();
+    resizeComposer();
+    updateSendButton();
 
 });
+
+
+
+
+
