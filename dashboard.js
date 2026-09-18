@@ -15,6 +15,10 @@
      · ADA AI → chatbox.html
    ========================================= */
 
+/* =========================================
+   ADA COMMUNITY — DASHBOARD LOGIC
+   ========================================= */
+
 document.addEventListener("DOMContentLoaded", () => {
 
     /* ========== GUARDS ========== */
@@ -34,43 +38,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ========== DOM REFERENCES ========== */
 
-    const welcomeHeading  = document.getElementById("welcomeHeading");
-    const welcomeSubtext  = document.getElementById("welcomeSubtext");
-    const worldwideChart  = document.getElementById("worldwideChart");
-    const usageMessages   = document.getElementById("usageMessages");
-    const usageSparkline  = document.getElementById("usageSparkline");
-    const recentList      = document.getElementById("recentList");
-    const footerYear      = document.getElementById("footerYear");
+    const welcomeHeading     = document.getElementById("welcomeHeading");
+    const welcomeSubtext     = document.getElementById("welcomeSubtext");
+    const worldwideChart     = document.getElementById("worldwideChart");
+    const usageMessages      = document.getElementById("usageMessages");
+    const usageSparkline     = document.getElementById("usageSparkline");
+    const recentList         = document.getElementById("recentList");
+    const footerYear         = document.getElementById("footerYear");
 
-    const hamburgerBtn    = document.getElementById("hamburgerBtn");
-    const drawer          = document.getElementById("mobileDrawer");
-    const overlay         = document.getElementById("navOverlay");
-    const drawerClose     = document.getElementById("drawerClose");
+    const hamburgerBtn       = document.getElementById("hamburgerBtn");
+    const drawer             = document.getElementById("mobileDrawer");
+    const overlay            = document.getElementById("navOverlay");
+    const drawerClose        = document.getElementById("drawerClose");
 
-    const drawerNicheList = document.getElementById("drawerNicheList");
-    const drawerProfileRow= document.getElementById("drawerProfileRow");
-    const drawerAvatarSm  = document.getElementById("drawerAvatarSm");
+    const drawerNicheList    = document.getElementById("drawerNicheList");
+    const drawerProfileRow   = document.getElementById("drawerProfileRow");
+    const drawerAvatarSm     = document.getElementById("drawerAvatarSm");
     const drawerProfileLabel = document.getElementById("drawerProfileLabel");
-    const drawerAdaButton = document.getElementById("drawerAdaButton");
+    const drawerAdaButton    = document.getElementById("drawerAdaButton");
 
-    const drawerViewList  = document.getElementById("drawerViewList");
-    const drawerViewProfile = document.getElementById("drawerViewProfile");
-    const profileBack     = document.getElementById("profileBack");
-
-    const profileAvatarLg = document.getElementById("profileAvatarLg");
-    const profileUsername = document.getElementById("profileUsername");
-
-    const detailName      = document.getElementById("detailName");
-    const detailUsername  = document.getElementById("detailUsername");
-    const detailEmail     = document.getElementById("detailEmail");
-    const detailPhone     = document.getElementById("detailPhone");
-    const detailPassword  = document.getElementById("detailPassword");
-
-    const profileTools    = document.getElementById("profileTools");
-    const profilePaths    = document.getElementById("profilePaths");
-
-    const editPathsBtn    = document.getElementById("editPathsBtn");
-    const logoutBtn       = document.getElementById("logoutBtn");
+    const drawerViewList     = document.getElementById("drawerViewList");
+    const drawerViewProfile  = document.getElementById("drawerViewProfile");
+    const profileBack        = document.getElementById("profileBack");
 
 
     /* =========================================
@@ -80,12 +69,9 @@ document.addEventListener("DOMContentLoaded", () => {
     function getInitials(user) {
         const first = (user.firstName || "").trim();
         const last  = (user.surname   || "").trim();
-
         const f = first ? first.charAt(0) : "";
         const l = last  ? last.charAt(0)  : "";
-
-        const initials = (f + l).toUpperCase();
-        return initials || "··";
+        return (f + l).toUpperCase() || "··";
     }
 
     function getDisplayName(user) {
@@ -95,7 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return full || user.username || "User";
     }
 
-    /* Safely read the chat history that chatbox.js uses */
     function getChatHistory() {
         try {
             const raw = localStorage.getItem("adaCommunityConversations");
@@ -107,7 +92,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    /* Count every message across every conversation */
     function countTotalMessages(conversations) {
         return conversations.reduce((total, c) => {
             const messages = Array.isArray(c.messages) ? c.messages.length : 0;
@@ -121,12 +105,12 @@ document.addEventListener("DOMContentLoaded", () => {
        ========================================= */
 
     function renderWelcome() {
-        if (!welcomeHeading) return;
-
-        const first = (currentUser.firstName || "").trim();
-        welcomeHeading.textContent = first
-            ? `Welcome back, ${first}`
-            : `Welcome back`;
+        if (welcomeHeading) {
+            const first = (currentUser.firstName || "").trim();
+            welcomeHeading.textContent = first
+                ? `Welcome back, ${first}`
+                : `Welcome back`;
+        }
 
         if (welcomeSubtext) {
             const niches = (currentUser.roadmap && currentUser.roadmap.niches) || [];
@@ -134,25 +118,29 @@ document.addEventListener("DOMContentLoaded", () => {
                 ? "Here's what's happening on your dashboard today."
                 : "Set your paths to unlock personalised content.";
         }
+
+        const initials    = getInitials(currentUser);
+        const displayName = getDisplayName(currentUser);
+
+        if (drawerAvatarSm)     drawerAvatarSm.textContent = initials;
+        if (drawerProfileLabel) drawerProfileLabel.textContent = displayName;
     }
 
 
     /* =========================================
-       WORLDWIDE ANALYTICS (mock)
-       Placeholder until a real backend feeds this.
+       WORLDWIDE ANALYTICS (mock data)
        ========================================= */
-    const WORLDWIDE_DAYS  = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-    const WORLDWIDE_DATA  = [42, 58, 45, 72, 63, 55, 68];
 
-    /* One color per weekday — cool sweep from brand green to warm amber */
+    const WORLDWIDE_DAYS   = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    const WORLDWIDE_DATA   = [42, 58, 45, 72, 63, 55, 68];
     const WORLDWIDE_COLORS = [
-        "37, 211, 102",   // Mon — brand emerald
-        "20, 184, 166",   // Tue — teal
-        "6, 182, 212",    // Wed — cyan
-        "59, 130, 246",   // Thu — blue
-        "139, 92, 246",   // Fri — violet
-        "236, 72, 153",   // Sat — pink
-        "245, 158, 11"    // Sun — amber
+        "37, 211, 102",
+        "20, 184, 166",
+        "6, 182, 212",
+        "59, 130, 246",
+        "139, 92, 246",
+        "236, 72, 153",
+        "245, 158, 11"
     ];
 
     function renderWorldwideChart() {
@@ -168,9 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const bar = document.createElement("div");
             bar.className = "chart-bar";
-            /* Height as % of the tallest value */
             bar.style.height = `${Math.round((value / max) * 100)}%`;
-            /* Per-bar color passed into CSS via a variable */
             bar.style.setProperty(
                 "--bar-rgb",
                 WORLDWIDE_COLORS[i % WORLDWIDE_COLORS.length]
@@ -189,8 +175,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =========================================
        MY USAGE STATISTICS
-       Reads the real chat count from localStorage,
-       shows a fixed sparkline for visual interest.
        ========================================= */
 
     const USAGE_SPARKLINE_POINTS = [20, 35, 30, 50, 45, 65, 55];
@@ -208,9 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-
-
-        function buildSparklineSVG(data) {
+    function buildSparklineSVG(data) {
         const W = 120, H = 44, PAD = 4;
         const max = Math.max(...data);
         const min = Math.min(...data);
@@ -252,26 +234,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-
-   
-
     /* =========================================
        RECENTLY USED
-       Pulls the 3 most recent conversations.
-       Placeholder if none exist.
        ========================================= */
 
-
-           /* Deterministic color picker — same title always gets same color */
     function colorForTitle(title) {
         const palette = [
-            { bg: "rgba(37, 211, 102, 0.16)", fg: "#25D366" }, // green
-            { bg: "rgba(6, 182, 212, 0.16)",  fg: "#06b6d4" }, // cyan
-            { bg: "rgba(59, 130, 246, 0.16)", fg: "#3b82f6" }, // blue
-            { bg: "rgba(139, 92, 246, 0.16)", fg: "#8b5cf6" }, // violet
-            { bg: "rgba(236, 72, 153, 0.16)", fg: "#ec4899" }, // pink
-            { bg: "rgba(245, 158, 11, 0.16)", fg: "#f59e0b" }, // amber
-            { bg: "rgba(20, 184, 166, 0.16)", fg: "#14b8a6" }  // teal
+            { bg: "rgba(37, 211, 102, 0.16)", fg: "#25D366" },
+            { bg: "rgba(6, 182, 212, 0.16)",  fg: "#06b6d4" },
+            { bg: "rgba(59, 130, 246, 0.16)", fg: "#3b82f6" },
+            { bg: "rgba(139, 92, 246, 0.16)", fg: "#8b5cf6" },
+            { bg: "rgba(236, 72, 153, 0.16)", fg: "#ec4899" },
+            { bg: "rgba(245, 158, 11, 0.16)", fg: "#f59e0b" },
+            { bg: "rgba(20, 184, 166, 0.16)", fg: "#14b8a6" }
         ];
 
         const clean = String(title || "?").trim();
@@ -285,8 +260,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function initialFromTitle(title) {
         const clean = String(title || "").trim();
         if (!clean) return "?";
-
-        /* Skip leading punctuation / quotes so "hello.." gives "H" not "." */
         const match = clean.match(/[A-Za-z0-9\u00C0-\u024F]/);
         return match ? match[0].toUpperCase() : "?";
     }
@@ -298,7 +271,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const conversations = getChatHistory();
 
-        /* Sort by createdAt descending, newest first */
         const sorted = [...conversations].sort((a, b) => {
             const ta = new Date(a.createdAt || 0).getTime();
             const tb = new Date(b.createdAt || 0).getTime();
@@ -316,8 +288,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         topThree.forEach((c) => {
-            const title = c.title || "Untitled conversation";
-            const color = colorForTitle(title);
+            const title   = c.title || "Untitled conversation";
+            const color   = colorForTitle(title);
             const initial = initialFromTitle(title);
 
             const li = document.createElement("li");
@@ -346,11 +318,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    
-
     /* =========================================
        DRAWER — NICHE LIST
-       One row per picked niche. Empty state if none.
        ========================================= */
 
     function renderDrawerNicheList() {
@@ -391,62 +360,9 @@ document.addEventListener("DOMContentLoaded", () => {
             link.appendChild(icon);
             link.appendChild(text);
 
-            /* Close the drawer when the user navigates */
             link.addEventListener("click", () => closeMenu());
 
             drawerNicheList.appendChild(link);
-        });
-    }
-
-
-    /* =========================================
-       PROFILE VIEW — CONTENT
-       ========================================= */
-
-    function renderProfile() {
-        const initials   = getInitials(currentUser);
-        const displayName = getDisplayName(currentUser);
-
-        /* Small avatar in the drawer list */
-        if (drawerAvatarSm)     drawerAvatarSm.textContent = initials;
-        if (drawerProfileLabel) drawerProfileLabel.textContent = displayName;
-
-        /* Large avatar in the profile hero */
-        if (profileAvatarLg)    profileAvatarLg.textContent = initials;
-        if (profileUsername)    profileUsername.textContent = `@${currentUser.username || "user"}`;
-
-        /* Detail rows */
-        if (detailName)     detailName.textContent     = displayName;
-        if (detailUsername) detailUsername.textContent = currentUser.username || "—";
-        if (detailEmail)    detailEmail.textContent    = currentUser.email    || "—";
-        if (detailPhone)    detailPhone.textContent    = currentUser.phone    || "—";
-
-        /* Password is masked — always */
-        if (detailPassword) detailPassword.textContent = "••••••••";
-
-        /* Tool + path chips */
-        renderChipRow(profileTools, (currentUser.roadmap && currentUser.roadmap.tools) || [], "No tools picked yet");
-        renderChipRow(profilePaths, (currentUser.roadmap && currentUser.roadmap.niches) || [], "No paths picked yet");
-    }
-
-    function renderChipRow(container, values, emptyText) {
-        if (!container) return;
-
-        container.innerHTML = "";
-
-        if (!values || values.length === 0) {
-            const empty = document.createElement("span");
-            empty.className = "chip-empty";
-            empty.textContent = emptyText;
-            container.appendChild(empty);
-            return;
-        }
-
-        values.forEach((value) => {
-            const chip = document.createElement("span");
-            chip.className = "chip";
-            chip.textContent = value;
-            container.appendChild(chip);
         });
     }
 
@@ -469,8 +385,6 @@ document.addEventListener("DOMContentLoaded", () => {
         overlay.classList.remove("active");
         document.body.classList.remove("menu-lock");
         hamburgerBtn.setAttribute("aria-expanded", "false");
-
-        /* Reset to list view so next open starts from the top */
         showListView();
     }
 
@@ -506,54 +420,30 @@ document.addEventListener("DOMContentLoaded", () => {
        WIRING
        ========================================= */
 
-    /* Hamburger toggle */
     if (hamburgerBtn) hamburgerBtn.addEventListener("click", toggleMenu);
+    if (drawerClose)  drawerClose.addEventListener("click", closeMenu);
+    if (overlay)      overlay.addEventListener("click", closeMenu);
 
-    /* Close button inside drawer */
-    if (drawerClose) drawerClose.addEventListener("click", closeMenu);
-
-    /* Tap the blurred backdrop */
-    if (overlay) overlay.addEventListener("click", closeMenu);
-
-    /* Escape closes */
     document.addEventListener("keydown", (event) => {
         if (event.key === "Escape" && drawer.classList.contains("open")) {
             closeMenu();
         }
     });
 
-    /* Profile row → open profile view */
     if (drawerProfileRow) {
         drawerProfileRow.addEventListener("click", showProfileView);
     }
 
-    /* Back → return to list view */
     if (profileBack) {
         profileBack.addEventListener("click", showListView);
     }
 
-    /* ADA AI button → chatbox */
     if (drawerAdaButton) {
         drawerAdaButton.addEventListener("click", () => {
             window.location.href = "chatbox.html";
         });
     }
 
-    /* Edit My Paths → roadmap in edit mode */
-    if (editPathsBtn) {
-        editPathsBtn.addEventListener("click", () => {
-            window.location.href = "roadmap.html?mode=edit";
-        });
-    }
-
-    /* Log Out → clear session and go home */
-    if (logoutBtn) {
-        logoutBtn.addEventListener("click", () => {
-            window.adaAuth.logout();
-        });
-    }
-
-    /* Footer year */
     if (footerYear) {
         footerYear.textContent = new Date().getFullYear();
     }
@@ -568,9 +458,12 @@ document.addEventListener("DOMContentLoaded", () => {
     renderUsageStats();
     renderRecentlyUsed();
     renderDrawerNicheList();
-    renderProfile();
 
-    /* Ensure we always start on the list view */
+    const profileContainer = document.querySelector("[data-profile-view]");
+    if (profileContainer && window.adaProfileView) {
+        window.adaProfileView.mount(profileContainer);
+    }
+
     showListView();
 
 });

@@ -594,7 +594,7 @@ body.menu-lock {
 
 /* Hide the profile view when [hidden] is set */
 .drawer-view[hidden] {
-    display: none;
+    display: none !important;
 }
 
 
