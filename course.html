@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="ADA.png" type="text" size="16x16 32x32">
+    <title>Course — ADA Community</title>
+    <link rel="stylesheet" href="auth.css">
+    <link rel="stylesheet" href="course.css">
+</head>
+<body class="course-page">
+
+
+    <!-- =========================================
+         MAIN COLUMN
+         ========================================= -->
+    <div class="course-main">
+
+        <!-- TOP BAR -->
+        <header class="course-topbar">
+
+            <button class="course-home-btn" id="courseHomeBtn"
+                    type="button" aria-label="Back to dashboard">
+                <svg viewBox="0 0 24 24" width="18" height="18"
+                     fill="none" stroke="currentColor"
+                     stroke-width="2.2" stroke-linecap="round"
+                     stroke-linejoin="round" aria-hidden="true">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span>Home</span>
+            </button>
+
+            <h2 class="course-brand">ADA<span>COMMUNITY</span></h2>
+
+            <button class="course-avatar" id="courseAvatar"
+                    type="button" aria-label="Open profile">
+                ··
+            </button>
+
+        </header>
+
+
+        <!-- CONTENT -->
+        <main class="course-content">
+
+            <!-- VIDEO AREA -->
+            <section class="course-media" id="courseMedia">
+
+                <div class="media-frame" id="mediaFrame">
+                    <iframe
+                        id="courseVideo"
+                        src="https://www.youtube.com/embed/aircAruvnKk"
+                        title="Course video"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+                <!-- Live class placeholder — hidden unless "Live Class" tab is active -->
+                <div class="media-live-placeholder" id="mediaLivePlaceholder" hidden>
+                    <div class="live-empty-icon" aria-hidden="true">📡</div>
+                    <h3>No live class right now</h3>
+                    <p>Next scheduled session: <strong id="liveNextSession">Check back soon</strong></p>
+                </div>
+
+            </section>
+
+
+            <!-- COURSE HEADING -->
+            <section class="course-heading">
+                <span class="course-niche-tag" id="courseNicheTag">—</span>
+                <h1 class="course-title" id="courseTitle">Loading course…</h1>
+                <p class="course-subtitle" id="courseSubtitle">
+                    A guided path from foundation to advanced practice.
+                </p>
+            </section>
+
+
+            <!-- MODE TABS -->
+            <div class="course-mode-tabs" role="tablist">
+                <button class="mode-tab active" id="tabReady" type="button"
+                        role="tab" aria-selected="true" data-mode="ready">
+                    Ready-made Course
+                </button>
+                <button class="mode-tab" id="tabLive" type="button"
+                        role="tab" aria-selected="false" data-mode="live">
+                    Live Class
+                </button>
+            </div>
+
+
+            <!-- COURSE PATHS -->
+            <section class="course-paths">
+                <header class="section-header">
+                    <h3 class="section-title">Course Paths</h3>
+                    <span class="section-counter" id="coursePathsCounter">0 / 4 completed</span>
+                </header>
+
+                <div class="path-grid" id="pathGrid">
+                    <!-- Path cards rendered by course.js -->
+                </div>
+            </section>
+
+
+            <!-- FOOTER -->
+            <footer class="course-footer">
+                <p>ADA Community © <span id="courseFooterYear">2026</span></p>
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <!-- =========================================
+         PROFILE MODAL BACKDROP
+         ========================================= -->
+    <div class="profile-modal-backdrop" id="profileModalBackdrop" hidden>
+
+
+        <!-- MODAL -->
+        <div class="profile-modal" id="profileModal" role="dialog"
+             aria-modal="true" aria-label="Your profile">
+
+            <header class="profile-modal-header">
+                <h3 class="profile-modal-title">Your Profile</h3>
+                <button class="profile-modal-close" id="profileModalClose"
+                        type="button" aria-label="Close profile">
+                    <span></span>
+                    <span></span>
+                </button>
+            </header>
+
+            <div class="profile-modal-body">
+                <div data-profile-view></div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SCRIPTS -->
+    <script src="auth.js"></script>
+    <script src="profile-view.js"></script>
+    <script src="course.js"></script>
+
+</body>
+</html>
