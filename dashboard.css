@@ -15,12 +15,40 @@
     --dash-radius-sm: 12px;
     --dash-drawer-w:  340px;
     --dash-topbar-h:  68px;
+
+
+    --navcontainer: #0a0a0a;
+    --navlink: #fafafa;
+    --navbtn1: #fafafa;
+    --navbtn2: rgb(56, 144, 232);
+    --navlogo: whitesmoke;
+    --navlogospan: #25D366;
+    --bg-dark: #0f172a;
+    --card-bg: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --flame-color: linear-gradient(180deg, rgba(5, 60, 24, 0.8) 0%, rgb(17, 171, 78) 50%, rgba(239, 68, 68, 0) 100%);
+    --glow-color: rgba(14, 248, 61, 0.633);
+
+    /* root color codes for the footer section */
+    --bg-footer: #090d16;
+    --text-primary: #f8fafc;
+    --text-muted: #64748b;
+    --border-color: rgba(255, 255, 255, 0.08);
+
+    /* Brand Accent Glow Colors */
+    --gpt-glow: #10a37f;
+    --claude-glow: #cc785c;
+    --gemini-glow: #4285f4;
+
+    /* brand fonts */
+
+    --primary-font: 'Plus Jakarta Sans', sans-serif;
+
 }
 
 
-/* =========================================
-   PAGE
-   ========================================= */
+/* PAGE */
 
 body.dashboard-page {
     min-height: 100vh;
@@ -37,9 +65,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   MAIN COLUMN
-   ========================================= */
+/* MAIN COLUMN */
 
 .dashboard-main {
     min-height: 100vh;
@@ -52,27 +78,35 @@ body.menu-lock {
    TOP BAR
    ========================================= */
 
-.dashboard-topbar {
-    position: sticky;
-    top: 0;
-    z-index: 500;
 
+
+
+
+
+.dashboard-topbar {
     display: flex;
     align-items: center;
     gap: 14px;
-
+    padding: 20px 34px;
+    margin-bottom: 20px;
     height: var(--dash-topbar-h);
     padding: 0 clamp(1rem, 3vw, 2rem);
-
-    background: rgba(10, 10, 10, 0.88);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: var(--navcontainer);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--dash-line-soft);
+    border-radius: 70px;
+    box-shadow: 1px 1px 2px 2px solid var(--navlogospan);
+    font-family: var(--primary-font);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    
 }
 
 .dashboard-brand h2 {
     margin: 0;
-    font-size: 0.92rem;
+    font-size: 1.2rem;
     font-weight: 800;
     letter-spacing: 0.12em;
     color: var(--dash-ink);
@@ -81,15 +115,13 @@ body.menu-lock {
 
 .dashboard-brand h2 span {
     color: var(--dash-accent);
-    font-weight: 400;
+    font-weight: 900;
     margin-left: 0.25em;
     letter-spacing: 0.16em;
 }
 
 
-/* =========================================
-   HAMBURGER (same visual language as the landing page)
-   ========================================= */
+/* HAMBURGER (same visual language as the landing page) */
 
 .hamburger-btn {
     display: flex;
@@ -127,9 +159,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   CONTENT
-   ========================================= */
+/* CONTENT */
 
 .dashboard-content {
     flex: 1;
@@ -145,9 +175,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   WELCOME
-   ========================================= */
+/* WELCOME */
 
 .dashboard-welcome {
     display: flex;
@@ -173,9 +201,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   CARDS
-   ========================================= */
+/* CARDS  */
 
 .card {
     background: var(--dash-card);
@@ -231,9 +257,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   WORLDWIDE ANALYTICS (bar chart)
-   ========================================= */
+/* WORLDWIDE ANALYTICS (bar chart)  */
 
 .chart-area {
     display: grid;
@@ -303,9 +327,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   TWO-COLUMN ROW
-   ========================================= */
+/* TWO-COLUMN ROW  */
 
 .dashboard-row {
     display: grid;
@@ -314,9 +336,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   MY USAGE STATISTICS
-   ========================================= */
+/* MY USAGE STATISTICS */
 
 .card-usage .card-body {
     display: flex;
@@ -360,9 +380,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   RECENTLY USED
-   ========================================= */
+/* RECENTLY USED */
 
 .recent-list {
     list-style: none;
@@ -429,9 +447,8 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   DASHBOARD FOOTER
-   ========================================= */
+
+/* DASHBOARD FOOTER  */
 
 .dashboard-footer {
     padding-top: 1rem;
@@ -447,9 +464,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   OVERLAY — heavy blur, dark tint
-   ========================================= */
+/* OVERLAY — heavy blur, dark tint */
 
 .nav-overlay {
     position: fixed;
@@ -474,9 +489,8 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   DRAWER
-   ========================================= */
+/*  DRAWER SECTION  */
+
 .dashboard-drawer {
     position: fixed;
     top: 0;
@@ -515,9 +529,7 @@ body.menu-lock {
 
 
 
-/* =========================================
-   DRAWER HEADER
-   ========================================= */
+/* DRAWER HEADER  */
 
 .drawer-header {
     display: flex;
@@ -542,7 +554,7 @@ body.menu-lock {
 
 .drawer-brand span {
     color: var(--dash-accent);
-    font-weight: 400;
+    font-weight: 800;
     margin-left: 0.25em;
     letter-spacing: 0.16em;
 }
@@ -621,7 +633,6 @@ body.menu-lock {
     display: flex;
     flex-direction: column;
     gap: 4px;
-
     margin-bottom: 12px;
 }
 
@@ -629,10 +640,9 @@ body.menu-lock {
     display: flex;
     align-items: center;
     gap: 12px;
-
     padding: 12px 14px;
-    border-radius: 10px;
-
+    border-radius: 20px;
+    border: none;
     color: var(--dash-ink);
     text-decoration: none;
     font-size: 0.86rem;
@@ -661,12 +671,12 @@ body.menu-lock {
     border: 1px solid rgba(var(--dash-accent-rgb), 0.24);
     color: var(--dash-accent);
 
-    font-size: 0.78rem;
+    font-size: 0.5rem;
 }
 
 .drawer-niche-item .niche-text {
     color: var(--dash-ink-low);
-    font-size: 0.78rem;
+    font-size: 0.80rem;
 }
 
 .drawer-niche-item .niche-name {
@@ -729,7 +739,7 @@ body.menu-lock {
 }
 
 .drawer-profile-row:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0);
     border-color: rgba(var(--dash-accent-rgb), 0.28);
     transform: translateY(-1px);
 }
@@ -769,7 +779,7 @@ body.menu-lock {
 }
 
 .drawer-profile-row:hover .profile-arrow {
-    color: var(--dash-accent);
+    color: rgba(33, 53, 4, 0.008);
     transform: translateX(2px);
 }
 
@@ -803,7 +813,6 @@ body.menu-lock {
 
 .drawer-ada-button:hover {
     transform: translateY(-1px);
-    box-shadow: 0 12px 26px -10px rgba(var(--dash-accent-rgb), 0.75);
 }
 
 .drawer-ada-button:active {
@@ -853,8 +862,8 @@ body.menu-lock {
 
 .profile-back:hover {
     color: var(--dash-accent);
-    border-color: rgba(var(--dash-accent-rgb), 0.42);
-    background: rgba(var(--dash-accent-rgb), 0.05);
+    border-color: rgba(var(--dash-accent-rgb), 0.12);
+    background: rgba(var(--dash-accent-rgb), 0.0);
 }
 
 
@@ -875,19 +884,14 @@ body.menu-lock {
     width: 78px;
     height: 78px;
     border-radius: 50%;
-
-    background: linear-gradient(135deg,
-        rgba(var(--dash-accent-rgb), 0.95),
-        rgba(var(--dash-accent-rgb), 0.55));
-    color: #04140a;
+    border: 1px solid rgba(var(--dash-accent-rgb), 0.9);
+    color: #f5f7f6;
 
     font-size: 1.35rem;
     font-weight: 800;
     letter-spacing: 0.02em;
     line-height: 1;
 
-    box-shadow: 0 0 0 3px rgba(var(--dash-accent-rgb), 0.10),
-                0 14px 30px -12px rgba(var(--dash-accent-rgb), 0.6);
 }
 
 .profile-username {
@@ -904,13 +908,13 @@ body.menu-lock {
     display: flex;
     flex-direction: column;
     gap: 10px;
-
     padding: 14px 14px 12px;
-
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid var(--dash-line);
     border-radius: 12px;
+    margin: 15px;
 }
+
 
 .profile-card-title {
     margin: 0 0 2px;
@@ -1208,6 +1212,8 @@ body.menu-lock {
         width: 66px;
         height: 66px;
         font-size: 1.15rem;
+        margin: 10px;
+        box-shadow: none;
     }
 
     .profile-username {

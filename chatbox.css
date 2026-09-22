@@ -1,10 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap');
 
 
-/* =========================================
-   ADA COMMUNITY — CHATBOX (ADA AI)
-   Loaded after auth.css — reuses its tokens
-   ========================================= */
+/* ADA COMMUNITY — CHATBOX (ADA AI), Loaded after auth.css — reuses its tokens */
 
 :root {
     --cb-bg:        var(--auth-bg,        #0a0a0a);
@@ -25,14 +22,12 @@
 }
 
 
-/* =========================================
-   PAGE
-   ========================================= */
+/* PAGE  */
 
 body.chatbox-page {
     height: 100vh;
     overflow: hidden;
-    background: var(--cb-link);
+    background: var(--cb-bg);
     color: var(--cb-ink);
     font-family: 'Plus Jakarta Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -49,30 +44,31 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   TOP BAR
-   ========================================= */
+/* TOP BAR */
 
 .chatbox-topbar {
-    flex-shrink: 0;
-    height: var(--cb-topbar-h);
-
-    display: grid;
-    grid-template-columns: 44px 1fr 44px;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 12px;
-    padding: 0 clamp(1rem, 3vw, 2rem);
-
-    background: rgba(10, 10, 10, 0.88);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--cb-line-soft);
+    flex-wrap: wrap;
+    background: var(--navcontainer);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(19px);
+    -webkit-backdrop-filter: blur(19px);
+    padding: 20px 34px;
+    margin-bottom: 20px;
+    border-radius: 70px;
+    Border: 1px solid rgba(245, 245, 245, 0.09);
+    box-shadow: 1px 1px 2px 2px solid var(--navlogospan);
+    font-family: var(--primary-font);
 }
 
 .chatbox-brand {
     margin: 0;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.99rem;
     font-weight: 800;
     letter-spacing: 0.12em;
     color: var(--cb-ink);
@@ -81,8 +77,8 @@ body.menu-lock {
 
 .chatbox-brand span {
     color: var(--cb-accent);
-    font-weight: 400;
-    margin-left: 0.25em;
+    font-weight: 800;
+    margin-left: 0.2em;
     letter-spacing: 0.16em;
 }
 
@@ -152,9 +148,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   CHAT AREA
-   ========================================= */
+/* CHAT AREA  SECTION  */
 
 .chat-area {
     flex: 1;
@@ -172,9 +166,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   EMPTY STATE
-   ========================================= */
+/* EMPTY STATE */
 
 .chat-empty {
     margin: auto;
@@ -189,23 +181,7 @@ body.menu-lock {
     padding: 1rem;
 }
 
-.chat-empty-icon {
-    display: grid;
-    place-items: center;
 
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-
-    background: rgba(var(--cb-accent-rgb), 0.10);
-    border: 1px solid rgba(var(--cb-accent-rgb), 0.28);
-    color: var(--cb-accent);
-
-    font-size: 1.4rem;
-    line-height: 1;
-
-    box-shadow: 0 0 0 6px rgba(var(--cb-accent-rgb), 0.05);
-}
 
 .chat-empty-greeting {
     margin: 0;
@@ -304,9 +280,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   MESSAGES
-   ========================================= */
+/* MESSAGES SECTION */
 
 .message {
     display: flex;
@@ -341,9 +315,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   TYPING INDICATOR
-   ========================================= */
+/* TYPING INDICATOR */
 
 .typing-row {
     display: flex;
@@ -393,9 +365,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   COMPOSER
-   ========================================= */
+/* COMPOSER SECTION */
 
 .composer-section {
     flex-shrink: 0;
@@ -495,9 +465,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   OVERLAY
-   ========================================= */
+/* OVERLAY SECTION */
 
 .chatbox-overlay {
     position: fixed;
@@ -520,9 +488,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   DRAWER
-   ========================================= */
+/* DRAWER SECTION */
 
 .chatbox-drawer {
     position: fixed;
@@ -569,7 +535,7 @@ body.menu-lock {
 
 .drawer-brand {
     margin: 0;
-    font-size: 0.82rem;
+    font-size: 0.89rem;
     font-weight: 800;
     letter-spacing: 0.12em;
     color: var(--cb-ink);
@@ -578,7 +544,7 @@ body.menu-lock {
 
 .drawer-brand span {
     color: var(--cb-accent);
-    font-weight: 400;
+    font-weight: 800;
     margin-left: 0.25em;
     letter-spacing: 0.16em;
 }
@@ -738,9 +704,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   RESPONSIVE — 700px
-   ========================================= */
+/* RESPONSIVE — 700px */
 
 @media (max-width: 700px) {
     :root { --cb-topbar-h: 58px; }
@@ -776,9 +740,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   RESPONSIVE — 400px
-   ========================================= */
+/* RESPONSIVE — 400px  */
 
 @media (max-width: 400px) {
     .chatbox-menu-btn {
@@ -830,9 +792,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   REDUCED MOTION
-   ========================================= */
+/* REDUCED MOTION */
 
 @media (prefers-reduced-motion: reduce) {
     .typing-dots span {

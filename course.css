@@ -18,6 +18,40 @@
     --cr-radius: 16px;
     --cr-radius-sm: 12px;
     --cr-topbar-h: 64px;
+
+
+
+   --navcontainer: #0a0a0a;
+    --navlink: #fafafa;
+    --navbtn1: #fafafa;
+    --navbtn2: rgb(56, 144, 232);
+    --navlogo: whitesmoke;
+    --navlogospan: #25D366;
+    --bg-dark: #0f172a;
+    --card-bg: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --flame-color: linear-gradient(180deg, rgba(5, 60, 24, 0.8) 0%, rgb(17, 171, 78) 50%, rgba(239, 68, 68, 0) 100%);
+    --glow-color: rgba(14, 248, 61, 0.633);
+
+    /* root color codes for the footer section */
+    --bg-footer: #090d16;
+    --text-primary: #f8fafc;
+    --text-muted: #64748b;
+    --border-color: rgba(255, 255, 255, 0.08);
+
+    /* Brand Accent Glow Colors */
+    --gpt-glow: #10a37f;
+    --claude-glow: #cc785c;
+    --gemini-glow: #4285f4;
+
+    /* brand fonts */
+
+    --primary-font: 'Plus Jakarta Sans', sans-serif; 
+
+
+
+    
 }
 
 
@@ -25,7 +59,7 @@
 
 body.course-page {
     min-height: 100vh;
-    background: var(--cr-bg);
+    background: var(--cr-link);
     color: var(--cr-ink);
     font-family: 'Plus Jakarta Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -45,24 +79,25 @@ body.modal-lock {
 
 /* TOP BAR */
 
+
+
 .course-topbar {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background: var(--navcontainer);
     position: sticky;
     top: 0;
-    z-index: 500;
-
-    height: var(--cr-topbar-h);
-
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: 12px;
-
-    padding: 0 clamp(1rem, 3vw, 2rem);
-
-    background: rgba(10, 10, 10, 0.88);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--cr-line-soft);
+    z-index: 1000;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 20px 34px;
+    margin-bottom: 20px;
+    border-radius: 70px;
+    box-shadow: 1px 1px 2px 2px solid var(--navlogospan);
+    font-family: var(--primary-font);
 }
 
 
@@ -77,7 +112,7 @@ body.modal-lock {
     border-radius: 10px;
 
     background: transparent;
-    border: 1px solid var(--cr-line);
+    border: none;
     color: var(--cr-ink);
 
     font-family: inherit;
@@ -109,7 +144,7 @@ body.modal-lock {
 .course-brand {
     margin: 0;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     font-weight: 800;
     letter-spacing: 0.12em;
     color: var(--cr-ink);
@@ -119,7 +154,7 @@ body.modal-lock {
 
 .course-brand span {
     color: var(--cr-accent);
-    font-weight: 400;
+    font-weight: 800;
     margin-left: 0.25em;
     letter-spacing: 0.16em;
 }
@@ -138,7 +173,7 @@ body.modal-lock {
     background: linear-gradient(135deg,
             rgba(var(--cr-accent-rgb), 0.95),
             rgba(var(--cr-accent-rgb), 0.55));
-    color: #04140a;
+    color: #140f04;
     border: none;
 
     font-family: inherit;
@@ -275,9 +310,9 @@ body.modal-lock {
     padding: 5px 12px;
     border-radius: 999px;
 
-    background: rgba(var(--cr-accent-rgb), 0.09);
+    background: rgba(var(--navcontainer), 0.09);
     border: 1px solid rgba(var(--cr-accent-rgb), 0.28);
-    color: var(--cr-accent);
+    color: var(--bg-footer);
 
     font-size: 0.72rem;
     font-weight: 700;
@@ -299,7 +334,7 @@ body.modal-lock {
     margin: 0;
     font-size: 0.9rem;
     line-height: 1.6;
-    color: var(--cr-ink-low);
+    color: var(--bg-footer);
     text-wrap: pretty;
 }
 
@@ -391,7 +426,7 @@ body.modal-lock {
 
     font-size: 0.72rem;
     font-weight: 600;
-    color: var(--cr-ink-low);
+    color: var(--bg-footer);
 }
 
 
@@ -611,7 +646,7 @@ body.modal-lock {
 .course-footer p {
     margin: 0;
     font-size: 0.76rem;
-    color: var(--cr-ink-low);
+    color: var(--bg-footer);
     letter-spacing: 0.02em;
 }
 
