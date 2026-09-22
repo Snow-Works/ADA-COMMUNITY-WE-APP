@@ -1,6 +1,5 @@
-/* =========================================
-   ADA COMMUNITY — DASHBOARD LOGIC
-   Handles:
+/* 
+   ADA COMMUNITY — DASHBOARD LOGIC Handles:
      · Auth guard (redirects if not logged in)
      · Welcome heading (personalised)
      · Worldwide analytics chart (mock data)
@@ -13,15 +12,13 @@
      · Edit My Paths → roadmap.html?mode=edit
      · Log Out → landing page
      · ADA AI → chatbox.html
-   ========================================= */
+ */
 
-/* =========================================
-   ADA COMMUNITY — DASHBOARD LOGIC
-   ========================================= */
+/* ADA COMMUNITY ( THE DASHBOARD LOGIC) */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* ========== GUARDS ========== */
+    /* GUARDS */
 
     if (!window.adaAuth) {
         console.error("ADA: auth.js must load before dashboard.js.");
@@ -36,48 +33,46 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* ========== DOM REFERENCES ========== */
+    /* DOM REFERENCES  */
 
-    const welcomeHeading     = document.getElementById("welcomeHeading");
-    const welcomeSubtext     = document.getElementById("welcomeSubtext");
-    const worldwideChart     = document.getElementById("worldwideChart");
-    const usageMessages      = document.getElementById("usageMessages");
-    const usageSparkline     = document.getElementById("usageSparkline");
-    const recentList         = document.getElementById("recentList");
-    const footerYear         = document.getElementById("footerYear");
+    const welcomeHeading = document.getElementById("welcomeHeading");
+    const welcomeSubtext = document.getElementById("welcomeSubtext");
+    const worldwideChart = document.getElementById("worldwideChart");
+    const usageMessages = document.getElementById("usageMessages");
+    const usageSparkline = document.getElementById("usageSparkline");
+    const recentList = document.getElementById("recentList");
+    const footerYear = document.getElementById("footerYear");
 
-    const hamburgerBtn       = document.getElementById("hamburgerBtn");
-    const drawer             = document.getElementById("mobileDrawer");
-    const overlay            = document.getElementById("navOverlay");
-    const drawerClose        = document.getElementById("drawerClose");
+    const hamburgerBtn = document.getElementById("hamburgerBtn");
+    const drawer = document.getElementById("mobileDrawer");
+    const overlay = document.getElementById("navOverlay");
+    const drawerClose = document.getElementById("drawerClose");
 
-    const drawerNicheList    = document.getElementById("drawerNicheList");
-    const drawerProfileRow   = document.getElementById("drawerProfileRow");
-    const drawerAvatarSm     = document.getElementById("drawerAvatarSm");
+    const drawerNicheList = document.getElementById("drawerNicheList");
+    const drawerProfileRow = document.getElementById("drawerProfileRow");
+    const drawerAvatarSm = document.getElementById("drawerAvatarSm");
     const drawerProfileLabel = document.getElementById("drawerProfileLabel");
-    const drawerAdaButton    = document.getElementById("drawerAdaButton");
+    const drawerAdaButton = document.getElementById("drawerAdaButton");
 
-    const drawerViewList     = document.getElementById("drawerViewList");
-    const drawerViewProfile  = document.getElementById("drawerViewProfile");
-    const profileBack        = document.getElementById("profileBack");
+    const drawerViewList = document.getElementById("drawerViewList");
+    const drawerViewProfile = document.getElementById("drawerViewProfile");
+    const profileBack = document.getElementById("profileBack");
 
 
-    /* =========================================
-       HELPERS
-       ========================================= */
+    /* HELP */
 
     function getInitials(user) {
         const first = (user.firstName || "").trim();
-        const last  = (user.surname   || "").trim();
+        const last = (user.surname || "").trim();
         const f = first ? first.charAt(0) : "";
-        const l = last  ? last.charAt(0)  : "";
+        const l = last ? last.charAt(0) : "";
         return (f + l).toUpperCase() || "··";
     }
 
     function getDisplayName(user) {
         const first = (user.firstName || "").trim();
-        const last  = (user.surname   || "").trim();
-        const full  = `${first} ${last}`.trim();
+        const last = (user.surname || "").trim();
+        const full = `${first} ${last}`.trim();
         return full || user.username || "User";
     }
 
@@ -100,9 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       WELCOME
-       ========================================= */
+    /* WELCOME */
 
     function renderWelcome() {
         if (welcomeHeading) {
@@ -119,20 +112,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 : "Set your paths to unlock personalised content.";
         }
 
-        const initials    = getInitials(currentUser);
+        const initials = getInitials(currentUser);
         const displayName = getDisplayName(currentUser);
 
-        if (drawerAvatarSm)     drawerAvatarSm.textContent = initials;
+        if (drawerAvatarSm) drawerAvatarSm.textContent = initials;
         if (drawerProfileLabel) drawerProfileLabel.textContent = displayName;
     }
 
 
-    /* =========================================
-       WORLDWIDE ANALYTICS (mock data)
-       ========================================= */
+    /* WORLDWIDE ANALYTICS (mock data)  */
 
-    const WORLDWIDE_DAYS   = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-    const WORLDWIDE_DATA   = [42, 58, 45, 72, 63, 55, 68];
+    const WORLDWIDE_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    const WORLDWIDE_DATA = [42, 58, 45, 72, 63, 55, 68];
     const WORLDWIDE_COLORS = [
         "37, 211, 102",
         "20, 184, 166",
@@ -173,9 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       MY USAGE STATISTICS
-       ========================================= */
+    /*  MY USAGE STATISTICS */
 
     const USAGE_SPARKLINE_POINTS = [20, 35, 30, 50, 45, 65, 55];
 
@@ -234,14 +223,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       RECENTLY USED
-       ========================================= */
+    /* RECENTLY USED */
 
     function colorForTitle(title) {
         const palette = [
             { bg: "rgba(37, 211, 102, 0.16)", fg: "#25D366" },
-            { bg: "rgba(6, 182, 212, 0.16)",  fg: "#06b6d4" },
+            { bg: "rgba(6, 182, 212, 0.16)", fg: "#06b6d4" },
             { bg: "rgba(59, 130, 246, 0.16)", fg: "#3b82f6" },
             { bg: "rgba(139, 92, 246, 0.16)", fg: "#8b5cf6" },
             { bg: "rgba(236, 72, 153, 0.16)", fg: "#ec4899" },
@@ -288,8 +275,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         topThree.forEach((c) => {
-            const title   = c.title || "Untitled conversation";
-            const color   = colorForTitle(title);
+            const title = c.title || "Untitled conversation";
+            const color = colorForTitle(title);
             const initial = initialFromTitle(title);
 
             const li = document.createElement("li");
@@ -318,9 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       DRAWER — NICHE LIST
-       ========================================= */
+    /* DRAWER — NICHE LIST */
 
     function renderDrawerNicheList() {
         if (!drawerNicheList) return;
@@ -367,9 +352,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       DRAWER — OPEN / CLOSE
-       ========================================= */
+    /* DRAWER ( OPEN / CLOSE ) */
 
     function openMenu() {
         if (!drawer) return;
@@ -397,9 +380,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       DRAWER — VIEW SWAP
-       ========================================= */
+    /* DRAWER (VIEW SWAP) */
 
     function showListView() {
         if (!drawerViewList || !drawerViewProfile) return;
@@ -416,13 +397,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       WIRING
-       ========================================= */
+    /* WIRING */
 
     if (hamburgerBtn) hamburgerBtn.addEventListener("click", toggleMenu);
-    if (drawerClose)  drawerClose.addEventListener("click", closeMenu);
-    if (overlay)      overlay.addEventListener("click", closeMenu);
+    if (drawerClose) drawerClose.addEventListener("click", closeMenu);
+    if (overlay) overlay.addEventListener("click", closeMenu);
 
     document.addEventListener("keydown", (event) => {
         if (event.key === "Escape" && drawer.classList.contains("open")) {
@@ -449,9 +428,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       INITIAL RENDER
-       ========================================= */
+    /* INITIAL RENDER */
 
     renderWelcome();
     renderWorldwideChart();

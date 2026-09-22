@@ -1,18 +1,17 @@
-
 :root {
     /* Fallbacks in case auth.css isn't loaded */
-    --rm-bg:           var(--auth-bg,        #0a0a0a);
-    --rm-card:         var(--auth-card,      #111111);
-    --rm-field:        var(--auth-field,     #171717);
-    --rm-line:         var(--auth-line,      rgba(255, 255, 255, 0.08));
-    --rm-line-soft:    var(--auth-line-soft, rgba(255, 255, 255, 0.05));
-    --rm-ink:          var(--auth-ink,       #fafafa);
-    --rm-ink-mid:      var(--auth-ink-mid,   #a1a1a1);
-    --rm-ink-low:      var(--auth-ink-low,   #777777);
-    --rm-accent:       var(--auth-accent,    #25D366);
-    --rm-accent-rgb:   var(--auth-accent-rgb, 37, 211, 102);
-    --rm-error:        #ef4444;
-    --rm-error-rgb:    239, 68, 68;
+    --rm-bg: var(--auth-bg, #0a0a0a);
+    --rm-card: var(--auth-card, #111111);
+    --rm-field: var(--auth-field, #171717);
+    --rm-line: var(--auth-line, rgba(255, 255, 255, 0.08));
+    --rm-line-soft: var(--auth-line-soft, rgba(255, 255, 255, 0.05));
+    --rm-ink: var(--auth-ink, #fafafa);
+    --rm-ink-mid: var(--auth-ink-mid, #a1a1a1);
+    --rm-ink-low: var(--auth-ink-low, #777777);
+    --rm-accent: var(--auth-accent, #25D366);
+    --rm-accent-rgb: var(--auth-accent-rgb, 37, 211, 102);
+    --rm-error: #ef4444;
+    --rm-error-rgb: 239, 68, 68;
 }
 
 
@@ -135,9 +134,9 @@ body.roadmap-page {
     color: var(--rm-ink-low);
 
     transition:
-        color         0.25s ease,
-        background    0.25s ease,
-        border-color  0.25s ease;
+        color 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease;
 }
 
 /* Full state — counter turns green when 2/2 reached */
@@ -186,11 +185,11 @@ body.roadmap-page {
     overflow: hidden;
 
     transition:
-        transform      0.22s cubic-bezier(0.25, 1, 0.5, 1),
-        border-color   0.22s ease,
-        background     0.22s ease,
-        box-shadow     0.22s ease,
-        color          0.22s ease;
+        transform 0.22s cubic-bezier(0.25, 1, 0.5, 1),
+        border-color 0.22s ease,
+        background 0.22s ease,
+        box-shadow 0.22s ease,
+        color 0.22s ease;
 }
 
 .option-btn:hover {
@@ -259,8 +258,8 @@ body.roadmap-page {
     -webkit-backdrop-filter: blur(10px);
 
     transition:
-        opacity    0.28s ease,
-        transform  0.28s cubic-bezier(0.25, 1, 0.5, 1);
+        opacity 0.28s ease,
+        transform 0.28s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .roadmap-toast.show {
@@ -306,10 +305,10 @@ body.roadmap-page {
     cursor: pointer;
 
     transition:
-        transform    0.22s cubic-bezier(0.25, 1, 0.5, 1),
-        box-shadow   0.22s ease,
-        background   0.22s ease,
-        color        0.22s ease;
+        transform 0.22s cubic-bezier(0.25, 1, 0.5, 1),
+        box-shadow 0.22s ease,
+        background 0.22s ease,
+        color 0.22s ease;
 }
 
 .roadmap-submit:hover:not(:disabled) {
@@ -423,7 +422,7 @@ body.roadmap-page {
     }
 
 
-        .see-more-btn {
+    .see-more-btn {
         font-size: 0.75rem;
         padding: 8px 16px;
     }
@@ -465,60 +464,58 @@ body.roadmap-page {
 
 
 
-    /* =========================================
-   SEE MORE / SEE LESS
-   ========================================= */
+    /* SEE MORE / SEE LESS */
 
-/* Extra options are hidden until the grid is expanded */
-.option-grid .option-btn.extra {
-    display: none;
-}
+    /* Extra options are hidden until the grid is expanded */
+    .option-grid .option-btn.extra {
+        display: none;
+    }
 
-.option-grid.expanded .option-btn.extra {
-    display: block;
-}
+    .option-grid.expanded .option-btn.extra {
+        display: block;
+    }
 
-/* The See More button itself */
-.see-more-btn {
-    align-self: center;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    margin-top: 0.25rem;
-    padding: 9px 20px;
-    background: transparent;
-    border-radius: 999px;
-    outline: none;
-    color: var(--rm-ink-mid);
-    font-family: inherit;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    cursor: pointer;
+    /* The See More button itself */
+    .see-more-btn {
+        align-self: center;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        margin-top: 0.25rem;
+        padding: 9px 20px;
+        background: transparent;
+        border-radius: 999px;
+        outline: none;
+        color: var(--rm-ink-mid);
+        font-family: inherit;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        cursor: pointer;
 
-    transition:
-        color          0.22s ease,
-        background     0.22s ease,
-        border-color   0.22s ease,
-        transform      0.22s cubic-bezier(0.25, 1, 0.5, 1);
-}
+        transition:
+            color 0.22s ease,
+            background 0.22s ease,
+            border-color 0.22s ease,
+            transform 0.22s cubic-bezier(0.25, 1, 0.5, 1);
+    }
 
-.see-more-btn:hover {
-    color: var(--rm-accent);
-    background: rgba(var(--rm-accent-rgb), 0.06);
-    border-color: rgba(var(--rm-accent-rgb), 0.42);
-    transform: translateY(-1px);
-}
+    .see-more-btn:hover {
+        color: var(--rm-accent);
+        background: rgba(var(--rm-accent-rgb), 0.06);
+        border-color: rgba(var(--rm-accent-rgb), 0.42);
+        transform: translateY(-1px);
+    }
 
-.see-more-btn:focus-visible {
-    outline: 2px solid var(--rm-accent);
-    outline-offset: 3px;
-}
+    .see-more-btn:focus-visible {
+        outline: 2px solid var(--rm-accent);
+        outline-offset: 3px;
+    }
 
-.see-more-btn:active {
-    transform: translateY(0);
-}
+    .see-more-btn:active {
+        transform: translateY(0);
+    }
 
     .roadmap-submit {
         padding: 13px 16px;
@@ -535,7 +532,7 @@ body.roadmap-page {
 
 
 
-        .see-more-btn {
+    .see-more-btn {
         font-size: 0.7rem;
         padding: 7px 14px;
     }
@@ -544,11 +541,10 @@ body.roadmap-page {
 }
 
 
-/* =========================================
-   REDUCED MOTION
-   ========================================= */
+/* REDUCED MOTION */
 
 @media (prefers-reduced-motion: reduce) {
+
     .option-btn,
     .roadmap-submit,
     .roadmap-toast,

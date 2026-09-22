@@ -1,6 +1,5 @@
-/* =========================================
-   ADA COMMUNITY — ROADMAP LOGIC
-   Handles:
+/* ADA COMMUNITY — ROADMAP LOGIC is handling:
+
      · Edit mode detection (?mode=edit)
      · See More / See Less expansion
      · Option picking (max 2 per section)
@@ -8,16 +7,15 @@
      · Toast on 3rd-pick refusal
      · Submit button enable/disable
      · Pre-fill in edit mode
-     · Save + redirect
-   ========================================= */
+     · Save + redirect  */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* ========== CONSTANTS ========== */
+    /* CONSTANTS  */
 
     const MAX_PICKS = 2;
 
-    /* ========== DOM REFERENCES ========== */
+    /*  DOM REFERENCES  */
 
     const toolsGrid      = document.getElementById("toolsGrid");
     const nichesGrid     = document.getElementById("nichesGrid");
@@ -37,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* ========== GUARDS ========== */
+    /* GUARDS  */
 
     /* If auth.js didn't load, we can't read the current user */
     if (!window.adaAuth) {
@@ -54,15 +52,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* ========== MODE DETECTION ========== */
+    /*  MODE DETECTION  */
 
     const params       = new URLSearchParams(window.location.search);
     const isEditMode   = params.get("mode") === "edit";
 
 
-    /* =========================================
-       STATE — what's currently picked
-       ========================================= */
+    /* STATE — what's currently picked */
 
     const state = {
         tools:  new Set(),
@@ -70,9 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
 
-    /* =========================================
-       PAGE TEXT — swap labels in edit mode
-       ========================================= */
+    /* PAGE TEXT — swap labels in edit mode */
 
     if (isEditMode) {
         if (titleEl)    titleEl.textContent    = "Update your paths";
@@ -81,9 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       SEE MORE / SEE LESS
-       ========================================= */
+    /* SEE MORE / SEE LESS  */
 
     function wireSeeMore(button, grid, sectionLabel) {
 
@@ -104,9 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
     wireSeeMore(nichesSeeMore, nichesGrid, "niches");
 
 
-    /* =========================================
-       TOAST
-       ========================================= */
+    /* TOAST */
 
     let toastTimer = null;
 
@@ -124,9 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       COUNTER UPDATES
-       ========================================= */
+    /* COUNTER UPDATES */
 
     function updateCounter(counterEl, count) {
 
@@ -137,9 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       SUBMIT BUTTON STATE
-       ========================================= */
+    /* SUBMIT BUTTON STATE */
 
     function refreshSubmitState() {
 
@@ -167,9 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       OPTION PICKING
-       ========================================= */
+    /*  OPTION PICKING */
 
     function handleOptionClick(button, sectionKey) {
 
@@ -217,9 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
     wireGrid(nichesGrid, "niches");
 
 
-    /* =========================================
-       PRE-FILL (edit mode only)
-       ========================================= */
+    /* PRE-FILL (edit mode only)  */
 
     function prefillSelections() {
 
@@ -227,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const saved = currentUser.roadmap || { tools: [], niches: [] };
 
-        /* ----- Tools ----- */
+        /*  Tools  */
         (saved.tools || []).forEach((value) => {
             const btn = toolsGrid.querySelector(
                 `.option-btn[data-value="${cssEscape(value)}"]`
@@ -238,7 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        /* ----- Niches ----- */
+        /*  Niches  */
         (saved.niches || []).forEach((value) => {
             const btn = nichesGrid.querySelector(
                 `.option-btn[data-value="${cssEscape(value)}"]`
@@ -284,9 +266,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       SAVE + REDIRECT
-       ========================================= */
+    /* SAVE + REDIRECT  */
 
     function saveAndContinue() {
 
@@ -324,9 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    /* =========================================
-       INITIAL RENDER
-       ========================================= */
+    /* INITIAL RENDER */
 
     updateCounter(toolsCounter, 0);
     updateCounter(nichesCounter, 0);

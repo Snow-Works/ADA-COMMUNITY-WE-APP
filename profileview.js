@@ -1,4 +1,4 @@
-/* =========================================
+/* 
    ADA COMMUNITY — SHARED PROFILE VIEW
    Mounts the user's profile content into any container.
    Used by: dashboard.html (inside drawer), course.html (inside modal)
@@ -9,24 +9,24 @@
    The container should be an empty element with [data-profile-view].
    The component injects markup, fills in the current user's data,
    and wires the Edit Paths + Log Out buttons.
-   ========================================= */
+   */
 
 (function () {
 
-    /* ---------- Helpers ---------- */
+    /*  Helpers  */
 
     function getInitials(user) {
         const first = (user.firstName || "").trim();
-        const last  = (user.surname   || "").trim();
+        const last = (user.surname || "").trim();
         const f = first ? first.charAt(0) : "";
-        const l = last  ? last.charAt(0)  : "";
+        const l = last ? last.charAt(0) : "";
         return (f + l).toUpperCase() || "··";
     }
 
     function getDisplayName(user) {
         const first = (user.firstName || "").trim();
-        const last  = (user.surname   || "").trim();
-        const full  = `${first} ${last}`.trim();
+        const last = (user.surname || "").trim();
+        const full = `${first} ${last}`.trim();
         return full || user.username || "User";
     }
 
@@ -51,7 +51,7 @@
     }
 
 
-    /* ---------- Markup template ---------- */
+    /*  Markup template  */
 
     function buildMarkup() {
         return `
@@ -111,20 +111,20 @@
     }
 
 
-    /* ---------- Fill the injected markup with real user data ---------- */
+    /*  Fill the injected markup with real user data  */
 
     function fill(container, user) {
-        const initials    = getInitials(user);
+        const initials = getInitials(user);
         const displayName = getDisplayName(user);
 
-        container.querySelector('[data-profile="avatar"]').textContent        = initials;
-        container.querySelector('[data-profile="username"]').textContent      = `@${user.username || "user"}`;
-        container.querySelector('[data-profile="name"]').textContent          = displayName;
+        container.querySelector('[data-profile="avatar"]').textContent = initials;
+        container.querySelector('[data-profile="username"]').textContent = `@${user.username || "user"}`;
+        container.querySelector('[data-profile="name"]').textContent = displayName;
         container.querySelector('[data-profile="detailUsername"]').textContent = user.username || "—";
-        container.querySelector('[data-profile="email"]').textContent         = user.email    || "—";
-        container.querySelector('[data-profile="phone"]').textContent         = user.phone    || "—";
+        container.querySelector('[data-profile="email"]').textContent = user.email || "—";
+        container.querySelector('[data-profile="phone"]').textContent = user.phone || "—";
 
-        const tools  = (user.roadmap && user.roadmap.tools)  || [];
+        const tools = (user.roadmap && user.roadmap.tools) || [];
         const niches = (user.roadmap && user.roadmap.niches) || [];
 
         renderChipRow(
@@ -140,7 +140,7 @@
     }
 
 
-    /* ---------- Public mount API ---------- */
+    /*  Public mount API  */
 
     function mount(container) {
         if (!container) {

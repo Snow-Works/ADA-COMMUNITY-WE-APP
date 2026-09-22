@@ -1,4 +1,4 @@
-/* =========================================
+/* 
    ADA COMMUNITY — CHATBOX (ADA AI)
    Handles:
      · Auth guard
@@ -8,11 +8,11 @@
      · Typing indicator
      · Keyword-aware mock AI responses
      · Suggested prompts derived from user's roadmap
-   ========================================= */
+  */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* ========== GUARDS ========== */
+    /* GUARDS  */
 
     if (!window.adaAuth) {
         console.error("ADA: auth.js must load before chatbox.js.");
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* ========== DOM REFERENCES ========== */
+    /*  DOM REFERENCES  */
 
     const chatArea        = document.getElementById("chatArea");
     const composerInput   = document.getElementById("composerInput");
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const newChatBtn      = document.getElementById("newChatBtn");
 
 
-    /* ========== STORAGE ========== */
+    /* STORAGE  */
 
     const STORAGE_KEY = "adaCommunityConversations";
 
@@ -51,9 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let activeConversationId = null;
 
 
-    /* =========================================
-       HELPERS
-       ========================================= */
+    /* HELPERS */
 
     function getInitials(user) {
         const first = (user.firstName || "").trim();
@@ -90,10 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       MOCK AI RESPONSES
-       Keyword matching → then generic pool → random delay
-       ========================================= */
+    /* MOCK AI RESPONSES, Keyword matching → then generic pool → random delay  */
 
     const KEYWORD_REPLIES = [
         { match: /\b(prompt|prompting|prompt engineering)\b/i,
@@ -142,9 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       USER-FACING GREETING + SUGGESTIONS
-       ========================================= */
+    /* USER-FACING GREETING + SUGGESTIONS */
 
     function getFirstName() {
         return (currentUser.firstName || "").trim() || "there";
@@ -166,9 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       EMPTY STATE
-       ========================================= */
+    /* EMPTY STATE */
 
     function renderEmptyState() {
         const initials = getInitials(currentUser);
@@ -229,9 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function escapeAttr(s) { return escapeHtml(s); }
 
 
-    /* =========================================
-       MESSAGE RENDERING
-       ========================================= */
+    /* MESSAGE RENDERING */
 
     function appendMessage(role, content) {
         const wrap = document.createElement("div");
@@ -272,9 +261,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       CONVERSATION — CREATE / OPEN / RENDER
-       ========================================= */
+    /* CONVERSATION — CREATE / OPEN / RENDER */
 
     function createConversation(firstMessage) {
         const conversation = {
@@ -339,9 +326,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       SEND MESSAGE
-       ========================================= */
+    /* SEND MESSAGE */
 
     function sendMessage() {
         const text = composerInput.value.trim();
@@ -401,9 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       COMPOSER AUTO-RESIZE + SEND STATE
-       ========================================= */
+    /* COMPOSER AUTO-RESIZE + SEND STATE */
 
     function resizeComposer() {
         composerInput.style.height = "auto";
@@ -415,9 +398,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       DRAWER
-       ========================================= */
+    /* DRAWER */
 
     function openMenu() {
         drawer.classList.add("open");
@@ -439,9 +420,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       WIRING
-       ========================================= */
+    /* WIRING */
 
     menuBtn.addEventListener("click", toggleMenu);
     drawerClose.addEventListener("click", closeMenu);
@@ -474,9 +453,7 @@ document.addEventListener("DOMContentLoaded", () => {
     composerSend.addEventListener("click", sendMessage);
 
 
-    /* =========================================
-       INITIAL RENDER
-       ========================================= */
+    /* INITIAL RENDER */
 
     avatarEl.textContent = getInitials(currentUser);
 

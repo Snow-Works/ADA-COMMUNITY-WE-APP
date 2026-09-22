@@ -1,4 +1,4 @@
-/* =========================================
+/* 
    ADA COMMUNITY — COURSE PAGE LOGIC
    Handles:
      · Auth guard
@@ -9,11 +9,11 @@
      · Tab toggle: Ready-made Course ↔ Live Class
      · Profile modal (open / close / backdrop / Escape)
      · Home button → dashboard
-   ========================================= */
+ */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* ========== GUARDS ========== */
+    /*  GUARDS  */
 
     if (!window.adaAuth) {
         console.error("ADA: auth.js must load before course.js.");
@@ -30,31 +30,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ========== DOM REFERENCES ========== */
 
-    const homeBtn               = document.getElementById("courseHomeBtn");
-    const avatarBtn             = document.getElementById("courseAvatar");
-    const courseNicheTag        = document.getElementById("courseNicheTag");
-    const courseTitle           = document.getElementById("courseTitle");
-    const courseSubtitle        = document.getElementById("courseSubtitle");
-    const coursePathsCounter    = document.getElementById("coursePathsCounter");
-    const pathGrid              = document.getElementById("pathGrid");
-    const courseFooterYear      = document.getElementById("courseFooterYear");
+    const homeBtn = document.getElementById("courseHomeBtn");
+    const avatarBtn = document.getElementById("courseAvatar");
+    const courseNicheTag = document.getElementById("courseNicheTag");
+    const courseTitle = document.getElementById("courseTitle");
+    const courseSubtitle = document.getElementById("courseSubtitle");
+    const coursePathsCounter = document.getElementById("coursePathsCounter");
+    const pathGrid = document.getElementById("pathGrid");
+    const courseFooterYear = document.getElementById("courseFooterYear");
 
-    const tabReady              = document.getElementById("tabReady");
-    const tabLive               = document.getElementById("tabLive");
+    const tabReady = document.getElementById("tabReady");
+    const tabLive = document.getElementById("tabLive");
 
-    const mediaFrame            = document.getElementById("mediaFrame");
-    const mediaLivePlaceholder  = document.getElementById("mediaLivePlaceholder");
-    const liveNextSession       = document.getElementById("liveNextSession");
+    const mediaFrame = document.getElementById("mediaFrame");
+    const mediaLivePlaceholder = document.getElementById("mediaLivePlaceholder");
+    const liveNextSession = document.getElementById("liveNextSession");
 
-    const modalBackdrop         = document.getElementById("profileModalBackdrop");
-    const modalClose            = document.getElementById("profileModalClose");
-    const modal                 = document.getElementById("profileModal");
+    const modalBackdrop = document.getElementById("profileModalBackdrop");
+    const modalClose = document.getElementById("profileModalClose");
+    const modal = document.getElementById("profileModal");
 
 
-    /* =========================================
-       READ ?niche= FROM URL
-       Falls back to "AI Engineer" if missing.
-       ========================================= */
+    /* READ ?niche= FROM URL Falls back to "AI Engineer" if missing. */
 
     function readNicheFromUrl() {
         const params = new URLSearchParams(window.location.search);
@@ -67,12 +64,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentNiche = readNicheFromUrl();
 
 
-    /* =========================================
-       COURSE CONTENT DATA
-       Hybrid model (locked decision C1):
-       · Module titles are per-niche
-       · Sub-topics are generic (work for any niche)
-       ========================================= */
+    /* COURSE CONTENT DATA, Hybrid model (locked decision C1): Module titles are per-niche 
+    Sub-topics a re generic (work for any niche) */
 
     const MODULE_TITLES = {
         "AI Engineer": [
@@ -167,52 +160,74 @@ document.addEventListener("DOMContentLoaded", () => {
     const SUBTOPICS_BY_PATH = [
         /* Path 1 */
         [
-            { title: "Understanding the landscape",
-              desc: "Get a clear picture of what this path involves and where it can lead." },
-            { title: "Setting up your environment",
-              desc: "Install the tools and configure your workspace so you're ready to build." },
-            { title: "Your first hands-on exercise",
-              desc: "Complete a small, concrete task to make the concepts stick." }
+            {
+                title: "Understanding the landscape",
+                desc: "Get a clear picture of what this path involves and where it can lead."
+            },
+            {
+                title: "Setting up your environment",
+                desc: "Install the tools and configure your workspace so you're ready to build."
+            },
+            {
+                title: "Your first hands-on exercise",
+                desc: "Complete a small, concrete task to make the concepts stick."
+            }
         ],
         /* Path 2 */
         [
-            { title: "Core principles",
-              desc: "Learn the mental models that separate beginners from practitioners." },
-            { title: "Common patterns",
-              desc: "Study the recurring structures that show up in real-world work." },
-            { title: "Practice lab",
-              desc: "Apply what you've learned to a self-contained challenge." }
+            {
+                title: "Core principles",
+                desc: "Learn the mental models that separate beginners from practitioners."
+            },
+            {
+                title: "Common patterns",
+                desc: "Study the recurring structures that show up in real-world work."
+            },
+            {
+                title: "Practice lab",
+                desc: "Apply what you've learned to a self-contained challenge."
+            }
         ],
         /* Path 3 */
         [
-            { title: "Designing your approach",
-              desc: "Plan before you build. Choose the right strategy for the problem." },
-            { title: "Building the real thing",
-              desc: "Take a project from idea to working prototype." },
-            { title: "Getting feedback",
-              desc: "Share your work and iterate based on real input." }
+            {
+                title: "Designing your approach",
+                desc: "Plan before you build. Choose the right strategy for the problem."
+            },
+            {
+                title: "Building the real thing",
+                desc: "Take a project from idea to working prototype."
+            },
+            {
+                title: "Getting feedback",
+                desc: "Share your work and iterate based on real input."
+            }
         ],
         /* Path 4 */
         [
-            { title: "Advanced techniques",
-              desc: "Push beyond the basics with patterns used by professionals." },
-            { title: "Scaling your work",
-              desc: "Make your skills repeatable, efficient, and reliable." },
-            { title: "Next steps and specialisation",
-              desc: "Decide where to go next and how to keep growing." }
+            {
+                title: "Advanced techniques",
+                desc: "Push beyond the basics with patterns used by professionals."
+            },
+            {
+                title: "Scaling your work",
+                desc: "Make your skills repeatable, efficient, and reliable."
+            },
+            {
+                title: "Next steps and specialisation",
+                desc: "Decide where to go next and how to keep growing."
+            }
         ]
     ];
 
 
-    /* =========================================
-       HELPERS
-       ========================================= */
+    /* HELPERS */
 
     function getInitials(user) {
         const first = (user.firstName || "").trim();
-        const last  = (user.surname   || "").trim();
+        const last = (user.surname || "").trim();
         const f = first ? first.charAt(0) : "";
-        const l = last  ? last.charAt(0)  : "";
+        const l = last ? last.charAt(0) : "";
         return (f + l).toUpperCase() || "··";
     }
 
@@ -230,9 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       FILL HEADER AREA
-       ========================================= */
+    /* FILL HEADER AREA */
 
     function renderHeader() {
         /* Avatar initials */
@@ -264,9 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       RENDER PATH CARDS
-       ========================================= */
+    /* RENDER PATH CARDS */
 
     function renderPathCard(index, title) {
         const number = index + 1;
@@ -343,9 +354,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       TAB TOGGLE — Ready-made ↔ Live Class
-       ========================================= */
+    /* TAB TOGGLE — Ready-made ↔ Live Class */
 
     function setActiveTab(mode) {
         if (!tabReady || !tabLive) return;
@@ -358,12 +367,12 @@ document.addEventListener("DOMContentLoaded", () => {
         tabLive.setAttribute("aria-selected", isReady ? "false" : "true");
 
         /* Swap media area */
-        if (mediaFrame)            mediaFrame.hidden = !isReady;
-        if (mediaLivePlaceholder)  mediaLivePlaceholder.hidden = isReady;
+        if (mediaFrame) mediaFrame.hidden = !isReady;
+        if (mediaLivePlaceholder) mediaLivePlaceholder.hidden = isReady;
     }
 
     if (tabReady) tabReady.addEventListener("click", () => setActiveTab("ready"));
-    if (tabLive)  tabLive.addEventListener("click",  () => setActiveTab("live"));
+    if (tabLive) tabLive.addEventListener("click", () => setActiveTab("live"));
 
     /* Set a realistic next-session line */
     if (liveNextSession) {
@@ -371,9 +380,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       PROFILE MODAL
-       ========================================= */
+    /* PROFILE MODAL */
 
     let profileMounted = false;
 
@@ -402,8 +409,8 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.classList.remove("modal-lock");
     }
 
-    if (avatarBtn)    avatarBtn.addEventListener("click", openModal);
-    if (modalClose)   modalClose.addEventListener("click", closeModal);
+    if (avatarBtn) avatarBtn.addEventListener("click", openModal);
+    if (modalClose) modalClose.addEventListener("click", closeModal);
 
     /* Click on backdrop (but not on the modal panel itself) */
     if (modalBackdrop) {
@@ -420,9 +427,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    /* =========================================
-       HOME BUTTON
-       ========================================= */
+    /* HOME BUTTON */
 
     if (homeBtn) {
         homeBtn.addEventListener("click", () => {
@@ -431,9 +436,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       INITIAL RENDER
-       ========================================= */
+    /* INITIAL RENDER */
 
     renderHeader();
     renderAllPaths();

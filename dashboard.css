@@ -581,9 +581,7 @@ body.menu-lock {
 .drawer-close span:nth-child(2) { transform: translate(-50%, -50%) rotate(-45deg); }
 
 
-/* =========================================
-   DRAWER BODY (view switcher)
-   ========================================= */
+/* DRAWER BODY (view switcher) */
 
 .drawer-body {
     flex: 1;
@@ -598,9 +596,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   VIEW 1 — LIST
-   ========================================= */
+/* VIEW 1 — LIST */
 
 .drawer-view-list {
     flex: 1;
@@ -820,9 +816,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   VIEW 2 — PROFILE
-   ========================================= */
+/* VIEW 2 — PROFILE */
 
 .drawer-view-profile {
     flex: 1;
@@ -1068,9 +1062,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   RESPONSIVE — 900px
-   ========================================= */
+/*  RESPONSIVE  SECTION */
 
 @media (max-width: 900px) {
     .dashboard-row {
@@ -1083,9 +1075,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   RESPONSIVE — 600px
-   ========================================= */
+/* RESPONSIVE — 600px */
 
 @media (max-width: 600px) {
     :root {
@@ -1132,9 +1122,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   RESPONSIVE — 400px
-   ========================================= */
+/* RESPONSIVE — 400px */
 
 @media (max-width: 400px) {
     .hamburger-btn {
@@ -1193,9 +1181,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   RESPONSIVE — 320px
-   ========================================= */
+/* RESPONSIVE — 320px */
 
 @media (max-width: 320px) {
     .dashboard-brand h2 {
@@ -1230,9 +1216,7 @@ body.menu-lock {
 }
 
 
-/* =========================================
-   REDUCED MOTION
-   ========================================= */
+/* REDUCED MOTION */
 
 @media (prefers-reduced-motion: reduce) {
     .chart-bar {

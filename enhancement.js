@@ -1,8 +1,8 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-/* STICKY MOBILE CTA
-Shows the fixed "Build With US" button once the user has scrolled past the hero section's own CTA button, hides it again if they scroll back up above it. */
+    /* STICKY MOBILE CTA
+    Shows the fixed "Build With US" button once the user has scrolled past the hero section's own CTA button, hides it again if they scroll back up above it. */
     const heroBtn = document.getElementById("heroBtn");
     const stickyCta = document.getElementById("stickyMobileCta");
 
@@ -23,7 +23,7 @@ Shows the fixed "Build With US" button once the user has scrolled past the hero 
 
 
 
-/* HERO "READ MORE" TOGGLE (small phones only: the  button is hidden, above 480px through CSS media queries, so this is harmless no-op weight on larger screens) */
+    /* HERO "READ MORE" TOGGLE (small phones only: the  button is hidden, above 480px through CSS media queries, so this is harmless no-op weight on larger screens) */
     const readMoreBtn = document.getElementById("heroReadMoreBtn");
     const extraCopy = document.getElementById("heroExtraCopy");
 
@@ -35,7 +35,7 @@ Shows the fixed "Build With US" button once the user has scrolled past the hero 
         });
     }
 
-/* SWIPE GESTURES ON THE HERO SLIDER: Uses the small public API script.js exposes (window.adaHeroSlider), instead of re-implementing slide logic here, so there's only ever one source of truth for "which image is active. */
+    /* SWIPE GESTURES ON THE HERO SLIDER: Uses the small public API script.js exposes (window.adaHeroSlider), instead of re-implementing slide logic here, so there's only ever one source of truth for "which image is active. */
     const sliderSection = document.getElementById("heroimgSection");
 
     if (sliderSection) {

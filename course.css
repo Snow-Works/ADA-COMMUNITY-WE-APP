@@ -1,32 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap');
 
 
-/* =========================================
-   ADA COMMUNITY — COURSE PAGE
-   Loaded after auth.css — reuses its tokens
-   ========================================= */
+/* ADA COMMUNITY — COURSE PAGE, Loaded after auth.css — reuses its tokens */
 
 :root {
-    --cr-bg:        var(--auth-bg,        #0a0a0a);
-    --cr-card:      var(--auth-card,      #111111);
-    --cr-field:     var(--auth-field,     #171717);
-    --cr-line:      var(--auth-line,      rgba(255, 255, 255, 0.08));
+    --cr-bg: var(--auth-bg, #0a0a0a);
+    --cr-card: var(--auth-card, #111111);
+    --cr-field: var(--auth-field, #171717);
+    --cr-line: var(--auth-line, rgba(255, 255, 255, 0.08));
     --cr-line-soft: var(--auth-line-soft, rgba(255, 255, 255, 0.05));
-    --cr-ink:       var(--auth-ink,       #fafafa);
-    --cr-ink-mid:   var(--auth-ink-mid,   #a1a1a1);
-    --cr-ink-low:   var(--auth-ink-low,   #777777);
-    --cr-accent:    var(--auth-accent,    #25D366);
+    --cr-ink: var(--auth-ink, #fafafa);
+    --cr-ink-mid: var(--auth-ink-mid, #a1a1a1);
+    --cr-ink-low: var(--auth-ink-low, #777777);
+    --cr-accent: var(--auth-accent, #25D366);
     --cr-accent-rgb: var(--auth-accent-rgb, 37, 211, 102);
 
-    --cr-radius:    16px;
+    --cr-radius: 16px;
     --cr-radius-sm: 12px;
-    --cr-topbar-h:  64px;
+    --cr-topbar-h: 64px;
 }
 
 
-/* =========================================
-   PAGE
-   ========================================= */
+/* PAGE */
 
 body.course-page {
     min-height: 100vh;
@@ -48,9 +43,7 @@ body.modal-lock {
 }
 
 
-/* =========================================
-   TOP BAR
-   ========================================= */
+/* TOP BAR */
 
 .course-topbar {
     position: sticky;
@@ -94,10 +87,10 @@ body.modal-lock {
     cursor: pointer;
 
     transition:
-        background     0.22s ease,
-        border-color   0.22s ease,
-        color          0.22s ease,
-        transform      0.22s cubic-bezier(0.25, 1, 0.5, 1);
+        background 0.22s ease,
+        border-color 0.22s ease,
+        color 0.22s ease,
+        transform 0.22s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .course-home-btn:hover {
@@ -143,8 +136,8 @@ body.modal-lock {
     border-radius: 50%;
 
     background: linear-gradient(135deg,
-        rgba(var(--cr-accent-rgb), 0.95),
-        rgba(var(--cr-accent-rgb), 0.55));
+            rgba(var(--cr-accent-rgb), 0.95),
+            rgba(var(--cr-accent-rgb), 0.55));
     color: #04140a;
     border: none;
 
@@ -159,8 +152,8 @@ body.modal-lock {
     box-shadow: 0 0 0 2px rgba(var(--cr-accent-rgb), 0.12);
 
     transition:
-        transform    0.22s cubic-bezier(0.25, 1, 0.5, 1),
-        box-shadow   0.22s ease;
+        transform 0.22s cubic-bezier(0.25, 1, 0.5, 1),
+        box-shadow 0.22s ease;
 }
 
 .course-avatar:hover {
@@ -169,9 +162,7 @@ body.modal-lock {
 }
 
 
-/* =========================================
-   CONTENT WRAPPER
-   ========================================= */
+/* CONTENT WRAPPER */
 
 .course-content {
     flex: 1;
@@ -187,9 +178,7 @@ body.modal-lock {
 }
 
 
-/* =========================================
-   VIDEO AREA
-   ========================================= */
+/* VIDEO AREA */
 
 .course-media {
     width: 100%;
@@ -270,9 +259,7 @@ body.modal-lock {
 }
 
 
-/* =========================================
-   COURSE HEADING
-   ========================================= */
+/* COURSE HEADING */
 
 .course-heading {
     display: flex;
@@ -317,9 +304,7 @@ body.modal-lock {
 }
 
 
-/* =========================================
-   MODE TABS
-   ========================================= */
+/* MODE TABS */
 
 .course-mode-tabs {
     display: inline-flex;
@@ -351,7 +336,7 @@ body.modal-lock {
 
     transition:
         background 0.22s ease,
-        color      0.22s ease;
+        color 0.22s ease;
 }
 
 .mode-tab:hover:not(.active) {
@@ -366,9 +351,7 @@ body.modal-lock {
 }
 
 
-/* =========================================
-   COURSE PATHS
-   ========================================= */
+/* COURSE PATHS */
 
 .course-paths {
     display: flex;
@@ -420,9 +403,7 @@ body.modal-lock {
 }
 
 
-/* =========================================
-   PATH CARD
-   ========================================= */
+/* PATH CARD */
 
 .path-card {
     background: var(--cr-card);
@@ -539,8 +520,8 @@ body.modal-lock {
     height: 100%;
     width: 0%;
     background: linear-gradient(90deg,
-        rgba(var(--cr-accent-rgb), 0.9),
-        rgba(var(--cr-accent-rgb), 0.55));
+            rgba(var(--cr-accent-rgb), 0.9),
+            rgba(var(--cr-accent-rgb), 0.55));
     transition: width 0.55s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -618,9 +599,7 @@ body.modal-lock {
 }
 
 
-/* =========================================
-   COURSE FOOTER
-   ========================================= */
+/* COURSE FOOTER */
 
 .course-footer {
     margin-top: 1rem;
@@ -637,9 +616,7 @@ body.modal-lock {
 }
 
 
-/* =========================================
-   PROFILE MODAL
-   ========================================= */
+/* PROFILE MODAL */
 
 .profile-modal-backdrop {
     position: fixed;
@@ -664,8 +641,13 @@ body.modal-lock {
 }
 
 @keyframes modalFadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 
@@ -690,8 +672,15 @@ body.modal-lock {
 }
 
 @keyframes modalScaleIn {
-    from { transform: translateY(12px) scale(0.98); opacity: 0; }
-    to   { transform: translateY(0)    scale(1);    opacity: 1; }
+    from {
+        transform: translateY(12px) scale(0.98);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
 }
 
 .profile-modal-header {
@@ -745,8 +734,13 @@ body.modal-lock {
     pointer-events: none;
 }
 
-.profile-modal-close span:nth-child(1) { transform: translate(-50%, -50%) rotate(45deg); }
-.profile-modal-close span:nth-child(2) { transform: translate(-50%, -50%) rotate(-45deg); }
+.profile-modal-close span:nth-child(1) {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.profile-modal-close span:nth-child(2) {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
 
 
 /* Modal body — hosts the shared profile component */
@@ -765,6 +759,7 @@ body.modal-lock {
 /* The shared profile component uses the dashboard's profile styles.
    Scoped adjustments for the modal context: hide the "Back" button
    (it belongs to the drawer), centre the hero. */
+
 .profile-modal-body .profile-hero {
     padding-top: 4px;
 }
@@ -774,19 +769,20 @@ body.modal-lock {
 }
 
 
-/* =========================================
-   RESPONSIVE — 700px
-   ========================================= */
+/* RESPONSIVE — 700px */
 
 @media (max-width: 700px) {
-    :root { --cr-topbar-h: 58px; }
+    :root {
+        --cr-topbar-h: 58px;
+    }
 
     .course-brand {
         font-size: 0.82rem;
     }
 
     .course-home-btn span {
-        display: none;    /* icon-only on phones */
+        display: none;
+        /* icon-only on phones */
     }
 
     .course-home-btn {
@@ -839,9 +835,7 @@ body.modal-lock {
 }
 
 
-/* =========================================
-   RESPONSIVE — 400px
-   ========================================= */
+/* RESPONSIVE — 400px */
 
 @media (max-width: 400px) {
     .course-brand {
@@ -899,9 +893,7 @@ body.modal-lock {
 }
 
 
-/* =========================================
-   RESPONSIVE — 320px
-   ========================================= */
+/* RESPONSIVE — 320px */
 
 @media (max-width: 320px) {
     .course-content {
@@ -938,11 +930,10 @@ body.modal-lock {
 }
 
 
-/* =========================================
-   REDUCED MOTION
-   ========================================= */
+/* REDUCED MOTION */
 
 @media (prefers-reduced-motion: reduce) {
+
     .path-card,
     .path-arrow,
     .path-progress-fill,

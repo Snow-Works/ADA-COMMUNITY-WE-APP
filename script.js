@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     const images = document.querySelectorAll(".hero-slider-img");
-    
+
     // Safety check: skip logic if there's only one image
-    if (images.length <= 1) return; 
+    if (images.length <= 1) return;
 
     let currentIndex = 0;
 
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //button functionalities and linkage.
 //LOGIN BUTTON  ON THE NAV BAR
 const btnI = document.querySelector('#navBtnA');
-btnI.addEventListener('click', () =>{
+btnI.addEventListener('click', () => {
     window.location.href = './login.html';
 
 });
@@ -37,7 +37,7 @@ btnI.addEventListener('click', () =>{
 
 //SIGNIN BUTTON  ON THE NAV BAR
 const btnI2 = document.querySelector('#navBtnB');
-btnI2.addEventListener('click', () =>{
+btnI2.addEventListener('click', () => {
     window.location.href = './signin.html';
 });
 
