@@ -41,6 +41,22 @@ btnI2.addEventListener('click', () => {
     window.location.href = './signin.html';
 });
 
+
+//LOGIN BUTTON FOR THE DRAWER MOBILE NAVBAR
+const drawBtn = document.querySelector("#drawerLogin");
+drawBtn.addEventListener('click', () => {
+    window.location.href = './login.html';
+    });
+
+
+//SIGNIN BUTTON FOR THE DRAWER MOBILE NAVBAR
+const signBtn = document.querySelector("#drawerSignIn");
+signBtn.addEventListener('click', () => {
+    window.location.href = './signin.html';
+});
+
+
+
 //BUILD WITH US BUTTON
 const btnI3 = document.querySelector('#heroBtn');
 btnI3.addEventListener('click', () => {
